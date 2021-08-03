@@ -62,6 +62,8 @@ resource "proxmox_vm_qemu" "kube-worker" {
       "HISTCONTROL=ignorespace",
       " echo \"${var.user_password}\" | sudo -S -k /bin/bash -c '\"%ubuntu ALL=(ALL) NOPASSWD:ALL\" >> /etc/sudoers.d/ubuntu'",
       "ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa -q -N \"\"",
+      "echo ${var.addl_pub_key1} >> ~/.ssh/authorized_keys",
+      "echo ${var.addl_pub_key2} >> ~/.ssh/authorized_keys",
     ]
   }
 }

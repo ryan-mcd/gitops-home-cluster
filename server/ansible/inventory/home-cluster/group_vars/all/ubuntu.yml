@@ -1,0 +1,16 @@
+---
+
+# Enable to skip apt upgrade
+skip_upgrade_packages: false
+# Enable to skip removing crufty packages
+skip_remove_packages: false
+
+# Timezone for the servers
+timezone: "America/New_York"
+
+# Additional ssh public keys to add to the nodes
+ssh_authorized_keys:
+# Predator Windows
+- "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIADFghowXM8Cl98uXCj0AdrY5V8Y2XdhdIfEtMnLa9gz"
+# Lenovo14 Windows
+- "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDmv3x5gjbApPRt02EUwuNSNyEStbMPoRdRXs30ubGNy"
