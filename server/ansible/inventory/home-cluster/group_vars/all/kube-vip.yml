@@ -1,12 +1,10 @@
 ---
 
 # The interface on the host kube-vip should attach to
-kube_vip:
-  pod_manifests_dir: /var/lib/rancher/k3s/agent/pod-manifests
   kubevip_interface: eth0
 
   kubevip_bgp_peer_ip: 10.24.0.254
-  kubevip_address: 10.24.0.30
+  kubevip_address: 10.24.0.200
   kubevip_bgp_as_number: 64512
   kubevip_bgp_peer_as_number: 64512
   
