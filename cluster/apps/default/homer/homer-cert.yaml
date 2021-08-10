@@ -4,7 +4,7 @@ metadata:
   name: "homer.${SECRET_DOMAIN}"
   namespace: default
 spec:
-  secretName: "homer.${SECRET_DOMAIN}-tls"
+  secretName: "homer-${SECRET_DOMAIN/./-}-tls"
   issuerRef:
     name: letsencrypt-staging
   dnsNames:
