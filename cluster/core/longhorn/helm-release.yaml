@@ -41,6 +41,7 @@ spec:
         tls:
         - hosts:
           - "longhorn.${SECRET_DOMAIN}"
+          secretName: longhorn-cert
     # ingress:
     #   enabled: true
     #   annotations:
