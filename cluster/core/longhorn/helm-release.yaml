@@ -21,27 +21,12 @@ spec:
     persistence:
       defaultClassReplicaCount: 2
     defaultSettings:
-    #   defaultDataPath: /longhorn
       defaultReplicaCount: 2
     #   createDefaultDiskLabeledNodes: true
     #   storageMinimalAvailablePercentage: "10"
     #   taintToleration: arm=true:NoExecute
     #   backupTarget: nfs://10.10.10.31:/mnt/tardisk/k3s
-    ingress:
-      main:
-        enabled: true
-        annotations:
-          kubernetes.io/ingress.class: "nginx"
-          cert-manager.io/cluster-issuer: letsencrypt-staging
-        hosts:
-        - host: "longhorn.${SECRET_DOMAIN}"
-          paths:
-          - path: /
-            pathType: Prefix
-        tls:
-        - hosts:
-          - "longhorn.${SECRET_DOMAIN}"
-          secretName: longhorn-cert
+
     # ingress:
     #   enabled: true
     #   annotations:
