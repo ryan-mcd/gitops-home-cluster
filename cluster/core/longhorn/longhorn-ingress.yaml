@@ -14,11 +14,11 @@ spec:
       paths:
       - pathType: Prefix
         path: "/"
-        # backend:
-        #   service:
-        #     name: longhorn-frontend
-        #     port:
-        #       number: 80
+        backend:
+          service:
+            name: longhorn-frontend
+            port:
+              number: 80
   tls:
   - hosts:
     - "longhorn.${SECRET_DOMAIN}"
