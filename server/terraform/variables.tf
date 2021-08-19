@@ -3,7 +3,6 @@ variable "common" {
   default = {
     os_type       = "cloud-init"
     clone         = "ubuntu-cloudimg"
-    search_domain = "dfw.56k.sh 56k.sh"
     nameserver    = "10.24.0.254"
   }
 }
@@ -85,39 +84,13 @@ variable "workers" {
     # }
   }
 }
-
-# Proxmox API host URL
-variable "pm_api_url" {
-  sensitive = true
-}
-# Proxmox user (e.g. root@pam)
-variable "pm_api_token_id" {
-  sensitive = true
-}
-# Proxmox password
-variable "pm_api_token_secret" {
-  sensitive = true
-}
-# Root password
-variable "root_password" {
-  sensitive = true
-}
-# Cloud-init user (i.e. terraform) password
-variable "user_password" {
-  sensitive = true
-}
 #Key used by Terraform and Ansible to login to bastion host to execute tasks
 variable "ssh_pub_key" {
+  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDVVQwsXxOMFK4D3gaE0YPV9pxKZ39lA7E7CRw5ZLJWJo+1fzIaEPsUmuLTtCgZqTdnkishV03RZ2e9k6mkNr537+fJJeK62KXPmyGKSgxZRZhKAcH+n80y2IZy+ZxitZDBH0MkfYI4zPQlo7EaW4FVbDbpDK0MYLcnNbHogvpVxxPBMNjgGor5esTWkqMABSIG3aKdYj1+oE6D59WuEgIaMngYXUgzob3CUxTQJOQoNaPgdYOCE8yUP33e6RCk92uyS1y6RjQpDIejmmvoJNUfKh1WOT1+tpdT/rnPxohE/B1AVp6ZCs1hDqhV8XdwIVQVUljK12NJmCQK//A8kDZ2g4tHEJZ7RDhfUvCh7t6lnoyFL4Hq0kCRLekMaVmSHHWpRj/nsOfKE7vdTn0xPeuaF+W5UutZjA0yqE218dSlxRHg6qnvFBi0dazpZvhdE13WCChQYSM2Tw0dRxdk4RETpkqLvVWRvuQ1b/kQArY7gPx6EZS18VXNfhvxEcgLL1czRR+9x2sfPxMzu8KFYJDgGaqnUjFnYklM95QdcOXTtxBajAmm/RCkqhP4haDD/ox4Sxk3avLg7Mn7fRtOQOiY6r2i2ul64xRAytTAxqlm1HjPAXoHPRaIIELV9AG8whzMbAnvvnB4hxIZp4siXXOEokp1Kb5ydKONeY9bLjKyWw== @"
 }
 variable "addl_pub_key1" {
+  default = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHzQMo1Lwdz8i34UZi8UVvzS7VAa/n+hHAf3vXtlWx4C pred-laptop"
 }
 variable "addl_pub_key2" {
-}
-#Key used by Terraform and Ansible to login to bastion host to execute tasks
-variable "ssh_key" {
-  sensitive = true
-}
-# Key used by the default Terraform sudo user among all provisioned hosts
-variable "terraform_key" {
-  sensitive = true
+  default = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMF/waMtpOx+6242Qa9Xf1S09NKZ6FXz4vZAir0YBVMR fedora-gpu"
 }

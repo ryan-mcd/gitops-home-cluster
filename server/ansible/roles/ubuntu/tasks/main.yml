@@ -6,7 +6,7 @@
 
 - include: locale.yml
   tags:
-  - time
+  - locale
 
 - include: packages.yml
   tags:
@@ -28,10 +28,6 @@
   tags:
   - network
 
-# - include: netplan.yml
-#   tags:
-#   - netplan
-
 - include: filesystem.yml
   tags:
   - filesystem
@@ -43,3 +39,10 @@
 - include: user.yml
   tags:
   - user
+
+# - include: rsyslog.yml
+#   when:
+#   - rsyslog.enabled is defined
+#   - rsyslog.enabled
+#   tags:
+#   - rsyslog

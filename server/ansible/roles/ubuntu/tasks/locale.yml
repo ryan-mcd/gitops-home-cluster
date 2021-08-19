@@ -2,7 +2,7 @@
 
 - name: locale | set timezone
   community.general.timezone:
-    name: "{{ timezone | default('Europe/Amsterdam') }}"
+    name: "{{ timezone | default('America/New_York') }}"
 
 - name: locale | copy timesyncd config
   ansible.builtin.copy:

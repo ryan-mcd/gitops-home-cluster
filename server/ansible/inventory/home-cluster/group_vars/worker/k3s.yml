@@ -6,13 +6,15 @@
 # Don't define the host as control plane nodes
 k3s_control_node: false
 
+# # Enabled embedded etcd
+# k3s_etcd_datastore: true
+
 # k3s settings for all worker nodes
 k3s_agent:
   node-ip: "{{ ansible_host }}"
-
   kubelet-arg:
-  - "feature-gates=GracefulNodeShutdown=true"
-  - "feature-gates=MixedProtocolLBService=true"
-
-  #node-label:
-  #- "node-role.kubernetes.io/worker=true"
+    - "feature-gates=GracefulNodeShutdown=true"
+    - "feature-gates=MixedProtocolLBService=true"
+  # TODO - Adding a node label here breaks the k3s service
+  # node-label:
+  #   - "node-role.kubernetes.io/worker=true"

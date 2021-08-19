@@ -1,3 +1,0 @@
-servers_ipv4_gateway: "10.24.0.254"
-servers_ipv4_dns:
-  - "{{ servers_ipv4_gateway }}"

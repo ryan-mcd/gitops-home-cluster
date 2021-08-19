@@ -42,25 +42,22 @@ resource "proxmox_vm_qemu" "kube-master" {
   os_type      = var.common.os_type
   ipconfig0    = "ip=${each.value.cidr},gw=${each.value.gw}"
   ciuser       = "ubuntu"
-  cipassword   = var.user_password
-  searchdomain = var.common.search_domain
+  cipassword   = data.sops_file.secrets.data["data.user_password"]
+  searchdomain = data.sops_file.secrets.data["data.search_domain"]
   nameserver   = var.common.nameserver
   sshkeys      = var.ssh_pub_key
-  # SOPS
-  #cipassword   = data.sops_file.secrets.data["k8s.user_password"]
-  #sshkeys      = data.sops_file.secrets.data["k3s.ssh_key"]
 
   connection {
     type     = "ssh"
     user     = "ubuntu"
-    private_key = var.ssh_key
+    private_key = data.sops_file.secrets.data["data.ssh_key"]
     host     = each.value.ip
   }
 
   provisioner "remote-exec" {
     inline = [
       "HISTCONTROL=ignorespace",
-      " echo \"${var.user_password}\" | sudo -S -k /bin/bash -c '\"%ubuntu ALL=(ALL) NOPASSWD:ALL\" >> /etc/sudoers.d/ubuntu'",
+      " echo \"${data.sops_file.secrets.data["data.user_password"]}\" | sudo -S -k /bin/bash -c '\"%ubuntu ALL=(ALL) NOPASSWD:ALL\" >> /etc/sudoers.d/ubuntu'",
       "ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa -q -N \"\"",
       "echo ${var.addl_pub_key1} >> ~/.ssh/authorized_keys",
       "echo ${var.addl_pub_key2} >> ~/.ssh/authorized_keys",

@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.jetstack.io/
       chart: cert-manager
-      version: v1.4.1
+      version: v1.5.1
       sourceRef:
         kind: HelmRepository
         name: jetstack-charts
@@ -20,12 +20,12 @@ spec:
     webhook:
       enabled: true
     extraArgs:
-    - --dns01-recursive-nameservers=1.1.1.1:53
-    - --dns01-recursive-nameservers-only
+      - --dns01-recursive-nameservers=1.1.1.1:53
+      - --dns01-recursive-nameservers-only
     cainjector:
       replicaCount: 1
     podDnsPolicy: "None"
     podDnsConfig:
       nameservers:
-      - "1.1.1.1"
-      - "8.8.8.8"
+        - "1.1.1.1"
+        - "8.8.8.8"
