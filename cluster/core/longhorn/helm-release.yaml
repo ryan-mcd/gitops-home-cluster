@@ -22,8 +22,8 @@ spec:
       defaultClassReplicaCount: 2
     defaultSettings:
       defaultReplicaCount: 2
-    #   createDefaultDiskLabeledNodes: true
-    #   storageMinimalAvailablePercentage: "10"
+      createDefaultDiskLabeledNodes: true
+      storageMinimalAvailablePercentage: "10"
     #   taintToleration: arm=true:NoExecute
     #   backupTarget: nfs://10.10.10.31:/mnt/tardisk/k3s
     

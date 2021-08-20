@@ -6,8 +6,6 @@
 # Don't define the host as control plane nodes
 k3s_control_node: false
 
-# # Enabled embedded etcd
-# k3s_etcd_datastore: true
 
 # k3s settings for all worker nodes
 k3s_agent:
@@ -18,3 +16,10 @@ k3s_agent:
   # TODO - Adding a node label here breaks the k3s service
   # node-label:
   #   - "node-role.kubernetes.io/worker=true"
+
+  # The above doesn't work, so this might break k3s as well
+  # Add node-label for longhorn to create disks
+  # https://longhorn.io/docs/1.1.2/advanced-resources/default-disk-and-node-config/
+  # CLI: kubectl label nodes k8s-worker01 node.longhorn.io/create-default-disk=true
+  node-label:
+    - "node.longhorn.io/create-default-disk=true"

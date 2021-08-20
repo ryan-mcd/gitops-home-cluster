@@ -60,7 +60,6 @@ spec:
         enabled: true
         annotations:
           kubernetes.io/ingress.class: "nginx"
-          cert-manager.io/cluster-issuer: letsencrypt-staging
         hosts:
         - host: "id.${SECRET_DOMAIN}"
           paths:
@@ -69,7 +68,6 @@ spec:
         tls:
         - hosts:
           - "id.${SECRET_DOMAIN}"
-          secretName: authentik-cert
         # ingressClassName: "traefik"
         # annotations:
         #   traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
