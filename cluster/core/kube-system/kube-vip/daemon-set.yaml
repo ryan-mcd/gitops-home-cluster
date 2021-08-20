@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: kube-vip
-        image: ghcr.io/kube-vip/kube-vip:v0.3.7
+        image: ghcr.io/kube-vip/kube-vip:v0.3.5
         imagePullPolicy: IfNotPresent
         args:
         - manager
@@ -23,7 +23,7 @@ spec:
         - name: vip_arp
           value: "true"
         - name: vip_interface
-          value: "{{ kubevip_interface }}"
+          value: "10.24.0.200"
         - name: port
           value: "6443"
         - name: vip_cidr
@@ -43,7 +43,7 @@ spec:
         - name: vip_retryperiod
           value: "1"
         - name: vip_address
-          value: "{{ kubevip_address }}"
+          value: "10.24.0.200"
         securityContext:
           capabilities:
             add:
