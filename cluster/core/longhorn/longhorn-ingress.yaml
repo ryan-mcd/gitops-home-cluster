@@ -11,7 +11,7 @@ spec:
   tls:
   - hosts:
     - "longhorn.${SECRET_DOMAIN}"
-    secretName: "longhorn-${SECRET_DOMAIN/./-}-tls"
+    #secretName: "longhorn-${SECRET_DOMAIN/./-}-tls"
   rules:
   - host: "longhorn.${SECRET_DOMAIN}"
     http:

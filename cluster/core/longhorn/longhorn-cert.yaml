@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "longhorn-cert"
+  name: "longhorn-${SECRET_DOMAIN/./-}-tls"
   namespace: longhorn-system
 spec:
   secretName: "longhorn-${SECRET_DOMAIN/./-}-tls"
