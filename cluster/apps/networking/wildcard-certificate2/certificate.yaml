@@ -2,12 +2,12 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "domain2-tls"
+  name: "${DOMAIN_2/./-}"
   namespace: networking
 spec:
-  secretName: "domain2-tls"
+  secretName: "${DOMAIN_2/./-}-tls"
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt-production
     kind: ClusterIssuer
   commonName: "${DOMAIN_2}"
   dnsNames:
