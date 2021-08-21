@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: authentik-ingress
+  namespace: security
+  annotations:
+    kubernetes.io/ingress.class: "nginx"    
+
+spec:
+  tls:
+  - hosts:
+    - "id.${SECRET_DOMAIN}"
+    #secretName: "longhorn-${SECRET_DOMAIN/./-}-tls"
+  rules:
+  - host: "id.${SECRET_DOMAIN}"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /

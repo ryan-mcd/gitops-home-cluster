@@ -2,12 +2,16 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: authentik-media-v1
+  name: authentik-postgresql
   namespace: security
+  labels:
+    kasten.io/backup-volume: "true"
 spec:
   accessModes:
-  - ReadWriteMany
+  - ReadWriteOnce
+
   resources:
     requests:
       storage: 5Gi
+
   storageClassName: longhorn
