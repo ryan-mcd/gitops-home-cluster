@@ -17,9 +17,9 @@ spec:
       paths:
       - pathType: Prefix
         path: /
-        # backend:
-        #   service:
-        #     name: longhorn-frontend
+        backend:
+          service:
+            name: longhorn-frontend
         #     port:
         #       number: 80
 
