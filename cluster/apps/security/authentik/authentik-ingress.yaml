@@ -17,3 +17,8 @@ spec:
       paths:
       - pathType: Prefix
         path: /
+        backend:
+          service:
+            name: authentik
+            port:
+              number: 80
