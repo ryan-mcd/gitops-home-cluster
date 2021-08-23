@@ -8,3 +8,4 @@ resources:
 - metallb-charts.yaml
 - longhorn-charts.yaml
 - authentik-charts.yaml
+- traefik-charts.yaml

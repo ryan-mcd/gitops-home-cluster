@@ -5,8 +5,13 @@ metadata:
   name: cluster-settings
   namespace: flux-system
 data:
+  KUBE_VIP_IP: 10.24.0.200
   METALLB_LB_RANGE: 10.24.0.210-10.24.0.225
   INGRESS_NGINX_LB: 10.24.0.210
+  LB_TRAEFIK_IP: 10.24.0.220
+  LB_COREDNS_IP: 10.24.0.205
 
-
-  KUBE_VIP_IP: 10.24.0.200
+  LB_JELLYFIN_IP: 10.24.0.201
+  LB_LOKI_IP: 10.24.0.202
+  LB_PLEX_IP: 10.24.0.203
+  LB_BLOCKY_IP: 10.24.0.204
