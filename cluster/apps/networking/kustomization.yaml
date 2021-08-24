@@ -4,4 +4,4 @@ resources:
 - wildcard-certificate
 - wildcard-certificate2
 - traefik
-# - ingress-nginx
+- ingress-nginx
