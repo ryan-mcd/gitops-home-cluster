@@ -26,6 +26,14 @@ spec:
       storageMinimalAvailablePercentage: "10"
     #   taintToleration: arm=true:NoExecute
     #   backupTarget: nfs://10.10.10.31:/mnt/tardisk/k3s
+
+    ingress:
+      enabled: true
+      ingressClassName: "traefik"
+      tls: true
+      host: "longhorn.${SECRET_DOMAIN}"
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
     
     # ingress:
     #   enabled: true
