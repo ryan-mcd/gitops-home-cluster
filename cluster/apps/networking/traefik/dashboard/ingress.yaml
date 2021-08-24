@@ -6,7 +6,7 @@ metadata:
   namespace: networking
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
+    # traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
 spec:
   tls:
     - secretName: "${SECRET_DOMAIN/./-}-tls"
