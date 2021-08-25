@@ -3,5 +3,4 @@ kind: Kustomization
 resources:
   - helm-release.yaml
   - pvc-postgresql.yaml
-  # - authentik-ingress.yaml
-  # - media-pvc.yaml
+  - media-pvc.yaml
