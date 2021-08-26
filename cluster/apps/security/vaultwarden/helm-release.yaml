@@ -106,4 +106,4 @@ spec:
         storageClass: longhorn
         accessModes:
         - ReadWriteOnce
-        size: 10Gi
+        size: 3Gi
