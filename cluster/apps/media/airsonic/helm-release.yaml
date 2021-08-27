@@ -17,6 +17,15 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    initContainers:
+    - name: update-airsonic-volume-permission
+      image: busybox
+      command: ["sh", "-c", "chown -R 2000:2000 /config"]
+      volumeMounts:
+      - name: airsonic-config-v1
+        mountPath: /config
+      securityContext:
+        runAsUser: 0
     image:
       repository: airsonicadvanced/airsonic-advanced
       tag: latest

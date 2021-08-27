@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
 - _pvc
 - jellyfin
-# - airsonic
+- airsonic
