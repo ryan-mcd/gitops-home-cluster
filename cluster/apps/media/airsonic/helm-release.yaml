@@ -35,10 +35,25 @@ spec:
         storageClass: longhorn
         accessMode: ReadWriteOnce
         size: 5Gi
+      podcasts:
+        enabled: true
+        storageClass: longhorn
+        accessMode: ReadWriteOnce
+        mountPath: /var/Podcasts
+        size: 10Gi
       media-nas:
         enabled: true
         existingClaim: nfs-media-nas-pvc
-        readOnly: true
+        subPath:
+          - path: Music/Old
+            mountPath: /var/music
+            readOnly: true
+          - path: ${SECRET_NEW_MUSIC}
+            mountPath: /var/new
+            readOnly: true
+          - path: Music/Classical
+            mountPath: /var/Classical
+            readOnly: true
     ingress:
       main:
         enabled: true
