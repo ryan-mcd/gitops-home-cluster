@@ -18,11 +18,11 @@ spec:
       interval: 5m
   values:
     initContainers:
-    - name: update-airsonic-volume-permission
+    - name: as-permissions
       image: busybox
       command: ["sh", "-c", "mkdir -p /var/airsonic && chown -R 2000:2000 /var/airsonic"]
       volumeMounts:
-      - name: airsonic-config-v1
+      - name: config
         mountPath: /var/airsonic
       securityContext:
         runAsUser: 0
