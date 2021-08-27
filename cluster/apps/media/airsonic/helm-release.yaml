@@ -32,9 +32,8 @@ spec:
     persistence:
       config:
         enabled: true
-        storageClass: longhorn
-        accessMode: ReadWriteOnce
-        size: 5Gi
+        existingClaim: airsonic-config-v1
+        mountPath: /var/airsonic
       podcasts:
         enabled: true
         storageClass: longhorn
