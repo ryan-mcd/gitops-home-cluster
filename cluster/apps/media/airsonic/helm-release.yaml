@@ -20,7 +20,7 @@ spec:
     initContainers:
     - name: update-airsonic-volume-permission
       image: busybox
-      command: ["sh", "-c", "chown -R 2000:2000 /var/airsonic"]
+      command: ["sh", "-c", "mkdir -p /var/airsonic && chown -R 2000:2000 /var/airsonic"]
       volumeMounts:
       - name: airsonic-config-v1
         mountPath: /var/airsonic
