@@ -11,7 +11,7 @@ spec:
   - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: ${NAS_ADDR}
+    server: 10.11.1.111
     path: /mnt/user/Media
   mountOptions:
   - tcp
