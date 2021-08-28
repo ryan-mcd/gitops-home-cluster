@@ -56,6 +56,7 @@ spec:
         enabled: true
         type: emptyDir
         medium: Memory
+        size: 3Gi
       media-nas:
         enabled: true
         existingClaim: nfs-media-nas-pvc
@@ -63,11 +64,10 @@ spec:
 
     resources:
       requests:
-        cpu: 35m
-        memory: 1500Mi
+        memory: 512Mi
         # gpu.intel.com/i915: 1
       limits:
-        memory: 4000Mi
+        memory: 2048Mi
         # gpu.intel.com/i915: 1
     # tolerations:
     # - key: "nvidia.com/gpu"

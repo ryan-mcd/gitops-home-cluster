@@ -29,7 +29,7 @@ spec:
       - 65540
     env:
       TZ: "America/New_York"
-      JAVA_OPTS: "-Xmx768m -Dserver.forward-headers-strategy=native"
+      JAVA_OPTS: "-Xms256m -Xmx512m -Dserver.forward-headers-strategy=native"
     enableServiceLinks: false
     persistence:
       config:
@@ -76,6 +76,6 @@ spec:
           - "airsonic.${SECRET_DOMAIN}"
     resources:
       requests:
-        memory: "512M"
+        memory: "768M"
       limits:
-        memory: "1024M"
+        memory: "2048M"
