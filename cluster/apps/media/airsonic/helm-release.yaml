@@ -26,6 +26,7 @@ spec:
       runAsGroup: 2000
       supplementalGroups:
       - 100
+      - 65540
     env:
       TZ: "America/New_York"
       JAVA_OPTS: "-Xmx768m -Dserver.forward-headers-strategy=native"
