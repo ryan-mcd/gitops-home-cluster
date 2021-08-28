@@ -40,7 +40,7 @@ spec:
         enabled: true
         storageClass: longhorn
         accessMode: ReadWriteOnce
-        mountPath: /var/Podcasts
+        mountPath: /var/podcasts
         size: 10Gi
       media-nas:
         enabled: true
