@@ -17,7 +17,7 @@ variable "masters" {
       cores       = 2
       gw          = "10.24.0.254"
       macaddr     = "5E:95:FA:7A:78:D0"
-      memory      = 4096
+      memory      = 2048
       disk        = "16G"
       target_node = "pve"
     },
@@ -28,7 +28,7 @@ variable "masters" {
       cores       = 2
       gw          = "10.24.0.254"
       macaddr     = "5E:95:FA:7A:78:D1"
-      memory      = 4096
+      memory      = 2048
       disk        = "16G"
       target_node = "pve"
     },
@@ -39,7 +39,7 @@ variable "masters" {
       cores       = 2
       gw          = "10.24.0.254"
       macaddr     = "5E:95:FA:7A:78:D2"
-      memory      = 4096
+      memory      = 2048
       disk        = "16G"
       target_node = "pve"
     }
@@ -56,7 +56,7 @@ variable "workers" {
       cores       = 4
       gw          = "10.24.0.254"
       macaddr     = "5E:95:FA:7A:78:D3"
-      memory      = 10240
+      memory      = 8192
       disk        = "120G"
       target_node = "pve"
     },
@@ -67,7 +67,7 @@ variable "workers" {
       cores       = 4
       gw          = "10.24.0.254"
       macaddr     = "5E:95:FA:7A:78:D4"
-      memory      = 10240
+      memory      = 8192
       disk        = "120G"
       target_node = "pve"
     },
