@@ -52,22 +52,22 @@ spec:
       config:
         enabled: true
         existingClaim: jellyfin-config-v1
-      transcode:
-        enabled: true
-        type: emptyDir
-        medium: Memory
-        size: 3Gi
       media-nas:
         enabled: true
         existingClaim: nfs-media-nas-pvc
         readOnly: true
+      # transcode:
+      #   enabled: true
+      #   type: emptyDir
+      #   medium: Memory
+      #   size: 3Gi
 
     resources:
       requests:
-        memory: 1500Mi
+        memory: 4000Mi
         # gpu.intel.com/i915: 1
       limits:
-        memory: 2048Mi
+        memory: 6000Mi
         # gpu.intel.com/i915: 1
     # tolerations:
     # - key: "nvidia.com/gpu"
