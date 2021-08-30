@@ -1,0 +1,12 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: longhorn-tls
+  namespace: networking
+spec:
+  chain:
+    middlewares:
+    - name: rfc1918-ips
+    - name: svc-longhorn-headers
+    - name: security-ak-outpost-traefik@kubernetescrd

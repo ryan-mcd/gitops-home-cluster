@@ -8,3 +8,5 @@ resources:
 - secret.enc.yaml
 - basic-auth.yaml
 - rfc1918.yaml
+- longhorn-headers.yaml
+- longhorn-tls.yaml

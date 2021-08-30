@@ -35,4 +35,5 @@ spec:
       host: "longhorn.${SECRET_DOMAIN}"
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-        traefik.ingress.kubernetes.io/router.middlewares: "security-ak-outpost-traefik@kubernetescrd"
+        traefik.ingress.kubernetes.io/router.tls: "true"  
+        traefik.ingress.kubernetes.io/router.middlewares: "networking-longhorn-tls@kubernetescrd"
