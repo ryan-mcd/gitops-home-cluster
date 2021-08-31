@@ -13,6 +13,8 @@ metadata:
 spec:
   ingressClassName: traefik
   tls:
+    - hosts:
+        - "traefik.${SECRET_DOMAIN}"
     - secretName: "${SECRET_DOMAIN/./-}-tls"
   rules:
     - host: traefik.${SECRET_DOMAIN}
