@@ -89,14 +89,13 @@ spec:
         storageClass: longhorn
         accessMode: ReadWriteOnce
         size: 15Gi
+
     postgresql:
       enabled: true
-      postgresqlUsername: "vaultwarden"
+      postgresqlUsername: vaultwarden
       postgresqlPassword: "${SECRET_VAULTWARDEN_DB_PASSWORD}"
-      postgresqlDatabase: "vaultwarden"
+      postgresqlDatabase: vaultwarden
       persistence:
         enabled: true
-        storageClass: longhorn
-        accessModes:
-        - ReadWriteOnce
-        size: 3Gi
+        existingClaim: vaultwarden-postgresql
+
