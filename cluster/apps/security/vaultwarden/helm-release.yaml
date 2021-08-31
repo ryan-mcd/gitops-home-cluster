@@ -26,8 +26,8 @@ spec:
     env:
       DATA_FOLDER: "config"
       ICON_CACHE_FOLDER: "config/icon_cache"
-      ATTACHMENTS_FOLDER: "/attachments"
-      SENDS_FOLDER: "/sends"
+      ATTACHMENTS_FOLDER: "config/attachments"
+      SENDS_FOLDER: "config/sends"
       SIGNUPS_ALLOWED: false
       WEBSOCKET_ENABLED: true
       WEBSOCKET_ADDRESS: 0.0.0.0
@@ -88,17 +88,7 @@ spec:
         enabled: true
         storageClass: longhorn
         accessMode: ReadWriteOnce
-        size: 3Gi
-      sends:
-        enabled: true
-        storageClass: longhorn
-        accessMode: ReadWriteOnce
-        size: 1Gi
-      attachments:
-        enabled: true
-        storageClass: longhorn
-        accessMode: ReadWriteOnce
-        size: 10Gi
+        size: 15Gi
     postgresql:
       enabled: true
       postgresqlUsername: "vaultwarden"
