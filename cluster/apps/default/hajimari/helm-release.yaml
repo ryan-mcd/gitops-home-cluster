@@ -23,19 +23,17 @@ spec:
     env:
       TZ: "America/New_York"
     hajimari:
+      name: "McD fam"
       namespaceSelector:
         matchNames:
         - default
         - media
         - security
         - longhorn-system
-        # - networking
+        - networking
         # - monitoring
         # - downloads
       customApps:
-      - name: pfSense
-        url: "https://pfsense.${SECRET_DOMAIN}"
-        icon: router-network
       - name: nas
         url: "https://nas.${SECRET_DOMAIN}"
         icon: nas
@@ -112,13 +110,13 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
         hosts:
-        - host: "start.${SECRET_DOMAIN}"
-          paths:
-          - path: /
-            pathType: Prefix
+          - host: "start.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
         tls:
-        - hosts:
-          - "start.${SECRET_DOMAIN}"
+          - hosts:
+              - "start.${SECRET_DOMAIN}"
     persistence:
       data:
         enabled: true
