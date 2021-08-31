@@ -9,3 +9,4 @@ resources:
 - longhorn-charts.yaml
 - authentik-charts.yaml
 - traefik-charts.yaml
+- hajimari-charts.yaml

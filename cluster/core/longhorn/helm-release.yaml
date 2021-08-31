@@ -37,3 +37,5 @@ spec:
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         traefik.ingress.kubernetes.io/router.tls: "true"  
         traefik.ingress.kubernetes.io/router.middlewares: "networking-longhorn-tls@kubernetescrd"
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "content-save-outline"
