@@ -11,18 +11,23 @@ spec:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: vaultwarden
-      version: 2.3.1
+      version: 3.1.0
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
         namespace: flux-system
       interval: 5m
   values:
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
     nameOverride: vaultwarden
     fullnameOverride: vaultwarden
     image:
       repository: vaultwarden/server
-      tag: 1.22.2-alpine
+      tag: 1.22.2
     env:
       DATA_FOLDER: "config"
       ICON_CACHE_FOLDER: "config/icon_cache"
@@ -43,7 +48,7 @@ spec:
       SMTP_PASSWORD: "${SECRET_VAULTWARDEN_EMAIL_KEY}"
       YUBICO_CLIENT_ID: "${SECRET_YUBICO_CLIENT_ID}"
       YUBICO_SECRET_KEY: "${SECRET_YUBICO_SECRET_KEY}"
-      DATABASE_URL: "postgresql://vaultwarden:${SECRET_VAULTWARDEN_DB_PASSWORD}@vaultwarden-postgresql/vaultwarden"
+      DATABASE_URL: "postgresql://vaultwarden:${SECRET_VAULTWARDEN_DB_PASSWORD}@vaultwarden-postgresql:5432/vaultwarden"
     ingress:
       main:
         enabled: true
@@ -86,9 +91,7 @@ spec:
     persistence:
       config:
         enabled: true
-        storageClass: longhorn
-        accessMode: ReadWriteOnce
-        size: 15Gi
+        existingClaim: vaultwarden-config-v1
 
     postgresql:
       enabled: true
