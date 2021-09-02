@@ -1,0 +1,33 @@
+---
+- name: netplan | disable cloud init config
+  ansible.builtin.template:
+    src: templates/99-disable-network-config.cfg.j2
+    dest: /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
+    lstrip_blocks: true
+
+- name: netplan | check original netplan
+  ansible.builtin.stat:
+    path: /etc/netplan/00-installer-config.yaml
+  register: original_netplan
+
+- name: netplan | move original netplan
+  command: mv /etc/netplan/00-installer-config.yaml /etc/netplan/00-installer-config.yaml.org
+  when: original_netplan.stat.exists
+
+- name: netplan | check CI netplan
+  ansible.builtin.stat:
+    path: /etc/netplan/50-cloud-init.yaml
+  register: original_ci_netplan
+
+- name: netplan | move original netplan
+  command: mv /etc/netplan/50-cloud-init.yaml /etc/netplan/50-cloud-init.yaml.orig
+  when: original_ci_netplan.stat.exists
+
+- name: netplan | install new netplan
+  ansible.builtin.template:
+    src: templates/01-netcfg.yaml.j2
+    dest: /etc/netplan/01-netcfg.yaml
+    lstrip_blocks: true
+
+- name: netplan | apply netplan
+  command: netplan apply

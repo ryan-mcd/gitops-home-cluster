@@ -18,7 +18,7 @@ variable "masters" {
       gw          = "10.24.0.254"
       macaddr     = "5E:95:FA:7A:78:D0"
       memory      = 2048
-      disk        = "16G"
+      disk        = "24G"
       target_node = "pve"
     },
     "k8s-master02" = {
@@ -29,7 +29,7 @@ variable "masters" {
       gw          = "10.24.0.254"
       macaddr     = "5E:95:FA:7A:78:D1"
       memory      = 2048
-      disk        = "16G"
+      disk        = "24G"
       target_node = "pve"
     },
     "k8s-master03" = {
@@ -40,7 +40,7 @@ variable "masters" {
       gw          = "10.24.0.254"
       macaddr     = "5E:95:FA:7A:78:D2"
       memory      = 2048
-      disk        = "16G"
+      disk        = "24G"
       target_node = "pve"
     }
   }
@@ -57,7 +57,7 @@ variable "workers" {
       gw          = "10.24.0.254"
       macaddr     = "5E:95:FA:7A:78:D3"
       memory      = 8192
-      disk        = "120G"
+      disk        = "160G"
       target_node = "pve"
     },
     "k8s-worker02" = {
@@ -68,7 +68,7 @@ variable "workers" {
       gw          = "10.24.0.254"
       macaddr     = "5E:95:FA:7A:78:D4"
       memory      = 8192
-      disk        = "120G"
+      disk        = "160G"
       target_node = "pve"
     },
     # "k8s-worker03" = {

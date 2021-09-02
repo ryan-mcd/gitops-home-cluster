@@ -22,7 +22,7 @@ resource "proxmox_vm_qemu" "kube-master" {
   }
   disk {
     type    = "scsi"
-    storage = "zfs500blue"
+    storage = "local-lvm"
     size    = each.value.disk
     format  = "raw"
     ssd     = 1

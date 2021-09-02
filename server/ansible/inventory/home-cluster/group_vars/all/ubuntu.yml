@@ -5,6 +5,10 @@ skip_upgrade_packages: false
 # Enable to skip removing crufty packages
 skip_remove_packages: false
 
+servers_ipv4_gateway: "10.24.0.254"
+servers_ipv4_dns:
+  - "{{ servers_ipv4_gateway }}"
+
 # Timezone for the servers
 timezone: "America/New_York"
 
