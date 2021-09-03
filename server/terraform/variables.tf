@@ -17,7 +17,7 @@ variable "masters" {
       cores       = 2
       gw          = "10.24.0.254"
       macaddr     = "5E:95:FA:7A:78:D0"
-      memory      = 2048
+      memory      = 4096
       disk        = "24G"
       target_node = "pve"
     },
@@ -28,7 +28,7 @@ variable "masters" {
       cores       = 2
       gw          = "10.24.0.254"
       macaddr     = "5E:95:FA:7A:78:D1"
-      memory      = 2048
+      memory      = 4096
       disk        = "24G"
       target_node = "pve"
     },
@@ -39,7 +39,7 @@ variable "masters" {
       cores       = 2
       gw          = "10.24.0.254"
       macaddr     = "5E:95:FA:7A:78:D2"
-      memory      = 2048
+      memory      = 4096
       disk        = "24G"
       target_node = "pve"
     }
