@@ -24,8 +24,8 @@ spec:
       defaultReplicaCount: 2
       createDefaultDiskLabeledNodes: true
       storageMinimalAvailablePercentage: "10"
-      backupTarget: s3://k8s-bak@us-east-1/cluster1/
-      backupTargetCredentialSecret: minio-secret
+      # backupTarget: s3://k8s-bak@us-east-1/cluster1/
+      # backupTargetCredentialSecret: minio-secret
     #   taintToleration: arm=true:NoExecute
 
     ingress:
