@@ -17,6 +17,11 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+      fsGroupChangePolicy: "OnRootMismatch"
     fullnameOverride: authentik
     image:
       name: ghcr.io/goauthentik/server
@@ -80,7 +85,7 @@ spec:
       email:
         host: "${SECRET_AUTHENTIK_EMAIL_HOST}"
         port: 587
-        use_tls: true
+        use_ssl: true
         username: "${SECRET_AUTHENTIK_USER}"
         password: "${SECRET_AUTHENTIK_EMAIL_KEY}"
         from: "${SECRET_AUTHENTIK_EMAIL_FROM}"
