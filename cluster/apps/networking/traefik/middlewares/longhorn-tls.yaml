@@ -9,4 +9,4 @@ spec:
     middlewares:
     - name: rfc1918-ips
     - name: svc-longhorn-headers
-    - name: security-ak-outpost-traefik@kubernetescrd
+    - name: basic-auth
