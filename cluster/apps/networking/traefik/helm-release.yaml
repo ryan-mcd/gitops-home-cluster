@@ -30,7 +30,7 @@ spec:
         externalTrafficPolicy: Local
         externalIPs:
         - "${LB_TRAEFIK_IP}"
-        # loadBalancerIP: "${LB_TRAEFIK_IP}"
+        loadBalancerIP: "${LB_TRAEFIK_IP}"
       # annotations:
       #   external-dns.alpha.kubernetes.io/hostname: "ipv4.${SECRET_DOMAIN},ipv4.${SECRET_DOMAIN_2}"
     logs:
