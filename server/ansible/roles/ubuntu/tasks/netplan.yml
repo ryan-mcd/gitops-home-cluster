@@ -1,5 +1,6 @@
 ---
 - name: netplan | disable cloud init config
+  when: inventory_hostname in groups['cloud-init']
   ansible.builtin.template:
     src: templates/99-disable-network-config.cfg.j2
     dest: /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg

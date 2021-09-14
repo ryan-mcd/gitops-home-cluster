@@ -16,14 +16,22 @@ resource "proxmox_vm_qemu" "kube-worker" {
   network {
     model    = "virtio"
     macaddr  = each.value.macaddr
-    bridge   = "vmbr911"
+    bridge   = "vmbr0"
     tag      = 924
     firewall = true
   }
   disk {
     type    = "scsi"
-    storage = "zfs500blue"
+    storage = "zfs1tbblue"
     size    = each.value.disk
+    format  = "raw"
+    ssd     = 1
+    discard = "on"
+  }
+  disk {
+    type    = "virtio"
+    storage = "zfs1tbblue"
+    size    = each.value.virtiodisk
     format  = "raw"
     ssd     = 1
     discard = "on"

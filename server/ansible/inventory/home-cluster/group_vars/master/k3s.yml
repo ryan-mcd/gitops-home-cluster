@@ -48,3 +48,9 @@ k3s_server:
   # Required for HAProxy health-checks
   kube-apiserver-arg:
     - "anonymous-auth=true"
+
+  # Add node-label for longhorn to create disks
+  # https://longhorn.io/docs/1.1.2/advanced-resources/default-disk-and-node-config/
+  # CLI: kubectl label nodes k8s-worker01 node.longhorn.io/create-default-disk=true
+  node-label:
+    - "node.longhorn.io/create-default-disk=true"

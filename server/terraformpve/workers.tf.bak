@@ -1,5 +1,5 @@
-resource "proxmox_vm_qemu" "kube-master" {
-  for_each = var.masters
+resource "proxmox_vm_qemu" "kube-worker" {
+  for_each = var.workers
 
   name        = each.key
   target_node = each.value.target_node
@@ -22,8 +22,16 @@ resource "proxmox_vm_qemu" "kube-master" {
   }
   disk {
     type    = "scsi"
-    storage = "local-lvm"
+    storage = "zfs500blue"
     size    = each.value.disk
+    format  = "raw"
+    ssd     = 1
+    discard = "on"
+  }
+  disk {
+    type    = "virtio"
+    storage = "zfs500blue"
+    size    = each.value.virtiodisk
     format  = "raw"
     ssd     = 1
     discard = "on"
