@@ -48,7 +48,6 @@ spec:
       SMTP_PASSWORD: "${SECRET_VAULTWARDEN_EMAIL_KEY}"
       YUBICO_CLIENT_ID: "${SECRET_YUBICO_CLIENT_ID}"
       YUBICO_SECRET_KEY: "${SECRET_YUBICO_SECRET_KEY}"
-      DATABASE_URL: "postgresql://vaultwarden:${SECRET_VAULTWARDEN_DB_PASSWORD}@vaultwarden-postgresql:5432/vaultwarden"
     ingress:
       main:
         enabled: true
@@ -66,11 +65,12 @@ spec:
           paths:
           - path: /
             pathType: Prefix
-          - path: /notifications/hub/negotiate
-            pathType: Prefix
           - path: /notifications/hub
             pathType: Prefix
-            servicePort: 3012
+            service:
+              port: 3012
+          - path: /notifications/hub/negotiate
+            pathType: Prefix
         tls:
         - hosts:
           - "bitwarden.${SECRET_DOMAIN}"
@@ -93,12 +93,4 @@ spec:
         enabled: true
         existingClaim: vaultwarden-config-v1
 
-    postgresql:
-      enabled: true
-      postgresqlUsername: vaultwarden
-      postgresqlPassword: "${SECRET_VAULTWARDEN_DB_PASSWORD}"
-      postgresqlDatabase: vaultwarden
-      persistence:
-        enabled: true
-        existingClaim: vaultwarden-postgresql
 
