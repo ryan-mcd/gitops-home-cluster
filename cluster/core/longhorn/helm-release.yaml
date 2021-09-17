@@ -24,7 +24,7 @@ spec:
       defaultReplicaCount: 2
       createDefaultDiskLabeledNodes: true
       storageMinimalAvailablePercentage: "10"
-      default-longhorn-static-storage-class: "longhorn"
+      defaultLonghornStaticStorageClass: "longhorn"
       backupTarget: s3://k8s-bak@us-east-1/cluster1/
       backupTargetCredentialSecret: minio-secret
     #   taintToleration: arm=true:NoExecute
