@@ -18,10 +18,10 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-    podSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
+    # podSecurityContext:
+    #   runAsUser: 568
+    #   runAsGroup: 568
+    #   fsGroup: 568
     nameOverride: vaultwarden
     fullnameOverride: vaultwarden
     image:
