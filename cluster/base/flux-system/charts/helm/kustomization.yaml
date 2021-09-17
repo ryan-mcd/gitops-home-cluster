@@ -10,3 +10,4 @@ resources:
 - authentik-charts.yaml
 - traefik-charts.yaml
 - hajimari-charts.yaml
+- node-feature-discovery-charts.yaml
