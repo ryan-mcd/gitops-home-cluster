@@ -1,0 +1,31 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: Nextcloud
+  namespace: networking
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    # traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "web"
+    hajimari.io/appName: "Nextcloud"
+spec:
+  rules:
+    - host: nc.${SECRET_DOMAIN}
+      http:
+        routers:
+          nextcloud:
+            entryPoints:
+              - "websecure"
+            rule: "Host('nc.${SECRET_DOMAIN}')"
+            ingressClassName: traefik
+            tls:
+              - hosts:
+                  - "nc.${SECRET_DOMAIN}"
+              - secretName: "${SECRET_DOMAIN/./-}-tls"
+        services:
+          nc-service:
+            loadBalancer:
+              servers:
+              - url: "http://10.10.91.99:55880"
