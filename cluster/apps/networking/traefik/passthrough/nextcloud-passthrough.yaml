@@ -1,31 +1,170 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nc-external-ip
+  namespace: networking
+spec:
+  ports:
+  - name: nextcloud
+    port: 80
+    protocol: TCP
+    targetPort: 55880
+  clusterIP: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: nc-external-ip
+  namespace: networking
+subsets:
+- addresses:
+  - ip: 10.10.91.99
+  ports:
+  - name: nextcloud
+    port: 55880
+    protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: Nextcloud
+  name: nextcloud
   namespace: networking
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
     # traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
     hajimari.io/enable: "true"
     hajimari.io/icon: "web"
-    hajimari.io/appName: "Nextcloud"
+    hajimari.io/appName: "nextcloud"
 spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - "nc.${SECRET_DOMAIN}"
+    - secretName: "${SECRET_DOMAIN/./-}-tls"
   rules:
     - host: nc.${SECRET_DOMAIN}
       http:
-        routers:
-          nextcloud:
-            entryPoints:
-              - "websecure"
-            rule: "Host('nc.${SECRET_DOMAIN}')"
-            ingressClassName: traefik
-            tls:
-              - hosts:
-                  - "nc.${SECRET_DOMAIN}"
-              - secretName: "${SECRET_DOMAIN/./-}-tls"
-        services:
-          nc-service:
-            loadBalancer:
-              servers:
-              - url: "http://10.10.91.99:55880"
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nc-external-ip
+                port:
+                  number: 80
+
+  # rules:
+  #   - host: nc.${SECRET_DOMAIN}
+  #     http:
+  #       routers:
+  #         nextcloud:
+  #           service: nc-external-ip
+  #           # entryPoints:
+  #           #   - "websecure"
+  #           rule: "Host('nc.${SECRET_DOMAIN}')"
+  #           ingressClassName: traefik
+  #           tls:
+  #             - hosts:
+  #                 - "nc.${SECRET_DOMAIN}"
+  #             - secretName: "${SECRET_DOMAIN/./-}-tls"
+        # services:
+        #   nc-service:
+        #     loadBalancer:
+        #       servers:
+        #       - url: "http://10.10.91.99:55880"
+  # rules:
+  # - host: service.example.com
+  #   http:
+  #     paths:
+  #     - backend:
+  #         serviceName: nc-external-ip
+  #         servicePort: 80
+  #       path: /
+# spec:
+#   tcp:
+#     routers:
+#       Router-1:
+#         # won't listen to entry point web
+#         entryPoints:
+#           - "websecure"
+#         rule: "HostSNI(`nc.${SECRET_DOMAIN}`)"
+#         service: "ncservice"
+#         # will route TLS requests (and ignore non tls requests)
+#         tls: {}
+#     services:
+#       ncservice:
+#         loadBalancer:
+#           terminationDelay: 42
+#           proxyProtocol:
+#             version: 42
+#           servers:
+#           - url: "http://10.10.91.99:55880"
+  # tcp:
+  #   routers:
+  #     TCPRouter0:
+  #       entryPoints:
+  #       - foobar
+  #       - foobar
+  #       middlewares:
+  #       - foobar
+  #       - foobar
+  #       service: foobar
+  #       rule: foobar
+  #       tls:
+  #         passthrough: true
+  #         options: foobar
+  #         certResolver: foobar
+  #         domains:
+  #         - main: foobar
+  #           sans:
+  #           - foobar
+  #           - foobar
+  #         - main: foobar
+  #           sans:
+  #           - foobar
+  #           - foobar
+  #     TCPRouter1:
+  #       entryPoints:
+  #       - foobar
+  #       - foobar
+  #       middlewares:
+  #       - foobar
+  #       - foobar
+  #       service: foobar
+  #       rule: foobar
+  #       tls:
+  #         passthrough: true
+  #         options: foobar
+  #         certResolver: foobar
+  #         domains:
+  #         - main: foobar
+  #           sans:
+  #           - foobar
+  #           - foobar
+  #         - main: foobar
+  #           sans:
+  #           - foobar
+  #           - foobar
+  #   middlewares:
+  #     Middleware00:
+  #       ipWhiteList:
+  #         sourceRange:
+  #         - foobar
+  #         - foobar
+  #   services:
+  #     TCPService01:
+  #       loadBalancer:
+  #         terminationDelay: 42
+  #         proxyProtocol:
+  #           version: 42
+  #         servers:
+  #         - address: foobar
+  #         - address: foobar
+  #     TCPService02:
+  #       weighted:
+  #         services:
+  #         - name: foobar
+  #           weight: 42
+  #         - name: foobar
+  #           weight: 42
