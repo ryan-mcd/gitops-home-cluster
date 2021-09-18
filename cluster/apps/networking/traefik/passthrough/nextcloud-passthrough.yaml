@@ -1,27 +1,24 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nc-external-ip
+  name: nc
   namespace: networking
 spec:
   ports:
-  - name: nextcloud
-    port: 81
-    protocol: TCP
+  - protocol: TCP
+    port: 80
     targetPort: 55880
 ---
 apiVersion: v1
 kind: Endpoints
 metadata:
-  name: nc-external-ip
+  name: nc
   namespace: networking
 subsets:
 - addresses:
   - ip: 10.10.91.99
   ports:
-  - name: nextcloud
-    port: 55880
-    protocol: TCP
+  - port: 55880
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -48,9 +45,9 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: nc-external-ip
+                name: nc
                 port:
-                  number: 81
+                  number: 80
 
   # rules:
   #   - host: nc.${SECRET_DOMAIN}
