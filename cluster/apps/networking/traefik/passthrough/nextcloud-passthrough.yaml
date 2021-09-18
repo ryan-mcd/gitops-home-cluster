@@ -6,11 +6,9 @@ metadata:
 spec:
   ports:
   - name: nextcloud
-    port: 80
+    port: 81
     protocol: TCP
     targetPort: 55880
-  clusterIP: None
-  type: ClusterIP
 ---
 apiVersion: v1
 kind: Endpoints
@@ -52,7 +50,7 @@ spec:
               service:
                 name: nc-external-ip
                 port:
-                  number: 80
+                  number: 81
 
   # rules:
   #   - host: nc.${SECRET_DOMAIN}
