@@ -70,13 +70,13 @@ spec:
         #   external-dns/is-public: "true"
         #   external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
         hosts:
-        - host: "airsonic.${SECRET_DOMAIN}"
+        - host: "as.${SECRET_DOMAIN}"
           paths:
           - path: /
             pathType: Prefix
         tls:
         - hosts:
-          - "airsonic.${SECRET_DOMAIN}"
+          - "as.${SECRET_DOMAIN}"
     resources:
       requests:
         memory: "768M"
