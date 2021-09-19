@@ -10,3 +10,5 @@ resources:
 - rfc1918.yaml
 - longhorn-headers.yaml
 - longhorn-tls.yaml
+- nextcloud-regex.yaml
+- nextcloud-tls.yaml

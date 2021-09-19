@@ -1,0 +1,11 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: nc-tls
+  namespace: networking
+spec:
+  chain:
+    middlewares:
+    - name: cloudflare-ips
+    - name: svc-nc-regex
