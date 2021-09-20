@@ -92,4 +92,70 @@ spec:
         enabled: true
         existingClaim: vaultwarden-config-v1
 
+      vaultwarden-sh:
+        enabled: true
+        type: custom
+        mountPath: /etc/vaultwarden.sh   
+        volumeSpec:
+          configMap:
+            name: vaultwarden-init-script
+             
+
+    ## Overly complicated halfway conceived option
+    # additionalContainers:
+    #   vaultwarden-backup:
+    #     name: vaultwarden-backup
+    #     image: ttionya/vaultwarden-backup:1.9.2
+    #     imagePullPolicy: IfNotPresent
+    #     env:
+    #       - name: DATA_DIR
+    #         value: "/config"
+    #       - name: RCLONE_REMOTE_NAME
+    #         value: 'BitwardenBackup'
+    #       - name: RCLONE_REMOTE_DIR
+    #         value: '/BitwardenBackup/'
+    #       - name: CRON
+    #         value: '5 1 * * *'
+    #       - name: ZIP_ENABLE
+    #         value: 'TRUE'
+    #       - name: ZIP_PASSWORD
+    #         value: 'WHEREISMYPASSWORD?'
+    #       - name: ZIP_TYPE
+    #         value: 'zip'
+    #       - name: BACKUP_FILE_DATE_SUFFIX
+    #         value: ''
+    #       - name: BACKUP_KEEP_DAYS
+    #         value: 30
+    #       - name: PING_URL
+    #         value: ''
+    #       - name: MAIL_SMTP_ENABLE
+    #         value: 'FALSE'
+    #       - name: MAIL_SMTP_VARIABLES
+    #         value: ''
+    #       - name: MAIL_TO
+    #         value: ''
+    #       - name: MAIL_WHEN_SUCCESS
+    #         value: 'TRUE'
+    #       - name: MAIL_WHEN_FAILURE
+    #         value: 'TRUE'
+    #       - name: TIMEZONE
+    #         value: 'UTC'
+    #     command:
+    #       - "/bin/bash"
+    #       - "-c"
+    #       - "sleep infinity"
+    #     volumeMounts:
+    #       - name: config
+    #         mountPath: /config
+    #       - name: test-volume
+    #         mountPath: /test-pd
+    #    volumes:
+    #    - name: test-volume
+    #      hostPath:
+    #        # directory location on host
+    #        path: /data
+    #        # this field is optional
+    #        type: Directory
+    #   securityContext:
+    #     runAsUser: 568
 
