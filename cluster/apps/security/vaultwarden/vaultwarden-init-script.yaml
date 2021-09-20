@@ -4,5 +4,5 @@ metadata:
   name: vaultwarden-init-script
   namespace: security
 data:
-  charset.cnf: |
+  vaultwarden.sh: |
     apt update && apt install sqlite3 -y

@@ -95,10 +95,14 @@ spec:
       vaultwarden-sh:
         enabled: true
         type: custom
-        mountPath: /etc/vaultwarden.sh   
+        mountPath: /etc/vaultwarden.sh 
+        subPath: vaultwarden.sh 
         volumeSpec:
           configMap:
             name: vaultwarden-init-script
+            items:
+              - key: vaultwarden.sh
+                path: vaultwarden.sh
              
 
     ## Overly complicated halfway conceived option
