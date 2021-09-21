@@ -91,6 +91,9 @@ spec:
       config:
         enabled: true
         existingClaim: vaultwarden-config-v1
+      backup-scratch:
+        enabled: true
+        type: emptyDir
 
       vaultwarden-sh:
         enabled: true
