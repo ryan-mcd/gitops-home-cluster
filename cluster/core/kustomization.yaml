@@ -6,4 +6,4 @@ resources:
 - cert-manager
 - system-upgrade
 - longhorn
-# - kube-system
+- rook-ceph

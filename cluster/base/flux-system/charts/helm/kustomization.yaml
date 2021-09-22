@@ -11,3 +11,5 @@ resources:
 - traefik-charts.yaml
 - hajimari-charts.yaml
 - node-feature-discovery-charts.yaml
+- rook-ceph-charts.yaml
+- weaveworks-kured-charts.yaml

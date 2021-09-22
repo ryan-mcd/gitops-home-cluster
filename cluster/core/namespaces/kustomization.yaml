@@ -7,3 +7,4 @@ resources:
 - longhorn-system.yaml
 - security.yaml
 - media.yaml
+- rook-ceph.yaml
