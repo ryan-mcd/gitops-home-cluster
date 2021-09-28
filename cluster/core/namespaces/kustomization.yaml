@@ -8,3 +8,5 @@ resources:
 - security.yaml
 - media.yaml
 - rook-ceph.yaml
+- monitoring.yaml
+- valero.yaml
