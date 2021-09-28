@@ -13,3 +13,7 @@ resources:
 - node-feature-discovery-charts.yaml
 - rook-ceph-charts.yaml
 - weaveworks-kured-charts.yaml
+- grafana-charts.yaml
+- prometheus-community-charts.yaml
+- stakater-charts.yaml
+- minio-charts.yaml
