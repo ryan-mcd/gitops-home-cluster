@@ -13,7 +13,7 @@ metadata:
 spec:
   ingressClassName: "traefik"
   rules:
-    - host: "rook.${SECRET_DOMAIN}"
+    - host: "rook.${DOMAIN2}"
       http:
         paths:
           - path: /
@@ -24,6 +24,6 @@ spec:
                 port: 7000
   tls:
     - hosts:
-        - "rook.${SECRET_DOMAIN}"
-      # secretName: "${DOMAIN_2/./-}-tls"
+        - "rook.${DOMAIN2}"
+      secretName: "${DOMAIN_2/./-}-tls"
     
