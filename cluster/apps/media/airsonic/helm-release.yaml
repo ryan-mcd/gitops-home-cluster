@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: airsonicadvanced/airsonic-advanced
-      tag: edge-11.0.0-SNAPSHOT.20210908073208
+      tag: edge-11.0.0-SNAPSHOT.20210928181117 
       pullPolicy: IfNotPresent
     podSecurityContext:
       runAsUser: 2000
