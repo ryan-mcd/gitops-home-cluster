@@ -21,7 +21,7 @@ spec:
             backend:
               service:
                 name: rook-ceph-mgr-dashboard
-                port: 7000
+                port: http-dashboard
   tls:
     - hosts:
         - "rook.${DOMAIN2}"
