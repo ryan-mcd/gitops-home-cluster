@@ -20,6 +20,9 @@ spec:
       enabled: false
     csi:
       kubeletDirPath: /var/lib/kubelet
+      # # Grabbed from wrmilling
+      # enableGrpcMetrics: true
+      # enableCSIHostNetwork: true
       pluginTolerations:
         - operator: "Exists"
     resources:
