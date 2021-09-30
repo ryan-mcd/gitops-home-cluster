@@ -29,6 +29,7 @@ parameters:
   # used for the metadata of the images.
   # The erasure coded pool must be set as the `dataPool` parameter below.
   #dataPool: ec-data-pool
+  pool: replicapool
 
   # RBD image format. Defaults to "2".
   imageFormat: "2"
