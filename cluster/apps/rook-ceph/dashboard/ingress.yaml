@@ -13,7 +13,7 @@ metadata:
 spec:
   ingressClassName: "traefik"
   rules:
-    - host: "rook.${DOMAIN2}"
+    - host: rook.${DOMAIN_2}
       http:
         paths:
           - path: /
@@ -21,9 +21,10 @@ spec:
             backend:
               service:
                 name: rook-ceph-mgr-dashboard
-                port: http-dashboard
+                port: 
+                  name: http-dashboard
   tls:
     - hosts:
-        - "rook.${DOMAIN2}"
+        - "rook.${DOMAIN_2}"
       secretName: "${DOMAIN_2/./-}-tls"
     
