@@ -26,5 +26,5 @@ spec:
   tls:
     - hosts:
         - "rook.${DOMAIN_2}"
-      secretName: "${DOMAIN_2/./-}-tls"
+      secretName: "rook-${DOMAIN_2/./-}-tls"
     
