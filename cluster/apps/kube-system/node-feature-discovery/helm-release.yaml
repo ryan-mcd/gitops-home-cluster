@@ -114,6 +114,11 @@ spec:
             matchOn:
             - usbId:
                 vendor: ["1a6e", "18d1"]
+          - name: "coral-tpu"
+            matchOn:
+            - pciId:
+                class: ["0880"]
+                vendor: ["1ac1"]
           - name: "flight-aware"
             matchOn:
             - usbId:
