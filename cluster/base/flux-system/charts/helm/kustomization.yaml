@@ -17,3 +17,4 @@ resources:
 - prometheus-community-charts.yaml
 - stakater-charts.yaml
 - minio-charts.yaml
+- metrics-server-charts.yaml
