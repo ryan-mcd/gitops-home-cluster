@@ -18,3 +18,5 @@ resources:
 - stakater-charts.yaml
 - minio-charts.yaml
 - metrics-server-charts.yaml
+- external-dns-charts.yaml
+- vmware-tanzu-charts.yaml
