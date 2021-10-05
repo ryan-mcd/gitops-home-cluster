@@ -44,7 +44,7 @@ spec:
         storageClass: longhorn
         accessMode: ReadWriteOnce
         mountPath: /var/podcasts
-        size: 10Gi
+        size: 11Gi
       media-nas:
         enabled: true
         existingClaim: nfs-media-nas-pvc
@@ -77,8 +77,23 @@ spec:
         tls:
         - hosts:
           - "as.${SECRET_DOMAIN}"
+    podAnnotations:
+      backup.velero.io/backup-volumes: config
+      pre.hook.backup.velero.io/container: fsfreeze
+      pre.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--freeze", "/config"]'
+      post.hook.backup.velero.io/container: fsfreeze
+      post.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--unfreeze", "/config"]'
     resources:
       requests:
         memory: "768M"
       limits:
         memory: "2048M"
+    additionalContainers:
+      fsfreeze:
+        name: fsfreeze
+        image: ghcr.io/k8s-at-home/fsfreeze:v2.37-r0
+        volumeMounts:
+          - name: config
+            mountPath: /config
+        securityContext:
+          privileged: true
