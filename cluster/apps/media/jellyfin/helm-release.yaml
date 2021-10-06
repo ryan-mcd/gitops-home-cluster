@@ -57,15 +57,20 @@ spec:
         enabled: true
         existingClaim: nfs-media-nas-pvc
         readOnly: true
-      # transcode:
-      #   enabled: true
-      #   type: emptyDir
-      #   medium: Memory
-      #   size: 3Gi
+      transcode:
+        enabled: true
+        type: emptyDir
+        medium: Memory
 
+    podAnnotations:
+      backup.velero.io/backup-volumes: config
+      pre.hook.backup.velero.io/container: fsfreeze
+      pre.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--freeze", "/config"]'
+      post.hook.backup.velero.io/container: fsfreeze
+      post.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--unfreeze", "/config"]'
     resources:
       requests:
-        memory: 2000Mi
+        memory: 500Mi
         gpu.intel.com/i915: 1
       limits:
         memory: 4000Mi
@@ -82,4 +87,12 @@ spec:
                   operator: In
                   values:
                     - "true"
-
+    additionalContainers:
+      fsfreeze:
+        name: fsfreeze
+        image: ghcr.io/k8s-at-home/fsfreeze:v2.37-r0
+        volumeMounts:
+          - name: config
+            mountPath: /config
+        securityContext:
+          privileged: true

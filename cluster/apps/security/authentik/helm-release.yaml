@@ -68,7 +68,10 @@ spec:
       persistence:
         enabled: true
         existingClaim: authentik-postgresql
-
+      
+      master:
+        podAnnotations:
+          backup.velero.io/backup-volumes: data
       postgresqlUsername: authentik
       postgresqlDatabase: authentik
       postgresqlPassword: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
@@ -78,6 +81,10 @@ spec:
       auth:
         enabled: true
         password: "${AUTHENTIK_REDIS_PASSWORD}"
+
+      master:
+        podAnnotations:
+          backup.velero.io/backup-volumes: data
      
       #outposts:
       #  docker_image_base: beryju.org/authentik/outpost-%(type)s:gh-%(build_hash)s
