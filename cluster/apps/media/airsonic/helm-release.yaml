@@ -18,7 +18,7 @@ spec:
       interval: 5m
   values:
     image:
-      repository: airsonicadvanced/airsonic-advanced
+      repository: docker.io/airsonicadvanced/airsonic-advanced
       tag: edge-11.0.0-SNAPSHOT.20210928181117 
       pullPolicy: IfNotPresent
     podSecurityContext:
