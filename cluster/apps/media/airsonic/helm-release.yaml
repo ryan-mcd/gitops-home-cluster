@@ -26,7 +26,7 @@ spec:
       runAsGroup: 2000
       # Run Once for /var/airsonic/transcode permissions issues      
       fsGroup: 2000
-      fsGroupChangePolicy: "OnRootMismatch"
+      # fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
       - 100
       - 65540
