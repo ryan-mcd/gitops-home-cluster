@@ -19,9 +19,9 @@ spec:
       interval: 5m
   values:
     persistence:
-      defaultClassReplicaCount: 2
+      defaultClassReplicaCount: 3
     defaultSettings:
-      defaultReplicaCount: 2
+      defaultReplicaCount: 3
       createDefaultDiskLabeledNodes: true
       storageMinimalAvailablePercentage: "10"
       defaultLonghornStaticStorageClass: "longhorn"
@@ -33,10 +33,12 @@ spec:
       enabled: true
       ingressClassName: "traefik"
       tls: true
-      host: "longhorn.${SECRET_DOMAIN}"
+      host: "longhorn.${DOMAIN_2}"
+      tlsSecret: "longhorn-${DOMAIN_2/./-}-tls"
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         traefik.ingress.kubernetes.io/router.tls: "true"  
         traefik.ingress.kubernetes.io/router.middlewares: "networking-longhorn-tls@kubernetescrd"
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
         hajimari.io/enable: "true"
         hajimari.io/icon: "content-save-outline"
