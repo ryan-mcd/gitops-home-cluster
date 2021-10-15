@@ -19,7 +19,7 @@ spec:
   values:
     fullnameOverride: prometheus
     alertmanager:
-      config:
+      # config:
         # global:
         #   slack_api_url: "${SECRET_ALERT_MANAGER_DISCORD_WEBHOOK}"
         #   resolve_timeout: 5m
