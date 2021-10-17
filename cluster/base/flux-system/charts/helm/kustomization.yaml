@@ -20,3 +20,4 @@ resources:
 - metrics-server-charts.yaml
 - external-dns-charts.yaml
 - vmware-tanzu-charts.yaml
+- infracloudio-charts.yaml
