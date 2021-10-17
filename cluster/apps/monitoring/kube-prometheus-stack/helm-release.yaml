@@ -19,58 +19,60 @@ spec:
   values:
     fullnameOverride: prometheus
     alertmanager:
-      # config:
-        # global:
-        #   slack_api_url: "${SECRET_ALERT_MANAGER_DISCORD_WEBHOOK}"
-        #   resolve_timeout: 5m
-        # receivers:
-        #   - name: "null"
-        #   - name: "discord"
-        #     slack_configs:
-        #       - channel: "#prometheus"
-        #         icon_url: https://avatars3.githubusercontent.com/u/3380462
-        #         username: "Prometheus"
-        #         send_resolved: true
-        #         title: |-
-        #           [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }}{{ else }}{{ .CommonLabels.alertname }}{{ end }}
-        #         text: >-
-        #           {{ range .Alerts -}}
-        #             **Alert:** {{ .Annotations.title }}{{ if .Labels.severity }} - `{{ .Labels.severity }}`{{ end }}
+      config:
+        global:
+          slack_api_url: "${SECRET_ALERT_MANAGER_DISCORD_WEBHOOK}"
+          resolve_timeout: 5m
 
-        #           **Description:** {{ if ne .Annotations.description ""}}{{ .Annotations.description }}{{else}}N/A{{ end }}
+        receivers:
+          - name: "null"
+          - name: "discord"
+            slack_configs:
+              - channel: "#prometheus"
+                icon_url: https://avatars3.githubusercontent.com/u/3380462
+                username: "Prometheus"
+                send_resolved: true
+                title: |-
+                  [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }}{{ else }}{{ .CommonLabels.alertname }}{{ end }}
+                text: >-
+                  {{ range .Alerts -}}
+                    **Alert:** {{ .Annotations.title }}{{ if .Labels.severity }} - `{{ .Labels.severity }}`{{ end }}
 
-        #           **Details:**
-        #             {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
-        #             {{ end }}
-        #           {{ end }}
+                  **Description:** {{ if ne .Annotations.description ""}}{{ .Annotations.description }}{{else}}N/A{{ end }}
+
+                  **Details:**
+                    {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+                    {{ end }}
+                  {{ end }}
         #   - name: "nodered"
         #     webhook_configs:
         #       - url: "http://node-red.home:1880/power-outage"
         #         send_resolved: true
-        # route:
-        #   group_by: ["alertname", "job"]
-        #   group_wait: 30s
-        #   group_interval: 5m
-        #   repeat_interval: 6h
-        #   receiver: "discord"
-        #   routes:
-        #     - receiver: "null"
-        #       match:
-        #         alertname: Watchdog
-        #     - receiver: "discord"
-        #       match_re:
-        #         severity: critical
-        #       continue: true
-        #     - receiver: "nodered"
-        #       match:
-        #         alertname: UPSOnBattery
-        #       continue: true
-        # inhibit_rules:
-        #   - source_match:
-        #       severity: "critical"
-        #     target_match:
-        #       severity: "warning"
-        #     equal: ["alertname", "namespace"]
+        route:
+          group_by: ["alertname", "job"]
+          group_wait: 30s
+          group_interval: 5m
+          repeat_interval: 6h
+          receiver: "discord"
+          routes:
+            - receiver: "null"
+              match:
+                alertname: Watchdog
+            - receiver: "discord"
+              match_re:
+                severity: critical
+              continue: true
+            # - receiver: "nodered"
+            #   match:
+            #     alertname: UPSOnBattery
+            #   continue: true
+            
+        inhibit_rules:
+          - source_match:
+              severity: "critical"
+            target_match:
+              severity: "warning"
+            equal: ["alertname", "namespace"]
       ingress:
         enabled: true
         pathType: Prefix
@@ -191,27 +193,22 @@ spec:
               resources:
                 requests:
                   storage: 10Gi
-        # thanos:
-        #   image: quay.io/thanos/thanos:v0.22.0
-        #   version: v0.22.0
-        #   objectStorageConfig:
-        #     name: thanos-objstore
-        #     key: objstore.yml
+        thanos:
+          image: quay.io/thanos/thanos:v0.22.0
+          version: v0.22.0
+          objectStorageConfig:
+            name: thanos-objstore
+            key: objstore.yml
         # additionalScrapeConfigs:
-        #   - job_name: "coredns"
-        #     honor_timestamps: true
-        #     static_configs:
-        #       - targets:
-        #           - "${GATEWAY_ADDR}:9153"
         #   - job_name: 'minio-job'
         #     honor_timestamps: true
         #     metrics_path: /minio/v2/metrics/cluster
         #     static_configs:
         #       - targets:
-        #           - "${NAS_ADDR}:9000"
-        #   - job_name: "node-exporter"
-        #     honor_timestamps: true
-        #     static_configs:
-        #       - targets:
-        #           - "${GATEWAY_ADDR}:9100"
-        #           - "${NAS_ADDR}:9100"
+        #           - "s3.${DOMAIN_2}:9768"
+        #   # - job_name: "coredns"
+        #   #   honor_timestamps: true
+        #   #   static_configs:
+        #   #     - targets:
+        #   #         - "${GATEWAY_ADDR}:9153"
+
