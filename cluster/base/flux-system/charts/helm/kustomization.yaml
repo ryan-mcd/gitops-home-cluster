@@ -21,3 +21,4 @@ resources:
 - external-dns-charts.yaml
 - vmware-tanzu-charts.yaml
 - infracloudio-charts.yaml
+- rancher-server-charts.yaml

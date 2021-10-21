@@ -10,3 +10,4 @@ resources:
 - rook-ceph.yaml
 - monitoring.yaml
 - velero.yaml
+- cattle-system.yaml
