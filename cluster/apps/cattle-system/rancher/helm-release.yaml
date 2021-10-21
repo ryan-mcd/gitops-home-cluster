@@ -19,15 +19,13 @@ spec:
   values:
     hostname: "rancher.${DOMAIN_2}"
     replicas: 3
-    letsencrypt:
-      ingress:
-        class: traefik
     ingress:
       enabled: true
+      tls:
+        source: secret
       extraAnnotations:
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
-        cert-manager.io/cluster-issuer: "letsencrypt-production"
     # extraEnv:
 
       
