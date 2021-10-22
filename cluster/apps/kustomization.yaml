@@ -10,4 +10,3 @@ resources:
   - monitoring
   - rook-ceph
   - velero
-  - cattle-system
