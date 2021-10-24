@@ -41,7 +41,7 @@ spec:
       storage_config:
         aws:
           bucketnames: loki
-          endpoint: ${MINIO_ADDR}:9768
+          endpoint: http://10.11.1.111:9768
           access_key_id: "${SECRET_MINIO_ACCESS_KEY}"
           secret_access_key: "${SECRET_MINIO_SECRET_KEY}"
           s3forcepathstyle: true
