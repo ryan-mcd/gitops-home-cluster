@@ -28,8 +28,8 @@ spec:
       type: LoadBalancer
       spec:
         externalTrafficPolicy: Local
-        externalIPs:
-        - "${LB_TRAEFIK_IP}"
+        # externalIPs:
+        # - "${LB_TRAEFIK_IP}"
         loadBalancerIP: "${LB_TRAEFIK_IP}"
       # annotations:
       #   external-dns.alpha.kubernetes.io/hostname: "ipv4.${SECRET_DOMAIN},ipv4.${SECRET_DOMAIN_2}"
@@ -58,6 +58,7 @@ spec:
     # - "--entrypoints.websecure.http.middlewares=ingress-error-pages@kubernetescrd"
     additionalArguments:
     - "--providers.kubernetesingress.ingressendpoint.ip=${LB_TRAEFIK_IP}"
+    - "--providers.kubernetesingress.allowexternalnameservices=true"
     - "--providers.kubernetescrd.allowexternalnameservices=true"
     # - "--providers.kubernetesingress.ingressendpoint.hostname=${SECRET_DOMAIN}"
     # - "--experimental.plugins.subfilter.modulename=github.com/DirtyCajunRice/subfilter"
@@ -86,21 +87,19 @@ spec:
     experimental:
       plugins:
         enabled: true
-    # affinity:
-    #   podAntiAffinity:
-    #     preferredDuringSchedulingIgnoredDuringExecution:
-    #     - weight: 100
-    #       podAffinityTerm:
-    #         labelSelector:
-    #           matchExpressions:
-    #           - key: app.kubernetes.io/name
-    #             operator: In
-    #             values:
-    #             - traefik
-    #         topologyKey: kubernetes.io/hostname
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - traefik
+            topologyKey: kubernetes.io/hostname
     resources:
       requests:
         memory: 100Mi
-        cpu: 500m
+        cpu: 100m
       limits:
         memory: 500Mi
