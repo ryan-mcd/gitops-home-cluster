@@ -42,7 +42,7 @@ spec:
       podcasts:
         enabled: true
         storageClass: longhorn
-        accessMode: ReadWriteOnce
+        accessMode: ReadWriteMany
         mountPath: /var/podcasts
         size: 11Gi
       media-nas:
