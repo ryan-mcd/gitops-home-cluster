@@ -32,7 +32,7 @@ spec:
       - 65540
     env:
       TZ: "America/New_York"
-      JAVA_OPTS: "-Xms256m -Xmx512m -Dserver.forward-headers-strategy=native"
+      JAVA_OPTS: "-Xms256m -Xmx512m -Dserver.forward-headers-strategy=native -Dserver.servlet.session.timeout=2880m"
     enableServiceLinks: false
     persistence:
       config:
