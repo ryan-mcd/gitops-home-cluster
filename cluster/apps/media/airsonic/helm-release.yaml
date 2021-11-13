@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: docker.io/airsonicadvanced/airsonic-advanced
-      tag: edge-11.0.0-SNAPSHOT.20211110175606 
+      tag: edge-11.0.0-SNAPSHOT.20211113044531 
       pullPolicy: IfNotPresent
     podSecurityContext:
       runAsUser: 2000
