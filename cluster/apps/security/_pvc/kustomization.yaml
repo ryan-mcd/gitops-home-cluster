@@ -3,6 +3,5 @@ kind: Kustomization
 resources:
   - vaultwarden-config.yaml
   - authentik-postgresql.yaml
-  - authentik-media-pvc.yaml
-  # - vaultwarden-postgresql.yaml
+  # - authentik-media-pvc.yaml
   

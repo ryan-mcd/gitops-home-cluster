@@ -62,6 +62,13 @@ spec:
       redis:
         host: '{{ .Release.Name }}-redis-master'
         password: "${AUTHENTIK_REDIS_PASSWORD}"
+      email:
+        host: "${SECRET_AUTHENTIK_EMAIL_HOST}"
+        port: 587
+        use_ssl: true
+        username: "${SECRET_AUTHENTIK_USER}"
+        password: "${SECRET_AUTHENTIK_EMAIL_KEY}"
+        from: "${SECRET_AUTHENTIK_EMAIL_FROM}"
 
     postgresql:
       enabled: true
@@ -81,32 +88,21 @@ spec:
       auth:
         enabled: true
         password: "${AUTHENTIK_REDIS_PASSWORD}"
-
-      master:
-        podAnnotations:
-          backup.velero.io/backup-volumes: data
      
       #outposts:
       #  docker_image_base: beryju.org/authentik/outpost-%(type)s:gh-%(build_hash)s
 
-      email:
-        host: "${SECRET_AUTHENTIK_EMAIL_HOST}"
-        port: 587
-        use_ssl: true
-        username: "${SECRET_AUTHENTIK_USER}"
-        password: "${SECRET_AUTHENTIK_EMAIL_KEY}"
-        from: "${SECRET_AUTHENTIK_EMAIL_FROM}"
-    # # persistence:
-    # #   media:
-    # #     enabled: true
-    # #     mountPath: /media
-    # #     storageClass: rook-ceph-block
-    # #     accessMode: ReadWriteOnce
-    # #     size: 5Gi
-    volumeMounts:
-    - name: media
-      mountPath: /media
-    volumes:
-    - name: media
-      persistentVolumeClaim:
-        claimName: authentik-media-v1
+    # # # persistence:
+    # # #   media:
+    # # #     enabled: true
+    # # #     mountPath: /media
+    # # #     storageClass: rook-ceph-block
+    # # #     accessMode: ReadWriteOnce
+    # # #     size: 5Gi
+    # volumeMounts:
+    # - name: media
+    #   mountPath: /media
+    # volumes:
+    # - name: media
+    #   persistentVolumeClaim:
+    #     claimName: authentik-media-v1
