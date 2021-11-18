@@ -41,10 +41,10 @@ spec:
         mountPath: /var/airsonic
       podcasts:
         enabled: true
-        storageClass: longhorn
-        accessMode: ReadWriteMany
+        storageClass: rook-ceph-block
+        accessMode: ReadWriteOnce
         mountPath: /var/podcasts
-        size: 11Gi
+        size: 7Gi
       media-nas:
         enabled: true
         existingClaim: nfs-media-nas-pvc
