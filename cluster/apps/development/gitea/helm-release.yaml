@@ -55,6 +55,7 @@ spec:
         server:
           PROTOCOL: http
           ROOT_URL: "https://code.${SECRET_DOMAIN}"
+          SSH_DOMAIN: ssh-code.${SECRET_DOMAIN}
         service:
           DISABLE_REGISTRATION: "true"
         security:
