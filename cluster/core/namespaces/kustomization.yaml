@@ -11,3 +11,4 @@ resources:
 - monitoring.yaml
 - velero.yaml
 - cattle-system.yaml
+- development.yaml
