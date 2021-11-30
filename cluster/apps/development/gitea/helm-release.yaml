@@ -59,6 +59,8 @@ spec:
           DISABLE_REGISTRATION: "true"
         security:
           SECRET_KEY: "${SECRET_GITEA_SECRET}"
+        migrations:
+          ALLOW_LOCALNETWORKS: "true"
       database:
         builtIn:
           postgresql:
