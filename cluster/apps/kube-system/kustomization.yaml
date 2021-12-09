@@ -5,5 +5,5 @@ resources:
   - metrics-server
   - node-feature-discovery
   - intel-gpu-plugin
-  - kured
   - reloader
+  # - kured
