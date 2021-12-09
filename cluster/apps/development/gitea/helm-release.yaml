@@ -56,6 +56,8 @@ spec:
           PROTOCOL: http
           ROOT_URL: "https://code.${SECRET_DOMAIN}"
           SSH_DOMAIN: ssh-code.${SECRET_DOMAIN}
+          LFS_START_SERVER: "true"
+          LFS_JWT_SECRET: ${SECRET_GITEA_LFS_JWT}
         service:
           DISABLE_REGISTRATION: "true"
         security:
