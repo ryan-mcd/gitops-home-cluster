@@ -70,7 +70,7 @@ spec:
         - name: nas-data
           nfs:
             server: "${NAS_ADDR}"
-            path: /mnt/user/k8s-bak/rook-bak
+            path: /mnt/user/rook-bak/
         - name: direct-mount-scripts
           projected:
             defaultMode: 0775

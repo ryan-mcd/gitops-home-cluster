@@ -23,3 +23,4 @@ resources:
 - infracloudio-charts.yaml
 - rancher-server-charts.yaml
 - gitea-charts.yaml
+- nfs-subdir-external-provisioner-charts.yaml

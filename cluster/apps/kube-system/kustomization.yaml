@@ -6,4 +6,5 @@ resources:
   - node-feature-discovery
   - intel-gpu-plugin
   - reloader
+  - nfs-subdir-provisioner
   # - kured
