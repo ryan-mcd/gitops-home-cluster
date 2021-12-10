@@ -17,7 +17,7 @@ _... managed by Flux and serviced with RenovateBot_ :robot:
 
 This repository _is_ my home Kubernetes cluster in a declarative state. [Flux](https://github.com/fluxcd/flux2) watches my [cluster](./cluster/) folder and makes the changes to my cluster based on the YAML manifests.
 
-Feel free to open a [Github issue](https://github.com/Ryan-McD/home-cluster/issues/new/choose) or join the [k8s@home Discord](https://discord.gg/k8s-at-home) if you have any questions.
+Feel free to open a [Github issue](https://github.com/Ryan-McD/gitops-home-cluster/issues/new/choose) or join the [k8s@home Discord](https://discord.gg/k8s-at-home) if you have any questions.
 
 This repository is built off the [k8s-at-home/template-cluster-k3s](https://github.com/k8s-at-home/template-cluster-k3s) repository.
 
