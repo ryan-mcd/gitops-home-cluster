@@ -27,12 +27,12 @@ This repository is built off the [k8s-at-home/template-cluster-k3s](https://gith
 
 This cluster consists of both VMs provisioned on [PVE](https://www.proxmox.com/en/proxmox-ve) with and without the [Terraform Proxmox provider](https://github.com/Telmate/terraform-provider-proxmox) as well as physical nodes. These run [k3s](https://k3s.io/) provisioned overtop Ubuntu 20.04 using the [Ansible](https://www.ansible.com/) galaxy role [ansible-role-k3s](https://github.com/PyratLabs/ansible-role-k3s). This is a semi hyper-converged cluster, workloads and block storage are sharing the same available resources on my nodes while I have a separate server for (NFS) file storage.
 
-See my [server/ansible](./server/ansible/) directory for my playbooks and roles, and [server/terraform](./server/terraform) for infrastructure provisioning.
+See my [server/ansible](./server/ansible/) directory for my playbooks and roles, and [server/terraform](./server/terraformpve) for infrastructure provisioning.
 
 ## :art:&nbsp; Cluster components
 
 - [metallb](https://metallb.universe.tf/): Provides a load-balancer implementation for bare metal Kubernetes clusters, using standard routing protocols.
-- [calico](https://docs.projectcalico.org/about/about-calico): For internal cluster networking using BGP.
+- [calico](https://docs.projectcalico.org/about/about-calico): For internal cluster networking.
 - [traefik](https://traefik.io/): Provides ingress cluster services.
 - [rook-ceph](https://rook.io/): Provides persistent volumes, allowing any application to consume RBD block storage.
 - [longhorn](https://longhorn.io): Cloud native distributed block storage for Kubernetes. Transitioning to rook-ceph.
