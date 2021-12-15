@@ -35,7 +35,6 @@ See my [server/ansible](./server/ansible/) directory for my playbooks and roles,
 - [calico](https://docs.projectcalico.org/about/about-calico): For internal cluster networking.
 - [traefik](https://traefik.io/): Provides ingress cluster services.
 - [rook-ceph](https://rook.io/): Provides persistent volumes, allowing any application to consume RBD block storage.
-- [longhorn](https://longhorn.io): Cloud native distributed block storage for Kubernetes. Transitioning to rook-ceph.
 - [SOPS](https://toolkit.fluxcd.io/guides/mozilla-sops/): Encrypts secrets which is safe to store - even to a public repository.
 - [cert-manager](https://cert-manager.io/docs/): Configured to create TLS certs for all ingress services automatically using LetsEncrypt.
 
@@ -68,24 +67,23 @@ cluster
 | [dir-env](https://github.com/direnv/direnv)                        | Sets environment variable based on present working directory              |
 | [sops](https://github.com/mozilla/sops)                            | Encrypts k8s secrets with GnuPG                                     |
 
-
 ## 💻 Nodes
 | Node                     | Hostname | CPU | RAM  | Storage       | Function          | Operating System
 | ------------------------ |-----|------|------| ------------- | ----------------- | -------------------- |
-| Lenovo M72e   |k8s-master01 | 2C4T i5 3470T  | 8GB  | 180GB SSD     | Kube Master Node  | Ubuntu 20.04.3 LTS         |
-| Lenovo M72e   |k8s-master02 | 2C4T i5 3470T  | 8GB  | 180GB SSD     | Kube Master Node  | Ubuntu 20.04.3 LTS         |
-| Lenovo M72e   |k8s-master03 | 2C4T i5 3470T  | 8GB  | 180GB SSD     | Kube Master Node  | Ubuntu 20.04.3 LTS         |
-| Proxmox VM w/o GPU passthrough  |k8s-worker01 | 6C i5 10400  | 16GB  | 120GB SSD, 350GB NVME virtual block storage     | Kube Worker Node  | Ubuntu 20.04.3 LTS        |
-| Proxmox VM w/ Intel iGPU passthrough   | k8s-worker02 | 4C i7 8700k  | 12GB  | 120GB SSD, 350GB NVME virtual block storage     | Kube Worker Node  | Ubuntu 20.04.3 LTS        |
-| HP590   |k8s-worker03 | 4C i3 10100  | 16GB  | 500GB SSD, 350GB NVME | Kube Worker Node  | Ubuntu 20.04.3 LTS        |
+| Lenovo M72e   | k8s-master-lt9 | 2C4T i5 3470T  | 8GB  | 180GB SSD     | Kube Master Node  | Ubuntu 20.04.3 LTS         |
+| Lenovo M72e   | k8s-master-lx0 | 2C4T i5 3470T  | 8GB  | 180GB SSD     | Kube Master Node  | Ubuntu 20.04.3 LTS         |
+| Lenovo M72e   | k8s-master-lr3 | 2C4T i5 3470T  | 8GB  | 180GB SSD     | Kube Master Node  | Ubuntu 20.04.3 LTS         |
+| Proxmox VM w/o GPU passthrough  | k8s-w-pve | 6C i5 10400  | 16GB  | 120GB SSD OS, 350GB NVME ceph virtual block storage     | Kube Worker Node  | Ubuntu 20.04.3 LTS        |
+| Proxmox VM w/ Intel iGPU passthrough   | k8s-w-pvegpu | 4C i7 8700k  | 12GB  | 120GB SSD OS, 350GB NVME ceph virtual block storage     | Kube Worker Node  | Ubuntu 20.04.3 LTS        |
+| HP590   | k8s-w-590 | 4C i3 10100  | 16GB  | 500GB SSD OS, 500GB NVME ceph | Kube Worker Node  | Ubuntu 20.04.3 LTS        |
 
 ## 💻 Networking and Virtualization Hosts
 | PC                       | Hostname | CPU | RAM  | Storage       | Function          | Operating System
 | ------------------------ |-----|------|------| ------------- | ----------------- | -------------------- |
 | Unraid on Proxmox pve       | NAS | 8C i5 10400  | 8GB  | 3 x 8TB HDD, 3TB HDD, 2 x 240GB SSD | NFS Server | unRaid |
-| Lenovo 310s | pfsense | 4C j4205  | 8GB | 100GB SSD | Router | pfsense|
-| Node 304 NAS/Virtualization Host | pve | i5 10400  | 64GB | 500GB SSD, 500GB NVME | Virtualization host | Proxmox 7|
-| Fractal Design NR200 Virtualization Host | pve8700k | i7 8700k  | 32GB | 500GB SSD, 1TB NVME | Virtualization host | Proxmox 7|
+| Lenovo 310s | pfsense | 4C j4205  | 8GB | 100GB SSD | Router | pfsense |
+| Node 304 NAS/Virtualization Host | pve | i5 10400  | 64GB | 500GB SSD, 500GB NVME | Virtualization host | Proxmox 7 |
+| Fractal Design NR200 Virtualization Host | pve8700k | i7 8700k  | 32GB | 500GB SSD, 1TB NVME | Virtualization host | Proxmox 7 |
 
 ---
 
