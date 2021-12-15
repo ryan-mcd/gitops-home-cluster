@@ -41,10 +41,8 @@ spec:
         mountPath: /var/airsonic
       podcasts:
         enabled: true
-        storageClass: rook-ceph-block
-        accessMode: ReadWriteOnce
+        existingClaim: airsonic-podcasts
         mountPath: /var/podcasts
-        size: 7Gi
       media-nas:
         enabled: true
         existingClaim: nfs-media-nas-pvc
