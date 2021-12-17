@@ -8,6 +8,6 @@ resources:
   - security
   - media
   - monitoring
-  # - rook-ceph
+  - rook-ceph
   - velero
   - development
