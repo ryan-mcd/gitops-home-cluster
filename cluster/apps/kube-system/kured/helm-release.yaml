@@ -19,6 +19,7 @@ spec:
   values:
     image:
       repository: ghcr.io/k8s-at-home/kured
+      tag: "1.8.1"
     updateStrategy: RollingUpdate
     configuration:
       timeZone: "America/New_York"
