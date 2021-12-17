@@ -1,7 +1,7 @@
 ---
 
 # Encapsulation type
-calico_encapsulation: "None"
+calico_encapsulation: "VXLANCrossSubnet"
 # BGP Peer IP
 # (usually your router IP address)
 calico_bgp_peer_ip: 10.24.0.254

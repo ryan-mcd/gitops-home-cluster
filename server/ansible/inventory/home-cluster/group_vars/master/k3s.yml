@@ -10,8 +10,8 @@ k3s_control_node: true
 k3s_server:
   node-ip: "{{ ansible_host }}"
   tls-san:
-    # kube-vip
-    - "{{ kubevip_address }}"
+    # # kube-vip
+    # - "{{ kubevip_address }}"
     # haproxy
     - "{{ k3s_registration_address }}"
   docker: false
@@ -31,26 +31,36 @@ k3s_server:
 
   # Network CIDR to use for service IPs
   service-cidr: "10.43.0.0/16"
-  kubelet-arg:
-    - "feature-gates=GracefulNodeShutdown=true"
-    - "feature-gates=MixedProtocolLBService=true"
-  # Required to use kube-prometheus-stack
-  kube-controller-manager-arg:
-    - "address=0.0.0.0"
-    - "bind-address=0.0.0.0"
-  kube-proxy-arg:
-    - "metrics-bind-address=0.0.0.0"
-  kube-scheduler-arg:
-    - "address=0.0.0.0"
-    - "bind-address=0.0.0.0"
+  
+  # Required to monitor component with kube-prometheus-stack
   etcd-expose-metrics: true
 
-  # Required for HAProxy health-checks
+  kubelet-arg:
+    - "feature-gates=EphemeralContainers=true"
+    - "feature-gates=MixedProtocolLBService=true"
+    - "feature-gates=ReadWriteOncePod=true"
+  kube-controller-manager-arg:
+    - "feature-gates=EphemeralContainers=true"
+    - "feature-gates=MixedProtocolLBService=true"
+    - "feature-gates=ReadWriteOncePod=true"
+    # Required to monitor component with kube-prometheus-stack
+    - "bind-address=0.0.0.0"
+  kube-proxy-arg:
+    - "feature-gates=EphemeralContainers=true"
+    - "feature-gates=MixedProtocolLBService=true"
+    - "feature-gates=ReadWriteOncePod=true"
+    # Required to monitor component with kube-prometheus-stack
+    - "metrics-bind-address=0.0.0.0"
+  kube-scheduler-arg:
+    - "feature-gates=EphemeralContainers=true"
+    - "feature-gates=MixedProtocolLBService=true"
+    - "feature-gates=ReadWriteOncePod=true"
+    # - "address=0.0.0.0"
+    # Required to monitor component with kube-prometheus-stack
+    - "bind-address=0.0.0.0"
   kube-apiserver-arg:
+    - "feature-gates=EphemeralContainers=true"
+    - "feature-gates=MixedProtocolLBService=true"
+    - "feature-gates=ReadWriteOncePod=true"
+    # Required for HAProxy health-checks
     - "anonymous-auth=true"
-
-  # Add node-label for longhorn to create disks
-  # https://longhorn.io/docs/1.1.2/advanced-resources/default-disk-and-node-config/
-  # CLI: kubectl label nodes k8s-worker01 node.longhorn.io/create-default-disk=true
-  node-label:
-    - "node.longhorn.io/create-default-disk=true"

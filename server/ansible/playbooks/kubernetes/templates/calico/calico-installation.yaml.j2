@@ -14,8 +14,8 @@ spec:
         encapsulation: "{{ calico_encapsulation }}"
         natOutgoing: Enabled
         nodeSelector: all()
-    #nodeAddressAutodetectionV4:
-    #  cidrs:
-    #    - "{{ calico_node_cidr }}"
-#  nodeMetricsPort: 9091
-#  typhaMetricsPort: 9093
+    nodeAddressAutodetectionV4:
+      cidrs:
+        - "{{ calico_node_cidr }}"
+  nodeMetricsPort: 9091
+  typhaMetricsPort: 9093
