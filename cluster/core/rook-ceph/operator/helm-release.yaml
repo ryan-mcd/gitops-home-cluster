@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.rook.io/release
       chart: rook-ceph
-      version: v1.7.9
+      version: v1.8.1
       sourceRef:
         kind: HelmRepository
         name: rook-ceph-charts
@@ -19,12 +19,10 @@ spec:
     crds:
       enabled: false
     csi:
-      kubeletDirPath: /var/lib/kubelet
-      # # Grabbed from wrmilling
-      # enableGrpcMetrics: true
-      # enableCSIHostNetwork: true
-      pluginTolerations:
-        - operator: "Exists"
+      enableCephfsDriver: false
+      enableCephfsSnapshotter: false
+    monitoring:
+      enabled: true
     resources:
       requests:
         cpu: 100m
