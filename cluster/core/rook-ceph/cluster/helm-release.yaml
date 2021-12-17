@@ -23,13 +23,17 @@ spec:
     ingress:
       dashboard:
         annotations:
-          kubernetes.io/ingress.class: "nginx"
+          kubernetes.io/ingress.class: "traefik"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         host:
-          name: "rook.${SECRET_DOMAIN}"
+          name: "rook.${DOMAIN_2}"
           path: "/"
         tls:
           - hosts:
-              - "rook.${SECRET_DOMAIN}"
+              - "rook.${DOMAIN_2}"
+            secretName: "rook-${DOMAIN_2/./-}-tls"
     cephClusterSpec:
       crashCollector:
         disable: false
