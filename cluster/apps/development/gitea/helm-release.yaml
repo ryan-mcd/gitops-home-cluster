@@ -27,8 +27,8 @@ spec:
         loadBalancerIP: ${LB_GITEA_IP}
     ingress:
       enabled: true
-      ingressClassName: "traefik"
       annotations:
+        kubernetes.io/ingress.class: "traefik"
         cert-manager.io/cluster-issuer: "letsencrypt-production"
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         traefik.ingress.kubernetes.io/router.middlewares: "networking-cloudflare-ips@kubernetescrd"
