@@ -26,8 +26,8 @@ spec:
           metallb.universe.tf/allow-shared-ip: traefik
         type: LoadBalancer
         port: 22
-        # loadBalancerIP: ${LB_GITEA_IP}
-        loadBalancerIP: ${LB_TRAEFIK_IP}
+        loadBalancerIP: ${LB_GITEA_IP}
+        # loadBalancerIP: ${LB_TRAEFIK_IP}
     ingress:
       enabled: true
       annotations:
@@ -58,6 +58,7 @@ spec:
         server:
           PROTOCOL: http
           ROOT_URL: "https://code.${SECRET_DOMAIN}"
+          # START_SSH_SERVER: "true"
           SSH_DOMAIN: ssh-code.${SECRET_DOMAIN}
           LFS_START_SERVER: "true"
           LFS_JWT_SECRET: ${SECRET_GITEA_LFS_JWT}
