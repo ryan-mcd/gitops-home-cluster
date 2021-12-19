@@ -129,27 +129,27 @@ spec:
     kubeControllerManager:
       enabled: true
       endpoints:
-        - 10.24.0.10
-        - 10.24.0.11
-        - 10.24.0.12
+        - 10.24.0.110
+        - 10.24.0.111
+        - 10.24.0.112
     kubeScheduler:
       enabled: true
       endpoints:
-        - 10.24.0.10
-        - 10.24.0.11
-        - 10.24.0.12
+        - 10.24.0.110
+        - 10.24.0.111
+        - 10.24.0.112
     kubeProxy:
       enabled: true
       endpoints:
-        - 10.24.0.10
-        - 10.24.0.11
-        - 10.24.0.12
+        - 10.24.0.110
+        - 10.24.0.111
+        - 10.24.0.112
     kubeEtcd:
       enabled: true
       endpoints:
-        - 10.24.0.10
-        - 10.24.0.11
-        - 10.24.0.12
+        - 10.24.0.110
+        - 10.24.0.111
+        - 10.24.0.112
       service:
         enabled: true
         port: 2381
