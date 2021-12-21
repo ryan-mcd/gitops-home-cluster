@@ -41,7 +41,7 @@ spec:
         mountPath: /var/airsonic
       podcasts:
         enabled: true
-        existingClaim: airsonic-podcasts
+        existingClaim: airsonic-podcasts-nas-pvc
         mountPath: /var/podcasts
       media-nas:
         enabled: true

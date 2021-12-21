@@ -1,12 +1,34 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: airsonic-podcasts-nas-pv
+spec:
+  storageClassName: podcasts-nas
+  capacity:
+    storage: 1Mi
+  accessModes:
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: ${NAS_ADDRESS}
+    path: /mnt/user/airsonic_podcasts
+  mountOptions:
+  - tcp
+  - intr
+  - hard
+  - noatime
+  - nodiratime
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: airsonic-podcasts
+  name: airsonic-podcasts-nas-pvc
   namespace: media
 spec:
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteMany
+  storageClassName: podcasts-nas
   resources:
     requests:
-      storage: 7Gi
-  storageClassName: nfs-client
+      storage: 1Mi
