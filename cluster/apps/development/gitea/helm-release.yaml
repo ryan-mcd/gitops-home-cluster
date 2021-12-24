@@ -54,9 +54,9 @@ spec:
         password: ${SECRET_GITEA_ADM_PASS}
         email: "${SECRET_GITEA_ADM_EMAIL}"
       config:
-        DOMAIN: "code.${SECRET_DOMAIN}"
         server:
           PROTOCOL: http
+          DOMAIN: "code.${SECRET_DOMAIN}"
           ROOT_URL: "https://code.${SECRET_DOMAIN}"
           # START_SSH_SERVER: "true"
           SSH_DOMAIN: ssh-code.${SECRET_DOMAIN}
@@ -68,17 +68,9 @@ spec:
           SECRET_KEY: "${SECRET_GITEA_SECRET}"
         migrations:
           ALLOW_LOCALNETWORKS: "true"
-      database:
-        builtIn:
-          postgresql:
-            enabled: true
 
-      podAnnotations:
-        backup.velero.io/backup-volumes: data
     postgresql:
-      primary:
-        podAnnotations:
-          backup.velero.io/backup-volumes: data
+      enabled: true
       global:
         postgresql:
           postgresqlDatabase: gitea
