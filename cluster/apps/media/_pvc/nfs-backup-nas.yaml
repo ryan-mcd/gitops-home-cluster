@@ -2,9 +2,9 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: airsonic-podcasts-nas-pv
+  name: nfs-backup-nas-pv
 spec:
-  storageClassName: podcasts-nas
+  storageClassName: backup-nas
   capacity:
     storage: 1Mi
   accessModes:
@@ -12,7 +12,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: ${NAS_ADDRESS}
-    path: /mnt/user/airsonic_podcasts
+    path: /mnt/user/k8s-bak
   mountOptions:
   - tcp
   - intr
@@ -23,12 +23,12 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: airsonic-podcasts-nas-pvc
+  name: nfs-backup-nas-pvc
   namespace: media
 spec:
   accessModes:
   - ReadWriteMany
-  storageClassName: podcasts-nas
+  storageClassName: backup-nas
   resources:
     requests:
       storage: 1Mi

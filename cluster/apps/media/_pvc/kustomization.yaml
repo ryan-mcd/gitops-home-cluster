@@ -4,3 +4,4 @@ resources:
 - nfs-media-nas.yaml
 - airsonic-config-pvc.yaml
 - jellyfin-config-pvc.yaml
+- nfs-backup-nas.yaml

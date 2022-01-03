@@ -41,8 +41,13 @@ spec:
         mountPath: /var/airsonic
       podcasts:
         enabled: true
-        existingClaim: airsonic-podcasts-nas-pvc
+        type: custom
+        volumeSpec:
+          nfs:
+            server: ${NAS_ADDRESS}
+            path: /mnt/user/airsonic_podcasts
         mountPath: /var/podcasts
+        readOnly: false
       media-nas:
         enabled: true
         existingClaim: nfs-media-nas-pvc
@@ -56,6 +61,13 @@ spec:
           - path: Music/Classical
             mountPath: /var/Classical
             readOnly: true
+      backup:
+        enabled: true
+        existingClaim: nfs-backup-nas-pvc
+        subPath:
+          - path: airsonic-backup
+            mountPath: /var/airsonic/backups
+            readOnly: false
     ingress:
       main:
         enabled: true
