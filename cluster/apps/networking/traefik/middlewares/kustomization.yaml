@@ -12,3 +12,4 @@ resources:
 - longhorn-tls.yaml
 - nextcloud-regex.yaml
 - nextcloud-tls.yaml
+- plex-redirect.yaml

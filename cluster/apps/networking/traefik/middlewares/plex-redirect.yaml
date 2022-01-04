@@ -1,0 +1,10 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: svc-plex-redirect
+  namespace: networking
+spec:
+  redirectRegex:
+    regex: "^(http|https)://${SECRET_DOMAIN}/"
+    replacement: "https://${SECRET_DOMAIN}/web/"
+    permanent: true
