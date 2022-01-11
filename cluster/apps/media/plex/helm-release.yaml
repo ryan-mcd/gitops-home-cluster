@@ -84,7 +84,7 @@ spec:
         existingClaim: nfs-backup-nas-pvc
         subPath:
           - path: plex-backup
-            mountPath: /config/Backups
+            mountPath: /backups
             readOnly: false
       # transcode:
       #   enabled: true
