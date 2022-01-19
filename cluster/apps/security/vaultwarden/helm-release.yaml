@@ -25,7 +25,7 @@ spec:
     nameOverride: vaultwarden
     fullnameOverride: vaultwarden
     image:
-      repository: vaultwarden/server
+      repository: ghcr.io/k8s-at-home/vaultwarden
       tag: 1.23.1
     env:
       DATA_FOLDER: "config"
