@@ -23,6 +23,7 @@
       "cluster/.+\\.yaml$"
     ]
   },
+  "regexManagers": [
     // regexManager to read and process cert-manager CRD's
     {
       "fileMatch": [
