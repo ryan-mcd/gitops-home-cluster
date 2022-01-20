@@ -8,7 +8,6 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://releases.rancher.com/server-charts/stable
       chart: rancher
       version: 2.6.3
       sourceRef:
