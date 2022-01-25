@@ -124,7 +124,7 @@
     },
     {
       "matchDatasources": ["docker"],
-      "matchPackageNames": ["ghcr.io/k8s-at-home/airsonic-advanced"],
+      "matchPackageNames": ["ghcr.io/airsonic-advanced/airsonic-advanced"],
       "versioning": "regex:^edge-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-SNAPSHOT\\.(?<build>\\d+)$"
     },
     {
