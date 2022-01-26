@@ -1,10 +1,17 @@
 {
   "enabled": true,
+  "timezone": "America/New_York",
   "semanticCommits": "enabled",
   "dependencyDashboard": true,
-  "dependencyDashboardTitle": "Renovate Dashboard",
+  "dependencyDashboardTitle": "Renovate Dashboard 🤖",
+  "commitBody": "Signed-off-by: Ryan McDaniel  <Ryan-McD@users.noreply.github.com>",
+  // do not notify on closed unmerged PRs
   "suppressNotifications": ["prIgnoreNotification"],
+  // only rebase PRs when there's a conflict
   "rebaseWhen": "conflicted",
+  "commitMessageTopic": "{{depName}}",
+  "commitMessageExtra": "to {{newVersion}}",
+  "commitMessageSuffix": "",
   "helm-values": {
     "fileMatch": [
       "cluster/.+/helm-release\\.yaml$"
@@ -134,6 +141,45 @@
       "versioning": "loose",
       "matchPackageNames": [
         "ghcr.io/k8s-at-home/plex"
+      ]
+    },
+    // group packages
+    {
+      "matchDatasources": ["helm", "docker"],
+      "matchPackagePatterns": ["^rook.ceph"],
+      "groupName": "rook-ceph-suite",
+      "additionalBranchPrefix": "",
+      "separateMinorPatch": true
+    },
+    // enable auto-merge
+    {
+      "matchDatasources": ["docker"],
+      "automerge": true,
+      "automergeType": "branch",
+      "requiredStatusChecks": null,
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": [
+        "ghcr.io/k8s-at-home/jellyfin",
+        "ghcr.io/airsonic-advanced/airsonic-advanced",
+        "ghcr.io/miguelndecarvalho/speedtest-exporter"
+      ]
+    },
+    {
+      "matchDatasources": ["helm"],
+      "automerge": true,
+      "automergeType": "branch",
+      "requiredStatusChecks": null,
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": [
+        "traefik",
+        "ingress-nginx",
+        "kube-prometheus-stack",
+        "grafana",
+        "thanos",
+        "loki",
+        "speedtest-exporter",
+        "kured",
+        "authentik"
       ]
     }
   ]
