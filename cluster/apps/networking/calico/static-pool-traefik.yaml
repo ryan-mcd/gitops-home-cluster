@@ -1,0 +1,12 @@
+apiVersion: crd.projectcalico.org/v1
+kind: IPPool
+metadata:
+  name: lb-pool
+spec:
+  blockSize: 29
+  cidr: 10.44.44.0/29
+  ipipMode: Never
+  vxlanMode: CrossSubnet
+  natOutgoing: true
+  disabled: false
+  nodeSelector: all()
