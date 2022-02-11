@@ -174,7 +174,6 @@
         "traefik",
         "ingress-nginx",
         "kube-prometheus-stack",
-        "grafana",
         "thanos",
         "loki",
         "speedtest-exporter",
