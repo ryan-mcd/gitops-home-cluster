@@ -1,7 +1,0 @@
-apiVersion: crd.projectcalico.org/v1
-kind: IPReservation
-metadata:
-  name: traefik-reservation
-spec:
-  reservedCIDRs:
-  - 10.44.44.0/29

@@ -24,8 +24,6 @@ spec:
     deployment:
       kind: Deployment
       replicas: 2
-      podAnnotations:
-        cni.projectcalico.org/ipv4pools: '["lb-pool"]'
     service:
       enabled: true
       type: LoadBalancer
