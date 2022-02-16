@@ -61,6 +61,13 @@ spec:
           SSH_DOMAIN: ssh-code.${SECRET_DOMAIN}
           LFS_START_SERVER: "true"
           LFS_JWT_SECRET: ${SECRET_GITEA_LFS_JWT}
+        database:
+          DB_TYPE: postgres
+          HOST: ${POSTGRESQL_ADDRESS}:5432
+          NAME: gitea
+          USER: gitea
+          PASSWD: ${SECRET_GITEA_PG_PASSWORD}
+          SCHEMA: public
         service:
           DISABLE_REGISTRATION: "true"
         security:
@@ -69,18 +76,4 @@ spec:
           ALLOW_LOCALNETWORKS: "true"
 
     postgresql:
-      enabled: true
-      global:
-        postgresql:
-          postgresqlDatabase: gitea
-          postgresqlUsername: gitea
-          postgresqlPassword: "${SECRET_GITEA_PG_PASSWORD}"
-          servicePort: 5432
-      image:
-        registry: docker.io
-        repository: bitnami/postgresql
-        tag: 13.5.0-debian-10-r7
-      persistence:
-        enabled: true
-        existingClaim: gitea-db-v1
-        subPath: data
+      enabled: false
