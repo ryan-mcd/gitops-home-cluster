@@ -54,7 +54,7 @@ spec:
         docker_image_base: ghcr.io/goauthentik/%(type)s:%(version)s
 
       postgresql:
-        host: '{{ .Release.Name }}-postgresql'
+        host: '${POSTGRESQL_ADDRESS}'
         name: authentik
         user: authentik
         password: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
@@ -70,17 +70,7 @@ spec:
         from: "${SECRET_AUTHENTIK_EMAIL_FROM}"
 
     postgresql:
-      enabled: true
-      persistence:
-        enabled: true
-        existingClaim: authentik-postgresql
-      
-      primary:
-        podAnnotations:
-          backup.velero.io/backup-volumes: data
-      postgresqlUsername: authentik
-      postgresqlDatabase: authentik
-      postgresqlPassword: "${SECRET_AUTHENTIK_POSTGRES_PASSWORD}"
+      enabled: false
 
     redis:
       enabled: true
