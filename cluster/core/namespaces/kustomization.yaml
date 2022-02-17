@@ -10,3 +10,4 @@ resources:
 - monitoring.yaml
 - cattle-system.yaml
 - development.yaml
+- home.yaml
