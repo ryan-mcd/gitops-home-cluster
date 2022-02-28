@@ -34,7 +34,7 @@ spec:
         # - downloads
       customApps:
       - name: nas
-        url: "https://nas.${SECRET_DOMAIN}"
+        url: "https://nas.${DOMAIN_2}"
         icon: nas
       groups:
       - name: Communicate
