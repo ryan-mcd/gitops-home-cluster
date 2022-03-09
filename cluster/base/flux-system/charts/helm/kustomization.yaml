@@ -24,3 +24,4 @@ resources:
 - rancher-server-charts.yaml
 - gitea-charts.yaml
 - nfs-subdir-external-provisioner-charts.yaml
+- kasten-charts.yaml

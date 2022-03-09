@@ -11,3 +11,4 @@ resources:
 - cattle-system.yaml
 - development.yaml
 - home.yaml
+- kasten-io.yaml
