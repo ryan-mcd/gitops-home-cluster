@@ -4,6 +4,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: airsonic-config-v1
   namespace: media
+  labels:
+    kasten.io/backup-volume: "enabled"
 spec:
   accessModes:
   - ReadWriteOnce
