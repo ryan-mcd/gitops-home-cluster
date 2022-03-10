@@ -49,6 +49,7 @@ spec:
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
         cert-manager.io/cluster-issuer: "letsencrypt-production"
+      host: "k10.${DOMAIN_2}"
       hosts:
         - "k10.${DOMAIN_2}"
       tls:
