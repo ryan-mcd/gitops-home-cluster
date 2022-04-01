@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: ghcr.io/weaveworks/kured
-      tag: "1.9.1"
+      tag: "1.9.2"
     updateStrategy: RollingUpdate
     configuration:
       timeZone: "America/New_York"
