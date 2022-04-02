@@ -64,11 +64,13 @@ spec:
         readOnly: true
       backup:
         enabled: true
-        existingClaim: nfs-backup-nas-pvc
-        subPath:
-          - path: plex-backup
-            mountPath: /backups
-            readOnly: false
+        type: custom
+        volumeSpec:
+          nfs:
+            server: ${NAS_ADDRESS}
+            path: /mnt/user/k8s-bak/plex-backup
+        mountPath: /backups
+        readOnly: false
       # transcode:
       #   enabled: true
       #   type: emptyDir
