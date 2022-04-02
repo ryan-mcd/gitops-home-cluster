@@ -62,11 +62,13 @@ spec:
             readOnly: true
       backup:
         enabled: true
-        existingClaim: nfs-backup-nas-pvc
-        subPath:
-          - path: airsonic-backup
-            mountPath: /var/airsonic/backups
-            readOnly: false
+        type: custom
+        volumeSpec:
+          nfs:
+            server: ${NAS_ADDRESS}
+            path: /mnt/user/k8s-bak/airsonic-backup
+        mountPath: /var/airsonic/backups
+        readOnly: false
     ingress:
       main:
         enabled: true
