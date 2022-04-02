@@ -52,9 +52,14 @@ spec:
       config:
         enabled: true
         existingClaim: jellyfin-config-v1
-      media-nas:
+      media:
         enabled: true
-        existingClaim: nfs-media-nas-pvc
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "${NAS_ADDRESS}"
+            path: /mnt/user/Media
+        mountPath: /media
         readOnly: true
       # transcode:
       #   enabled: true
