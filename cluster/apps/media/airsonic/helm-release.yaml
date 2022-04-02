@@ -47,19 +47,33 @@ spec:
             path: /mnt/user/airsonic_podcasts
         mountPath: /var/podcasts
         readOnly: false
-      media-nas:
+      old:
         enabled: true
-        existingClaim: nfs-media-nas-pvc
-        subPath:
-          - path: Music/Old
-            mountPath: /var/music
-            readOnly: true
-          - path: ${SECRET_NEW_MUSIC}
-            mountPath: /var/new
-            readOnly: true
-          - path: Music/Classical
-            mountPath: /var/Classical
-            readOnly: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: ${NAS_ADDRESS}
+            path: /mnt/user/Media/Music/Old
+        mountPath: /var/music
+        readOnly: true
+      new:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: ${NAS_ADDRESS}
+            path: /mnt/user/Media/${SECRET_NEW_MUSIC}
+        mountPath: /var/new
+        readOnly: true
+      classical:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: ${NAS_ADDRESS}
+            path: /mnt/user/Media/Music/Classical
+        mountPath: /var/Classical
+        readOnly: true
       backup:
         enabled: true
         type: custom
