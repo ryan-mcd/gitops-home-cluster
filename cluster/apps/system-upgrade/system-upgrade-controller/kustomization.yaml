@@ -2,5 +2,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - manifest.yaml
   - server-plan.yaml
   - agent-plan.yaml

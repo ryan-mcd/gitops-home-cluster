@@ -12,3 +12,4 @@ resources:
 - development.yaml
 - home.yaml
 - kasten-io.yaml
+- system-upgrade.yaml
