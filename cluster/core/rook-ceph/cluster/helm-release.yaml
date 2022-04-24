@@ -9,16 +9,18 @@ spec:
   chart:
     spec:
       chart: rook-ceph-cluster
-      version: v1.8.9
+      version: v1.9.1
       sourceRef:
         kind: HelmRepository
         name: rook-ceph-charts
         namespace: flux-system
   dependsOn:
+    # TODO(rook-ceph): Rename dependency to rook-ceph-operator
     - name: rook-ceph
   values:
     monitoring:
       enabled: true
+      createPrometheusRules: true
     ingress:
       dashboard:
         annotations:
@@ -34,6 +36,15 @@ spec:
               - "rook.${DOMAIN_2}"
             secretName: "rook-${DOMAIN_2/./-}-tls"
     cephClusterSpec:
+      cephVersion:
+        image: quay.io/ceph/ceph:v17.2.0
+      # TODO(rook-ceph): Enable host network on next rebuild
+      # network:
+      #   provider: host
+      # TODO(rook-ceph): Enable compression on next rebuild
+      # connections:
+      #   compression:
+      #     enabled: true
       crashCollector:
         disable: false
       mgr:
