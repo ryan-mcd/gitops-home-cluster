@@ -5,3 +5,4 @@ resources:
 - airsonic-config-pvc.yaml
 - jellyfin-config-pvc.yaml
 - nfs-backup-nas.yaml
+- tautulli-config-pvc.yaml
