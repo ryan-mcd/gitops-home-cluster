@@ -139,3 +139,18 @@ spec:
             csi.storage.k8s.io/fstype: ext4
     cephFileSystems: []
     cephObjectStores: []
+  postRenderers:
+    - kustomize:
+        patchesJson6902:
+          - target:
+              group: monitoring.coreos.com
+              kind: PrometheusRule
+              name: prometheus-ceph-rules
+              version: v1
+            patch:
+              # remove CephNodeInconsistentMTU
+              - op: remove
+                path: /spec/groups/6/rules/4
+              # alert on nic packet errors and drops rates > 1% packets/s
+              - op: remove
+                path: /spec/groups/6/rules/1
