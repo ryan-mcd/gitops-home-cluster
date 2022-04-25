@@ -80,6 +80,8 @@ spec:
             # cpu: "100m"
             cpu: "50m"
             memory: "40Mi"
+          limits:
+            cpu: "1"
         mon:
           requests:
             # cpu: "1000m"
