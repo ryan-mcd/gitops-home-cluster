@@ -164,3 +164,6 @@ spec:
       #         category: logs
       #       annotations:
       #         summary: "Valetudo is unable to connect to mqtt"
+    tolerations:
+      - key: "node-role.kubernetes.io/master"
+        operator: "Exists"

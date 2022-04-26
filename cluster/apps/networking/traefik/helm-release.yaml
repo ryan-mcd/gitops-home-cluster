@@ -97,6 +97,9 @@ spec:
                   values:
                     - traefik
             topologyKey: kubernetes.io/hostname
+    tolerations:
+      - key: "node-role.kubernetes.io/master"
+        operator: "Exists"
     resources:
       requests:
         memory: 100Mi
