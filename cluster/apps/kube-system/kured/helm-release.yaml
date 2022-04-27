@@ -24,12 +24,12 @@ spec:
       timeZone: "America/New_York"
       startTime: "2am"
       endTime: "6am"
-      drain-timeout: 15m  # timeout after which the drain is aborted
-      reboot-days: tue,thu
+      drainTimeout: 15m          # timeout after which the drain is aborted
+      rebootDays: ["tu,th"]
       # Using --lock-ttl=30m will allow other nodes to take over if TTL has expired (in this case 30min) and continue reboot process.
-      lock-ttl: 60m # expire lock annotation after this duration
+      lockTtl: 60m               # force clean annotation after this amount of time
       # Using --lock-release-delay=30m will cause nodes to hold the lock for the specified time frame (in this case 30min) before it is released and the reboot process continues. This can be used to throttle reboots across the cluster.
-      lock-release-delay: 10m # hold lock after reboot by this duration
+      lockReleaseDelay: 10m      # hold lock after reboot by this duration
       notifyUrl: "${SECRET_KURED_DISCORD_WEBHOOK}"
       messageTemplateDrain: "⏳ Draining node %s"
       messageTemplateReboot: "♻️ Rebooted node %s"
