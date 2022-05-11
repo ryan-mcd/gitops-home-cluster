@@ -161,6 +161,23 @@
       "additionalBranchPrefix": "",
       "separateMinorPatch": true
     },
+    {
+      "matchDatasources": ["helm"],
+      "groupName": "k8s-at-home",
+      "additionalBranchPrefix": "",
+      "separateMinorPatch": true,
+      "matchPackageNames": [
+        "airsonic",
+        "home-assistant",
+        "intel-gpu-plugin",
+        "jellyfin",
+        "mosquitto",
+        "plex",
+        "tautulli",
+        "unifi",
+        "vaultwarden"
+      ]
+    },
     // enable auto-merge
     {
       "matchDatasources": ["docker"],
