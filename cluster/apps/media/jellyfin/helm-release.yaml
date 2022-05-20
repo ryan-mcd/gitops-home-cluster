@@ -60,11 +60,11 @@ spec:
           nfs:
             server: "${NAS_ADDRESS}"
             path: /mnt/user/Media
-        mountPath: /media
+        mountPath: /media-nas
         readOnly: true
-      # transcode:
-      #   enabled: true
-      #   type: emptyDir
+      transcode:
+        enabled: true
+        type: emptyDir
       #   medium: Memory
 
     podAnnotations:
