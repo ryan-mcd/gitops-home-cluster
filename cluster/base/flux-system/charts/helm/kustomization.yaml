@@ -25,3 +25,4 @@ resources:
 - gitea-charts.yaml
 - nfs-subdir-external-provisioner-charts.yaml
 - kasten-charts.yaml
+- calico-charts.yaml

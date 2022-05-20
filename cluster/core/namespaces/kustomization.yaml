@@ -13,3 +13,5 @@ resources:
 - home.yaml
 - kasten-io.yaml
 - system-upgrade.yaml
+- tigera-operator.yaml
+- calico-system.yaml
