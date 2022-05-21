@@ -155,6 +155,6 @@ spec:
                 path: /spec/groups/6/rules/4
               # alert on nic packet errors and drops rates > 1% packets/s
               - op: remove
-                path: /spec/groups/6/rules/1
-              - op: remove
                 path: /spec/groups/6/rules/2
+              - op: remove
+                path: /spec/groups/6/rules/1
