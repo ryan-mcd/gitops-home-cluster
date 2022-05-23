@@ -3,5 +3,5 @@ kind: Kustomization
 resources:
   - home-assistant-pvc.yaml
   - mosquitto-config-pvc.yaml
-
-
+  - esphome-config-pvc.yaml
+  
