@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - kube-prometheus-stack
   - grafana
-  - loki
+  # - loki
   - speedtest-exporter
   - thanos
   # - botkube
