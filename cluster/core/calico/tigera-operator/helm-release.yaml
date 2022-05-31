@@ -57,3 +57,8 @@ spec:
           #   nodeSelector: all()
       nodeMetricsPort: 9091
       typhaMetricsPort: 9093
+
+    resources:
+      requests:
+        cpu: 100m
+        memory: 120Mi

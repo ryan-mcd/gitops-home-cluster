@@ -71,9 +71,9 @@ spec:
             path: /mnt/user/k8s-bak/plex-backup
         mountPath: /backups
         readOnly: false
-      # transcode:
-      #   enabled: true
-      #   type: emptyDir
+      transcode:
+        enabled: true
+        type: emptyDir
       #   medium: Memory
     affinity:
       nodeAffinity:
@@ -87,8 +87,8 @@ spec:
     resources:
       requests:
         gpu.intel.com/i915: 1
-        cpu: 1000m
-        memory: 1000Mi
+        cpu: 800m
+        memory: 2000Mi
       limits:
         gpu.intel.com/i915: 1
         memory: 4000Mi

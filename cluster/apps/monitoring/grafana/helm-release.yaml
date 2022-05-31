@@ -167,3 +167,13 @@ spec:
     tolerations:
       - key: "node-role.kubernetes.io/master"
         operator: "Exists"
+
+    resources:
+      requests:
+        cpu: 23m
+        memory: 100Mi
+      limits:
+        memory: 200Mi
+
+    podAnnotations:
+      configmap.reloader.stakater.com/reload: "grafana"

@@ -95,6 +95,24 @@ spec:
                   storage: 1Gi
     kube-state-metrics:
       fullnameOverride: kube-state-metrics
+      metricLabelsAllowlist:
+        - "persistentvolumeclaims=[*]"
+      prometheus:
+        monitor:
+          enabled: true
+          relabelings:
+            - action: replace
+              regex: (.*)
+              replacement: $1
+              sourceLabels:
+                - __meta_kubernetes_pod_node_name
+              targetLabel: kubernetes_node
+      resources:
+        requests:
+          cpu: 15m
+          memory: 100Mi
+        limits:
+          memory: 200Mi
     prometheus-node-exporter:
       fullnameOverride: node-exporter
       prometheus:
@@ -170,6 +188,12 @@ spec:
         port: 2381
         targetPort: 2381
     prometheusOperator:
+      resources:
+        requests:
+          cpu: 35m
+          memory: 250Mi
+        limits:
+          memory: 400Mi
       prometheusConfigReloader:
         resources:
           requests:
@@ -214,6 +238,13 @@ spec:
               resources:
                 requests:
                   storage: 10Gi
+
+        resources:
+          requests:
+            cpu: 587m
+            memory: 5200Mi
+          limits:
+            memory: 6250Mi
         thanos:
           image: quay.io/thanos/thanos:v0.26.0
           version: v0.22.0

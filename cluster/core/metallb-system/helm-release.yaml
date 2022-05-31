@@ -15,6 +15,15 @@ spec:
         name: metallb-charts
         namespace: flux-system
   values:
+    controller:
+      resources:
+        requests:
+          cpu: 10m
+          memory: 20Mi
+    speaker:
+      resources:
+        requests:
+          memory: 25Mi
     configInline:
       address-pools:
       - name: default

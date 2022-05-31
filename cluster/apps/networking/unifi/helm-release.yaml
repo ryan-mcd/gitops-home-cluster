@@ -54,10 +54,19 @@ spec:
       data:
         enabled: true
         existingClaim: unifi-data
+      backup:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: ${NAS_ADDRESS}
+            path: /mnt/user/k8s-bak/unifi
+        mountPath: /var/lib/unifi/backup
+        readOnly: false
 
     resources:
       requests:
         cpu: "25m"
-        memory: "1024M"
+        memory: "1000Mi"
       limits:
-        memory: "1536M"
+        memory: "1400Mi"
