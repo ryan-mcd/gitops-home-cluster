@@ -2,30 +2,36 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: vaultwarden
+  name: &app vaultwarden
   namespace: security
 spec:
-  releaseName: vaultwarden
-  interval: 5m
+  interval: 15m
   chart:
     spec:
-      chart: vaultwarden
-      version: 4.2.2
+      chart: kah-common-chart
+      version: 1.1.2
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
         namespace: flux-system
-      interval: 5m
+      interval: 15m
+
   values:
+    global:
+      nameOverride: *app
     # podSecurityContext:
     #   runAsUser: 568
     #   runAsGroup: 568
     #   fsGroup: 568
-    nameOverride: vaultwarden
-    fullnameOverride: vaultwarden
+    nameOverride: *app
+    fullnameOverride: *app
     image:
       repository: ghcr.io/k8s-at-home/vaultwarden
       tag: v1.25.0
+
+    strategy:
+      type: Recreate
+
     env:
       DATA_FOLDER: "config"
       ICON_CACHE_FOLDER: "config/icon_cache"
@@ -46,6 +52,15 @@ spec:
       SMTP_PASSWORD: "${SECRET_VAULTWARDEN_EMAIL_KEY}"
       YUBICO_CLIENT_ID: "${SECRET_YUBICO_CLIENT_ID}"
       YUBICO_SECRET_KEY: "${SECRET_YUBICO_SECRET_KEY}"
+
+    service:
+      main:
+        ports:
+          http:
+            port: 80
+          websocket:
+            enabled: true
+            port: 3012
     ingress:
       main:
         enabled: true
@@ -59,19 +74,23 @@ spec:
           # external-dns/is-public: "true"
           # external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
         hosts:
-        - host: "bitwarden.${SECRET_DOMAIN}"
+        - host: &host "bitwarden.${SECRET_DOMAIN}"
           paths:
           - path: /
             pathType: Prefix
+            service:
+              port: 80
           - path: /notifications/hub
             pathType: Prefix
             service:
               port: 3012
           - path: /notifications/hub/negotiate
             pathType: Prefix
+            service:
+              port: 80
         tls:
         - hosts:
-          - "bitwarden.${SECRET_DOMAIN}"
+          - *host
       admin:
         enabled: true
         ingressClassName: "traefik"
@@ -79,13 +98,15 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
         hosts:
-        - host: "bitwarden.${SECRET_DOMAIN}"
+        - host: *host
           paths:
           - path: /admin
             pathType: Prefix
+            service:
+              port: 80
         tls:
         - hosts:
-          - "bitwarden.${SECRET_DOMAIN}"
+          - *host
     persistence:
       config:
         enabled: true
@@ -105,25 +126,10 @@ spec:
             items:
               - key: vaultwarden.sh
                 path: vaultwarden.sh
-    podAnnotations:
-      backup.velero.io/backup-volumes: config
-      # pre.hook.backup.velero.io/container: fsfreeze
-      # pre.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--freeze", "/config"]'
-      # post.hook.backup.velero.io/container: fsfreeze
-      # post.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--unfreeze", "/config"]'
-      # secret.reloader.stakater.com/reload: "vaultwarden"
+
     resources:
       requests:
         memory: 100Mi
         cpu: 100m
       limits:
         memory: 2000Mi
-    # additionalContainers:
-    #   fsfreeze:
-    #     name: fsfreeze
-    #     image: ghcr.io/k8s-at-home/fsfreeze:v2.37-r0
-    #     volumeMounts:
-    #       - name: config
-    #         mountPath: /config
-    #     securityContext:
-    #       privileged: true
