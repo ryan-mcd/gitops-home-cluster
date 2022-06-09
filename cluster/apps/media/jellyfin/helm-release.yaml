@@ -2,22 +2,32 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: jellyfin
+  name: &app jellyfin
   namespace: media
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
-      chart: jellyfin
-      version: 9.4.2
+      chart: kah-common-chart
+      version: 1.1.2
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
         namespace: flux-system
+  install:
+    createNamespace: true
+  dependsOn:
+    - name: intel-gpu-plugin
+      namespace: kube-system
+    - name: node-feature-discovery
+      namespace: kube-system
+
   values:
+    global:
+      nameOverride: *app
     image:
-      repository: ghcr.io/k8s-at-home/jellyfin
-      tag: 10.7.7
+      repository: docker.io/jellyfin/jellyfin
+      tag: 10.8.0-beta3
     env:
       TZ: "America/New_York"
       JELLYFIN_CACHE_DIR: "/config/cache"
@@ -31,6 +41,9 @@ spec:
         type: LoadBalancer
         loadBalancerIP: "${LB_JELLYFIN_IP}"
         externalTrafficPolicy: Local
+        ports:
+          http:
+            port: 8096
     ingress:
       main:
         enabled: true
@@ -42,13 +55,13 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "television-play"
         hosts:
-        - host: "jf.${SECRET_DOMAIN}"
+        - host: &host "jf.${SECRET_DOMAIN}"
           paths:
           - path: /
             pathType: Prefix
         tls:
         - hosts:
-          - "jf.${SECRET_DOMAIN}"
+          - *host
     persistence:
       config:
         enabled: true
@@ -67,14 +80,9 @@ spec:
         type: emptyDir
       #   medium: Memory
 
-    podAnnotations:
-      backup.velero.io/backup-volumes: config
-      # pre.hook.backup.velero.io/container: fsfreeze
-      # pre.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--freeze", "/config"]'
-      # post.hook.backup.velero.io/container: fsfreeze
-      # post.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--unfreeze", "/config"]'
     resources:
       requests:
+        cpu: 100m
         memory: 1000Mi
         gpu.intel.com/i915: 1
       limits:

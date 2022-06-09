@@ -2,22 +2,24 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: home-assistant
+  name: &app home-assistant
   namespace: home
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
-      chart: home-assistant
-      version: 13.2.0
+      chart: kah-common-chart
+      version: 1.1.2
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
         namespace: flux-system
-      interval: 5m
+      interval: 15m
   install:
     createNamespace: true
   values:
+    global:
+      nameOverride: *app
     image:
       repository: ghcr.io/home-assistant/home-assistant
       tag: 2022.6.4
@@ -29,6 +31,9 @@ spec:
       main:
         type: LoadBalancer
         loadBalancerIP: "${LB_HOME_ASSISTANT_IP}"
+        ports:
+          http:
+            port: 8123
     ingress:
       main:
         enabled: true
@@ -37,13 +42,13 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-cloudflare-ips@kubernetescrd"
         hosts:
-          - host: "hass.${SECRET_DOMAIN}"
+          - host: &host "hass.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
-              - "hass.${SECRET_DOMAIN}"
+              - *host
     probes:
       liveness:
         enabled: false
@@ -55,6 +60,15 @@ spec:
       config:
         enabled: true
         existingClaim: home-assistant-config-v1
+      backup:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: ${NAS_ADDRESS}
+            path: /mnt/user/k8s-bak/hass-backup
+        mountPath: /config/backups
+        readOnly: false
     podAnnotations:
       secret.reloader.stakater.com/reload: "home-assistant"
     addons:
@@ -83,13 +97,13 @@ spec:
             traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
             cert-manager.io/cluster-issuer: "letsencrypt-production"
           hosts:
-            - host: "hass-config.${DOMAIN_2}"
+            - host: &host-config "hass-config.${DOMAIN_2}"
               paths:
                 - path: /
                   pathType: Prefix
           tls:
             - hosts:
-                - "hass-config.${DOMAIN_2}"
+                - *host-config
               secretName: "hass-config-${DOMAIN_2/./-}-tls"
         volumeMounts:
           - name: config

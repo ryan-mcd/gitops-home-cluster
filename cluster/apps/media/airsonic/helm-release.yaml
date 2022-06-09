@@ -1,21 +1,24 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: airsonic
+  name: &app airsonic
   namespace: media
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
-      chart: airsonic
-      version: 6.3.2
+      chart: kah-common-chart
+      version: 1.1.2
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
         namespace: flux-system
-      interval: 5m
+      interval: 15m
+
   values:
+    global:
+      nameOverride: *app
+
     image:
       repository: ghcr.io/airsonic-advanced/airsonic-advanced
       tag: edge-11.0.0-SNAPSHOT.20220418221611
@@ -83,6 +86,12 @@ spec:
             path: /mnt/user/k8s-bak/airsonic-backup
         mountPath: /var/airsonic/backups
         readOnly: false
+
+    service:
+      main:
+        ports:
+          http:
+            port: 4040
     ingress:
       main:
         enabled: true
@@ -93,16 +102,50 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "headphones-box"
         hosts:
-        - host: "as.${SECRET_DOMAIN}"
+        - host: &host "as.${SECRET_DOMAIN}"
           paths:
           - path: /
             pathType: Prefix
         tls:
         - hosts:
-          - "as.${SECRET_DOMAIN}"
+          - *host
     resources:
       requests:
-        memory: "768M"
+        memory: "1500Mi"
       limits:
-        memory: "2048M"
+        memory: "2000Mi"
 
+    probes:
+      liveness:
+        enabled: true
+        custom: true
+        spec:
+          httpGet:
+            path: /rest/ping
+            port: http
+          initialDelaySeconds: 0
+          periodSeconds: 10
+          timeoutSeconds: 1
+          failureThreshold: 3
+      readiness:
+        enabled: true
+        custom: true
+        spec:
+          httpGet:
+            path: /rest/ping
+            port: http
+          initialDelaySeconds: 0
+          periodSeconds: 10
+          timeoutSeconds: 1
+          failureThreshold: 3
+      startup:
+        enabled: true
+        custom: true
+        spec:
+          httpGet:
+            path: /rest/ping
+            port: http
+          initialDelaySeconds: 0
+          periodSeconds: 5
+          timeoutSeconds: 1
+          failureThreshold: 30
