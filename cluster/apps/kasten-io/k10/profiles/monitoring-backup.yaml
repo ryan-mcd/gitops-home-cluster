@@ -29,9 +29,6 @@ spec:
       exportData:
         enabled: true
       frequency: '@daily'
-      migrationToken:
-        name: monitoring-backup-migration-token-f9zkk
-        namespace: kasten-io
       profile:
         name: nas-nfs
         namespace: kasten-io

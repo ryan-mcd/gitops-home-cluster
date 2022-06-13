@@ -34,9 +34,6 @@ spec:
         - enabled: false
           storageClassName: nfs-client
       frequency: '@daily'
-      migrationToken:
-        name: non-media-migration-token-9h9l6
-        namespace: kasten-io
       profile:
         name: nas-nfs
         namespace: kasten-io
