@@ -9,4 +9,4 @@ resources:
   - rook-ceph
   - development
   - home
-  # - kasten-io
+  - kasten-io

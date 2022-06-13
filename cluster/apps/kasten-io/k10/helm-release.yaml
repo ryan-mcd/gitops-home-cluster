@@ -38,6 +38,7 @@ spec:
     global:
       persistence:
         storageClass: ceph-block
+        size: 5Gi
     auth:
       tokenAuth:
         enabled: true
@@ -61,7 +62,7 @@ spec:
       server:
         persistentVolume:
           enabled: true
-          size: 15Gi #30Gi
+          size: 5Gi #30Gi
         retention: "15d" #"30d"
     # injectKanisterSidecar:
     #   enabled: false
