@@ -21,7 +21,7 @@ spec:
       nameOverride: *app
     image:
       repository: esphome/esphome
-      tag: 2022.6.0
+      tag: 2022.6.1
       pullPolicy: Always
     env:
       TZ: "America/New_York"
