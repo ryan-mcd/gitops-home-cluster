@@ -11,9 +11,7 @@ k3s_control_node: false
 k3s_agent:
   node-ip: "{{ ansible_host }}"
   kubelet-arg:
-    - "feature-gates=GracefulNodeShutdown=true"
-    - "feature-gates=MixedProtocolLBService=true"
-    - "feature-gates=ReadWriteOncePod=true"
+    - "feature-gates=EphemeralContainers=true,MixedProtocolLBService=true,ReadWriteOncePod=true"
 
   # Add node-label for longhorn to create disks
   # https://longhorn.io/docs/1.1.2/advanced-resources/default-disk-and-node-config/
