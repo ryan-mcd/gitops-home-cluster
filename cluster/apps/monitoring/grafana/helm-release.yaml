@@ -26,6 +26,15 @@ spec:
       GF_DATE_FORMATS_FULL_DATE: "MMM Do, YYYY hh:mm:ss a"
       GF_DATE_FORMATS_DEFAULT_TIMEZONE: "browser"
     adminPassword: "${SECRET_GRAFANA_PASSWORD}"
+    envValueFrom:
+      DB_USER:
+        secretKeyRef:
+          key: username
+          name: grafana-pg-creds
+      DB_PASSWORD:
+        secretKeyRef:
+          key: password
+          name: grafana-pg-creds
     grafana.ini:
       server:
         root_url: "https://grafana.${DOMAIN_2}"
@@ -40,6 +49,13 @@ spec:
         mode: console
       grafana_net:
         url: https://grafana.net
+      database:
+        type: "postgres"
+        host: "${POSTGRESQL_ADDRESS}:5432"
+        name: grafana
+        ssl_mode: disable 
+        user: $__env{DB_USER}
+        password: $__env{DB_PASSWORD}
       auth.basic:
         disable_login_form: false
     dashboardProviders:
@@ -123,11 +139,11 @@ spec:
         #   gnetId: 11312
         #   revision: 8
         #   datasource: Prometheus
-        # Ref: https://grafana.com/grafana/dashboards/13665
-        speedtest:
-          gnetId: 13665
-          revision: 4
-          datasource: Prometheus
+        # # Ref: https://grafana.com/grafana/dashboards/13665
+        # speedtest:
+        #   gnetId: 13665
+        #   revision: 4
+        #   datasource: Prometheus
         flux-cluster:
           url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/cluster.json
           datasource: Prometheus
@@ -172,10 +188,11 @@ spec:
       create: true
       autoMount: true
     persistence:
-      enabled: false
-    tolerations:
-      - key: "node-role.kubernetes.io/master"
-        operator: "Exists"
+      enabled: true
+      existingClaim: grafana-config-v1
+    # tolerations:
+    #   - key: "node-role.kubernetes.io/master"
+    #     operator: "Exists"
 
     resources:
       requests:
