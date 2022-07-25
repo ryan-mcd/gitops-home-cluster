@@ -147,6 +147,7 @@ spec:
       data:
         enabled: true
         existingClaim: unifi-data
+        mountPath: /unifi
       backup:
         enabled: true
         type: custom
