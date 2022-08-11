@@ -26,3 +26,5 @@ resources:
 - nfs-subdir-external-provisioner-charts.yaml
 - kasten-charts.yaml
 - calico-charts.yaml
+- kyverno-charts.yaml
+- vector-charts.yaml
