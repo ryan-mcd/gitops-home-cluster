@@ -5,3 +5,5 @@ metadata:
   name: kyverno
   annotations:
     "cni.projectcalico.org/ipv4pools": "[\"default-ipv4-ippool\"]"
+  labels:
+    kustomize.toolkit.fluxcd.io/prune: disabled
