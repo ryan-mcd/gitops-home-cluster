@@ -28,3 +28,4 @@ resources:
 - calico-charts.yaml
 - kyverno-charts.yaml
 - vector-charts.yaml
+- bjw-s-charts.yaml
