@@ -2,17 +2,17 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app intel-gpu-plugin
+  name: intel-gpu-plugin
   namespace: kube-system
 spec:
   interval: 15m
   chart:
     spec:
-      chart: kah-common-chart
-      version: 1.2.2
+      chart: app-template
+      version: 0.1.1
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s-helm-charts
         namespace: flux-system
       interval: 15m
   dependsOn:
@@ -20,8 +20,6 @@ spec:
       namespace: kube-system
 
   values:
-    global:
-      nameOverride: *app
     controller:
       type: daemonset
       strategy: RollingUpdate
