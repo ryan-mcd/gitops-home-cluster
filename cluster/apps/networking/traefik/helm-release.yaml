@@ -19,8 +19,9 @@ spec:
     - name: cert-manager
       namespace: cert-manager
   values:
-    # image:
-    #   name: ghcr.io/k8s-at-home/traefik
+    image:
+      name: public.ecr.aws/docker/library/traefik
+      tag: "v2.8.3"
     deployment:
       kind: Deployment
       replicas: 2
