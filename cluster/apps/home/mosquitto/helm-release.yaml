@@ -8,11 +8,11 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: mosquitto
-      version: 4.8.2
+      chart: app-template
+      version: 0.1.1
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s-helm-charts
         namespace: flux-system
       interval: 5m
   install:
@@ -25,20 +25,53 @@ spec:
       TZ: "America/New_York"
     service:
       main:
+        ports:
+          http:
+            enabled: false
+          mqtt:
+            enabled: true
+            port: 1883
         type: LoadBalancer
         loadBalancerIP: ${LB_MOSQUITTO_IP}
         externalTrafficPolicy: Local
     auth:
       enabled: true
+    # -- By enabling this, authentication and access control settings will be controlled on a per-listener basis
+    perListenerSettings: false
+
+    # -- When enabled, this adds the `listener` option to the mosquitto config.
+    # Change this to false when using TLS.
+    addListener: true
     podAnnotations:
       secret.reloader.stakater.com/reload: mosquitto
+    configmap:
+      config:
+        enabled: true
+        data:
+          mosquitto.conf: |
+            per_listener_settings false
+            listener 1883
+            allow_anonymous false
+            persistence true
+            persistence_location /mosquitto/data
+            autosave_interval 1800
+            include_dir /mosquitto/configinc
     persistence:
       data:
         enabled: true
         existingClaim: mosquitto-config-v1
+      config:
+        enabled: true
+        type: custom
+        mountPath: /mosquitto/config/mosquitto.conf
+        subPath: mosquitto.conf
+        volumeSpec:
+          configMap:
+            name: mosquitto-config
       configinc:
         enabled: true
         type: custom
+        mountPath: /mosquitto/configinc
         volumeSpec:
           secret:
             secretName: mosquitto
