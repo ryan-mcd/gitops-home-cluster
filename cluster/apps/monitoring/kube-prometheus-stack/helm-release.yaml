@@ -246,7 +246,7 @@ spec:
           limits:
             memory: 6250Mi
         thanos:
-          image: quay.io/thanos/thanos:v0.27.0
+          image: quay.io/thanos/thanos:v0.28.0
           version: v0.22.0
           objectStorageConfig:
             name: thanos-objstore
