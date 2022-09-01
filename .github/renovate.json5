@@ -150,7 +150,7 @@
       ],
       "versioning": "loose",
       "matchPackageNames": [
-        "ghcr.io/k8s-at-home/plex"
+        "ghcr.io/onedr0p/plex"
       ]
     },
     // group packages
@@ -160,23 +160,6 @@
       "groupName": "rook-ceph-suite",
       "additionalBranchPrefix": "",
       "separateMinorPatch": true
-    },
-    {
-      "matchDatasources": ["helm"],
-      "groupName": "k8s-at-home",
-      "additionalBranchPrefix": "",
-      "separateMinorPatch": true,
-      "matchPackageNames": [
-        "airsonic",
-        "home-assistant",
-        "intel-gpu-plugin",
-        "jellyfin",
-        "mosquitto",
-        "plex",
-        "tautulli",
-        "unifi",
-        "vaultwarden"
-      ]
     },
     // enable auto-merge
     {
