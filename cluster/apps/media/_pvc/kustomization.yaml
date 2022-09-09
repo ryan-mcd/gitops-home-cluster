@@ -4,3 +4,4 @@ resources:
 - airsonic-config-pvc.yaml
 - jellyfin-config-pvc.yaml
 - tautulli-config-pvc.yaml
+- navidrome-config-pvc.yaml
