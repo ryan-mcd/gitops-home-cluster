@@ -5,3 +5,4 @@ resources:
   - home-assistant
   - mosquitto
   - esphome
+  - home-assistant-code
