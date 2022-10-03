@@ -32,6 +32,10 @@ spec:
         ports:
           http:
             port: 8123
+          coiot:
+            enabled: true
+            port: 5683
+            protocol: UDP
     ingress:
       main:
         enabled: true
