@@ -5,7 +5,9 @@ metadata:
   name: unifi-data
   namespace: networking
   labels:
-    kasten.io/backup-volume: "enabled"
+    app.kubernetes.io/name: &name unifi
+    app.kubernetes.io/instance: *name
+    snapshot.home.arpa/enabled: "true"
 spec:
   accessModes:
     - ReadWriteOnce
