@@ -16,3 +16,4 @@ resources:
 - tigera-operator.yaml
 - calico-system.yaml
 - kyverno.yaml
+- services.yaml

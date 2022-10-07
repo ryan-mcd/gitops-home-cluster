@@ -10,4 +10,4 @@ resources:
   - development
   - home
   - kyverno
-  # - kasten-io
+  - kopia

@@ -5,6 +5,7 @@ metadata:
   name: cluster-settings
   namespace: flux-system
 data:
+  TIMEZONE: "America/New_York"
   KUBE_VIP_IP: 10.24.0.200
   METALLB_LB_RANGE: 10.24.0.210-10.24.0.225
   INGRESS_NGINX_LB: 10.24.0.210

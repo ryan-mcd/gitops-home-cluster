@@ -29,8 +29,8 @@ spec:
               selector:
                 matchLabels:
                   snapshot.home.arpa/enabled: "true"
-                  app.kubernetes.io/name: "*"
-                  app.kubernetes.io/instance: "*"
+                  app.kubernetes.io/name: "jellyfin"
+                  app.kubernetes.io/instance: "jellyfin"
       context:
         - name: appName
           variable:
@@ -127,8 +127,8 @@ spec:
                           claimName: "{{ claimName }}"
                       - name: snapshots
                         nfs:
-                          server: "expanse.${SECRET_PRIVATE_DOMAIN}"
-                          path: /tycho/Apps/External/Kopia
+                          server: ${NAS_ADDRESS}
+                          path: /mnt/user/k8s-bak/kopia
                     affinity:
                       podAffinity:
                         requiredDuringSchedulingIgnoredDuringExecution:
