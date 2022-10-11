@@ -20,7 +20,7 @@ spec:
   values:
     image:
       repository: ghcr.io/home-assistant/home-assistant
-      tag: 2022.9.7
+      tag: 2022.10.3
     env:
       TZ: "America/New_York"
     hostNetwork: true
