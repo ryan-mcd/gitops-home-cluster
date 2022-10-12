@@ -33,6 +33,7 @@ spec:
       WEBSOCKET_ENABLED: true
       WEBSOCKET_ADDRESS: 0.0.0.0
       WEBSOCKET_PORT: 3012
+      ROCKET_PORT: 8080
       DOMAIN: https://bitwarden.${SECRET_DOMAIN}
       ADMIN_TOKEN: ${SECRET_VAULTWARDEN_ADMIN_TOKEN}
       SMTP_HOST: "${SECRET_VAULTWARDEN_EMAIL_HOST}"
@@ -49,7 +50,7 @@ spec:
       main:
         ports:
           http:
-            port: 80
+            port: 8080
           websocket:
             enabled: true
             port: 3012
@@ -71,7 +72,7 @@ spec:
           - path: /
             pathType: Prefix
             service:
-              port: 80
+              port: 8080
           - path: /notifications/hub
             pathType: Prefix
             service:
@@ -79,7 +80,7 @@ spec:
           - path: /notifications/hub/negotiate
             pathType: Prefix
             service:
-              port: 80
+              port: 8080
         tls:
         - hosts:
           - *host
@@ -95,7 +96,7 @@ spec:
           - path: /admin
             pathType: Prefix
             service:
-              port: 80
+              port: 8080
         tls:
         - hosts:
           - *host
@@ -106,18 +107,27 @@ spec:
       backup-scratch:
         enabled: true
         type: emptyDir
-
-      vaultwarden-sh:
+      backups:
         enabled: true
         type: custom
-        mountPath: /etc/vaultwarden.sh 
-        subPath: vaultwarden.sh 
         volumeSpec:
-          configMap:
-            name: vaultwarden-init-script
-            items:
-              - key: vaultwarden.sh
-                path: vaultwarden.sh
+          nfs:
+            server: ${NAS_ADDRESS}
+            path: /mnt/user/k8s-bak/vaultwarden-bak
+        mountPath: /backups
+        readOnly: false
+
+      # vaultwarden-sh:
+      #   enabled: true
+      #   type: custom
+      #   mountPath: /etc/vaultwarden.sh 
+      #   subPath: vaultwarden.sh 
+      #   volumeSpec:
+      #     configMap:
+      #       name: vaultwarden-init-script
+      #       items:
+      #         - key: vaultwarden.sh
+      #           path: vaultwarden.sh
 
     resources:
       requests:
@@ -125,3 +135,22 @@ spec:
         cpu: 100m
       limits:
         memory: 2000Mi
+
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
+      supplementalGroups:
+        - 100
+
+    additionalContainers:
+      sqlite3:
+        name: sqlite3
+        image: keinos/sqlite3:3.39.4
+        command: ["sleep","infinity"]
+        volumeMounts:
+          - name: config
+            mountPath: /config
+          - name: backups
+            mountPath: /backups
