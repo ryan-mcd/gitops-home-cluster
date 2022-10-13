@@ -104,30 +104,6 @@ spec:
       config:
         enabled: true
         existingClaim: vaultwarden-config-v1
-      backup-scratch:
-        enabled: true
-        type: emptyDir
-      backups:
-        enabled: true
-        type: custom
-        volumeSpec:
-          nfs:
-            server: ${NAS_ADDRESS}
-            path: /mnt/user/k8s-bak/vaultwarden-bak
-        mountPath: /backups
-        readOnly: false
-
-      # vaultwarden-sh:
-      #   enabled: true
-      #   type: custom
-      #   mountPath: /etc/vaultwarden.sh 
-      #   subPath: vaultwarden.sh 
-      #   volumeSpec:
-      #     configMap:
-      #       name: vaultwarden-init-script
-      #       items:
-      #         - key: vaultwarden.sh
-      #           path: vaultwarden.sh
 
     resources:
       requests:
@@ -143,14 +119,3 @@ spec:
       fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
         - 100
-
-    additionalContainers:
-      sqlite3:
-        name: sqlite3
-        image: keinos/sqlite3:3.39.4
-        command: ["sleep","infinity"]
-        volumeMounts:
-          - name: config
-            mountPath: /config
-          - name: backups
-            mountPath: /backups

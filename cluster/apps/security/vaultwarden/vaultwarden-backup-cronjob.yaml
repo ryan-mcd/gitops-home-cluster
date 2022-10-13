@@ -1,0 +1,66 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: vw-backup
+  namespace: security
+spec:
+  schedule: "55 5 * * *"
+  suspend: false
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: sqlite3
+              image: keinos/sqlite3:3.39.4
+              imagePullPolicy: IfNotPresent
+              command:
+              - /bin/sh
+              - -c
+              - |-
+                sqlite3 /config/db.sqlite3 ".backup /backups/db-$(date '+%Y%m%d-%H%M').sqlite3" && \
+                mkdir -p /backups/attachments && \
+                mkdir -p /backups/sends && \
+                mkdir -p /backups/rsa-files && \
+                cp -r /config/attachments/* /backups/attachments/ && \
+                cp -r /config/sends/* /backups/sends/ && \
+                cp /config/rsa* /backups/rsa-files
+
+              volumeMounts:
+                - name: config
+                  mountPath: /config
+                  readOnly: true
+                - name: backups
+                  mountPath: /backups
+          volumes:
+            - name: config
+              persistentVolumeClaim:
+                claimName: vaultwarden-config-v1
+            - name: backups
+              nfs:
+                server: "${NAS_ADDRESS}"
+                path: /mnt/user/k8s-bak/vaultwarden-bak
+
+          securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            supplementalGroups:
+              - 100
+
+          affinity:
+            podAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - labelSelector:
+                    matchExpressions:
+                      - key: app.kubernetes.io/name
+                        operator: In
+                        values: ["vaultwarden"]
+                      - key: app.kubernetes.io/instance
+                        operator: In
+                        values: ["vaultwarden"]
+                  topologyKey: kubernetes.io/hostname

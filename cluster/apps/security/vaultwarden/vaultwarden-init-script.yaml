@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: vaultwarden-init-script
-  namespace: security
-data:
-  vaultwarden.sh: |
-    apt update && apt install sqlite3 -y
