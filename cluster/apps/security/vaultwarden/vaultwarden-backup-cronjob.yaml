@@ -23,12 +23,13 @@ spec:
               - /bin/sh
               - -c
               - |-
+                echo My id is $(id) && \
                 sqlite3 /config/db.sqlite3 ".backup /backups/db-$(date '+%Y%m%d-%H%M').sqlite3" && \
                 mkdir -p /backups/attachments && \
                 mkdir -p /backups/sends && \
                 mkdir -p /backups/rsa-files && \
                 cp -r /config/attachments/* /backups/attachments/ && \
-                cp -r /config/sends/* /backups/sends/ && \
+                cp -r /config/sends/ /backups/sends/ && \
                 cp /config/rsa* /backups/rsa-files
 
               volumeMounts:
