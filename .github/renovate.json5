@@ -1,4 +1,7 @@
 {
+  "extends": [
+    "github>Ryan-McD/gitops-home-cluster//.github/renovate/disabledDatasources.json5",
+  ],
   "enabled": true,
   "timezone": "America/New_York",
   "semanticCommits": "enabled",
