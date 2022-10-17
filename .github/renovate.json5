@@ -184,7 +184,7 @@
       "requiredStatusChecks": null,
       "matchUpdateTypes": ["minor", "patch"],
       "matchPackageNames": [
-        "traefik",
+        // "traefik",
         "ingress-nginx",
         "kube-prometheus-stack",
         "thanos",
