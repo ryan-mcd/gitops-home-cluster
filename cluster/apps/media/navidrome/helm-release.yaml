@@ -34,6 +34,7 @@ spec:
       ND_SCANSCHEDULE: "@every 1h"
       ND_LISTENBRAINZ_ENABLED: "false"
       ND_LASTFM_ENABLED: "true"
+      ND_PROMETHEUS_ENABLED: "true"
 
       # ND_LASTFM_APIKEY: 
       # ND_LASTFM_SECRET: Last.fm Shared Secret
@@ -93,8 +94,12 @@ spec:
         readOnly: true
 
     podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
-        - 65539
+        - 100
 
     resources:
       requests:
@@ -108,3 +113,5 @@ spec:
         ports:
           http:
             port: 4533
+        monitor:
+          enabled: true
