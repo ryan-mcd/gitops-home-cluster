@@ -35,10 +35,13 @@ spec:
           traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
-          - "goldilocks.${DOMAIN_2}"
+          - host: &host "goldilocks.${DOMAIN_2}"
+            paths:
+              - path: /
+                type: Prefix
         tls:
           - hosts:
-              - "goldilocks.${DOMAIN_2}"
+              - *host
             secretName: "goldilocks-${DOMAIN_2/./-}-tls"
       resources:
         requests:
