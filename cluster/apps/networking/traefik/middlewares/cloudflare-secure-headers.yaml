@@ -2,7 +2,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: networking-cloudflare-ips-secure-headers
+  name: cloudflare-ips-secure-headers
   namespace: networking
 spec:
   chain:
