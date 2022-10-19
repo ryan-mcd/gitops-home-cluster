@@ -42,7 +42,7 @@ spec:
         ingressClassName: "traefik"
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-cloudflare-ips@kubernetescrd"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-cloudflare-ips-secure-headers@kubernetescrd"
         hosts:
           - host: &host "hass.${SECRET_DOMAIN}"
             paths:

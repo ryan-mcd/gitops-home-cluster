@@ -13,3 +13,5 @@ resources:
 - nextcloud-regex.yaml
 - nextcloud-tls.yaml
 - plex-redirect.yaml
+- secure-headers.yaml
+- cloudflare-secure-headers.yaml
