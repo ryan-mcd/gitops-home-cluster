@@ -7,3 +7,4 @@ resources:
   - speedtest-exporter
   - thanos
   # - botkube
+  - goldilocks
