@@ -27,7 +27,7 @@ spec:
     env:
       ND_DATAFOLDER: /data
       ND_SESSIONTIMEOUT: 48h
-      ND_PORT: "4533"
+      ND_PORT: &port "80"
       ND_ENABLESTARRATING: "false"
       ND_LOGLEVEL: info
       ND_MUSICFOLDER: /music
@@ -112,6 +112,6 @@ spec:
       main:
         ports:
           http:
-            port: 4533
+            port: *port
         monitor:
           enabled: true
