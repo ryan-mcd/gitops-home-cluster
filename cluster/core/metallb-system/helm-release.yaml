@@ -18,15 +18,13 @@ spec:
     controller:
       resources:
         requests:
-          cpu: 10m
-          memory: 20Mi
+          cpu: 15m
+          memory: 64M
+        limits:
+          memory: 64M
     speaker:
       resources:
         requests:
-          memory: 25Mi
-    configInline:
-      address-pools:
-      - name: default
-        protocol: layer2
-        addresses:
-        - "${METALLB_LB_RANGE}"
+          memory: 64M
+        limits:
+          memory: 64M
