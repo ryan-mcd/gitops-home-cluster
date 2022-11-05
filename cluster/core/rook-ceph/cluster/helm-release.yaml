@@ -5,7 +5,7 @@ metadata:
   name: rook-ceph-cluster
   namespace: rook-ceph
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
       chart: rook-ceph-cluster
@@ -15,8 +15,8 @@ spec:
         name: rook-ceph-charts
         namespace: flux-system
   dependsOn:
-    # TODO(rook-ceph): Rename dependency to rook-ceph-operator
-    - name: rook-ceph
+    - name: rook-ceph-operator
+    - namespace: rook-ceph
   values:
     monitoring:
       enabled: true
@@ -35,14 +35,17 @@ spec:
           - hosts:
               - "rook.${DOMAIN_2}"
             secretName: "rook-${DOMAIN_2/./-}-tls"
+    configOverride: |
+      [global]
+      bdev_enable_discard = true
+      bdev_async_discard = true
     cephClusterSpec:
-      # TODO(rook-ceph): Enable host network on next rebuild
-      # network:
-      #   provider: host
-      # TODO(rook-ceph): Enable compression on next rebuild
-      # connections:
-      #   compression:
-      #     enabled: true
+      network:
+        provider: host
+      # TODO(rook-ceph): confirm this works
+      connections:
+        compression:
+          enabled: true
       crashCollector:
         disable: false
       mgr:
@@ -57,13 +60,13 @@ spec:
         config:
           osdsPerDevice: "1"
         nodes:
-          - name: "k8s-w-pve"
+          - name: "k8s-3080-1yn"
             devices:
-              - name: "vda"
-          - name: "k8s-w-pvegpu"
+              - name: "nvme0n1"
+          - name: "k8s-3080-5xn"
             devices:
-              - name: "vda"
-          - name: "k8s-w-590"
+              - name: "nvme0n1"
+          - name: "k8s-590-n61"
             devices:
               - name: "nvme0n1"
       resources:
