@@ -42,10 +42,6 @@ spec:
     cephClusterSpec:
       network:
         provider: host
-      # TODO(rook-ceph): confirm this works
-      connections:
-        compression:
-          enabled: true
       crashCollector:
         disable: false
       mgr:
