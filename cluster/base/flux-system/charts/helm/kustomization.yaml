@@ -30,3 +30,4 @@ resources:
 - vector-charts.yaml
 - bjw-s-charts.yaml
 - fairwinds-charts.yaml
+- dysnix-charts.yaml

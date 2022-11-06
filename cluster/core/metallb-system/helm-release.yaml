@@ -21,6 +21,10 @@ spec:
   upgrade:
     crds: CreateReplace
   values:
+    crds:
+      enabled: true
+    psp:
+      create: false
     controller:
       resources:
         requests:
