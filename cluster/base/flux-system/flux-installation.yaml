@@ -60,4 +60,4 @@ spec:
       patch: |-
         - op: add
           path: /metadata/annotations/cni.projectcalico.org~1ipv4pools
-          value: "'["default-ipv4-ippool"]'"
+          value: '["default-ipv4-ippool"]'
