@@ -62,13 +62,13 @@ spec:
         nodes:
           - name: "k8s-3080-1yn"
             devices:
-              - name: "nvme0n1"
+              - name: "/dev/disk/by-id/nvme-INTEL_SSDPEKNW512G8_BTNH21361YYE512A"
           - name: "k8s-3080-5xn"
             devices:
-              - name: "nvme0n1"
+              - name: "/dev/disk/by-id/nvme-INTEL_SSDPEKNW512G8_BTNH00830NAY512A"
           - name: "k8s-590-n61"
             devices:
-              - name: "nvme0n1"
+              - name: "/dev/disk/by-id/nvme-WDBRPG5000ANC-WRSN_21122N800679"
       resources:
         mgr:
           requests:
