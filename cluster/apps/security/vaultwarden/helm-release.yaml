@@ -18,33 +18,87 @@ spec:
 
   values:
     image:
-      repository: ghcr.io/k8s-at-home/vaultwarden
-      tag: v1.25.2
+      repository: vaultwarden/server
+      tag: "1.26.0"
 
     strategy:
       type: Recreate
 
     env:
+      DOMAIN: https://bitwarden.${SECRET_DOMAIN}
       DATA_FOLDER: "config"
       ICON_CACHE_FOLDER: "config/icon_cache"
       ATTACHMENTS_FOLDER: "config/attachments"
       SENDS_FOLDER: "config/sends"
       SIGNUPS_ALLOWED: false
+      INVITATIONS_ALLOWED: true
       WEBSOCKET_ENABLED: true
       WEBSOCKET_ADDRESS: 0.0.0.0
       WEBSOCKET_PORT: 3012
+      SENDS_ALLOWED: true
+      EMERGENCY_ACCESS_ALLOWED: true
+      DISABLE_ICON_DOWNLOAD: false
+      DISABLE_2FA_REMEMBER: false
+      EMAIL_ATTEMPTS_LIMIT: 3
+      PASSWORD_HINTS_ALLOWED: false
       ROCKET_PORT: 8080
-      DOMAIN: https://bitwarden.${SECRET_DOMAIN}
-      ADMIN_TOKEN: ${SECRET_VAULTWARDEN_ADMIN_TOKEN}
-      SMTP_HOST: "${SECRET_VAULTWARDEN_EMAIL_HOST}"
-      SMTP_FROM: "${SECRET_VAULTWARDEN_EMAIL_ADDR}"
-      SMTP_FROM_NAME: "${SECRET_VAULTWARDEN_EMAIL_FROM}"
       SMTP_SSL: true
       SMTP_PORT: 587
-      SMTP_USERNAME: "${SECRET_VAULTWARDEN_EMAIL_USER}"
-      SMTP_PASSWORD: "${SECRET_VAULTWARDEN_EMAIL_KEY}"
-      YUBICO_CLIENT_ID: "${SECRET_YUBICO_CLIENT_ID}"
-      YUBICO_SECRET_KEY: "${SECRET_YUBICO_SECRET_KEY}"
+
+      SIGNUPS_DOMAINS_WHITELIST:
+        valueFrom:
+          secretKeyRef:
+            name: vaultwarden-env
+            key: SIGNUPS_DOMAINS_WHITELIST
+      ORG_CREATION_USERS:
+        valueFrom:
+          secretKeyRef:
+            name: vaultwarden-env
+            key: ORG_CREATION_USERS
+      INVITATION_ORG_NAME:
+        valueFrom:
+          secretKeyRef:
+            name: vaultwarden-env
+            key: INVITATION_ORG_NAME      
+      SMTP_HOST:
+        valueFrom:
+          secretKeyRef:
+            name: vaultwarden-env
+            key: SMTP_HOST
+      SMTP_FROM:
+        valueFrom:
+          secretKeyRef:
+            name: vaultwarden-env
+            key: SMTP_FROM
+      SMTP_FROM_NAME:
+        valueFrom:
+          secretKeyRef:
+            name: vaultwarden-env
+            key: SMTP_FROM
+      SMTP_USERNAME:
+        valueFrom:
+          secretKeyRef:
+            name: vaultwarden-env
+            key: SMTP_USERNAME
+      SMTP_PASSWORD:
+        valueFrom:
+          secretKeyRef:
+            name: vaultwarden-env
+            key: SMTP_PASSWORD
+      YUBICO_CLIENT_ID:
+        valueFrom:
+          secretKeyRef:
+            name: vaultwarden-env
+            key: YUBICO_CLIENT_ID
+      YUBICO_SECRET_KEY:
+        valueFrom:
+          secretKeyRef:
+            name: vaultwarden-env
+            key: YUBICO_SECRET_KEY
+
+    envFrom:
+      - secretRef:
+          name: vaultwarden-env
 
     service:
       main:
