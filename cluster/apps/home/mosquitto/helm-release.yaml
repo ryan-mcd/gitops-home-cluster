@@ -44,7 +44,7 @@ spec:
     addListener: true
     podAnnotations:
       secret.reloader.stakater.com/reload: mosquitto
-    configmap:
+    configMaps:
       config:
         enabled: true
         data:
