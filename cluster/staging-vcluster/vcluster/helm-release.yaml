@@ -144,11 +144,11 @@ spec:
       limitRange:
         enabled: true
         default:
-          ephemeral-storage: 8Gi
+          # ephemeral-storage: 8Gi
           memory: 512Mi
-          cpu: "1"
+          cpu: "300m"
         defaultRequest:
-          ephemeral-storage: 3Gi
+          # ephemeral-storage: 3Gi
           memory: 128Mi
           cpu: 100m
 
