@@ -31,6 +31,8 @@ spec:
       nodes:
         enabled: true
         syncAllNodes: true
+      ingresses:
+        enabled: true
 
     # Enable HA mode
     enableHA: true
