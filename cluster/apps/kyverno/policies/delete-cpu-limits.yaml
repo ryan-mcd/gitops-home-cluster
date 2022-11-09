@@ -24,6 +24,7 @@ spec:
                 - calico-system
                 - tigera-operator
                 - kube-system
+                - staging-vcluster
           - resources:
               kinds: ["Pod"]
               selector:

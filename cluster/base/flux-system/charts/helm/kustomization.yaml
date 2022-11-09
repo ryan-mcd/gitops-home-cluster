@@ -31,3 +31,4 @@ resources:
 - bjw-s-charts.yaml
 - fairwinds-charts.yaml
 - dysnix-charts.yaml
+- loft-charts.yaml
