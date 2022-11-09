@@ -132,8 +132,8 @@ spec:
           services.nodeports: 20
           services.loadbalancers: 2
           count/endpoints: 40
-          count/pods: 20
-          count/services: 20
+          count/pods: 30
+          count/services: 40
           count/secrets: 100
           count/configmaps: 100
           count/persistentvolumeclaims: 20
