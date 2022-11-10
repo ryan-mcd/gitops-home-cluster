@@ -101,7 +101,7 @@ spec:
 
     # Scale up DNS server
     coredns:
-      replicas: 3
+      replicas: 1
       securityContext:
         allowPrivilegeEscalation: false
         capabilities:
@@ -125,10 +125,10 @@ spec:
           requests.cpu: 10
           requests.memory: 20Gi
           requests.storage: "100Gi"
-          requests.ephemeral-storage: 60Gi
+          requests.ephemeral-storage: "200Gi"
           limits.cpu: 20
           limits.memory: 40Gi
-          limits.ephemeral-storage: 160Gi
+          limits.ephemeral-storage: "200Gi"
           services.nodeports: 20
           services.loadbalancers: 2
           count/endpoints: 40
@@ -144,11 +144,11 @@ spec:
       limitRange:
         enabled: true
         default:
-          # ephemeral-storage: 8Gi
+          ephemeral-storage: 2Gi
           memory: 512Mi
           cpu: "300m"
         defaultRequest:
-          # ephemeral-storage: 3Gi
+          ephemeral-storage: 1Gi
           memory: 128Mi
           cpu: 100m
 
