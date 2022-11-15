@@ -37,6 +37,12 @@ k3s_server:
 
   kubelet-arg:
     - "feature-gates=EphemeralContainers=true,MixedProtocolLBService=true,ReadWriteOncePod=true"
+    # Adding to reserve resources for host daemons
+    ## - Kubernetes docs state the following but it doesn't work
+    # - "system-reserved=[cpu=200m][,][memory=500Mi]"
+    - "system-reserved=cpu=200m,memory=500Mi,ephemeral-storage=5Gi"
+    - "kube-reserved=cpu=150m,memory=1000Mi,ephemeral-storage=2Gi"
+    # - "eviction-hard=memory.avail<500Mi,nodefs.available<10%"
   kube-controller-manager-arg:
     - "feature-gates=EphemeralContainers=true,MixedProtocolLBService=true,ReadWriteOncePod=true"
     # Required to monitor component with kube-prometheus-stack

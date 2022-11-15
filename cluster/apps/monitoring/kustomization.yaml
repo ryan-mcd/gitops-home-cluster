@@ -6,5 +6,4 @@ resources:
   # - loki
   - speedtest-exporter
   - thanos
-  # - botkube
   - goldilocks

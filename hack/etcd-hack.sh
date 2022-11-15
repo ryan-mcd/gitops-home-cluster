@@ -23,6 +23,8 @@ export ETCDCTL_CERT="/var/lib/rancher/k3s/server/tls/etcd/server-client.crt"
 export ETCDCTL_KEY="/var/lib/rancher/k3s/server/tls/etcd/server-client.key"
 export ETCDCTL_API=3
 etcdctl defrag --cluster
+
+# curl https://raw.githubusercontent.com/Ryan-McD/gitops-home-cluster/main/hack/etcd-hack.sh | sudo bash
 # Finished defragmenting etcd member[https://10.24.0.20:2379]
 # Finished defragmenting etcd member[https://10.24.0.21:2379]
 # Finished defragmenting etcd member[https://10.24.0.22:2379]

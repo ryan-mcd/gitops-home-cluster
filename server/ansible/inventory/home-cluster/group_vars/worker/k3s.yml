@@ -12,6 +12,11 @@ k3s_agent:
   node-ip: "{{ ansible_host }}"
   kubelet-arg:
     - "feature-gates=EphemeralContainers=true,MixedProtocolLBService=true,ReadWriteOncePod=true"
+    # # Adding to reserve resources for host daemons
+    # - "system-reserved=[cpu=200m][,][memory=500Mi][,][ephemeral-storage=10Gi]"
+    - "system-reserved=cpu=200m,memory=500Mi,ephemeral-storage=5Gi"
+    - "kube-reserved=cpu=100m,memory=250Mi,ephemeral-storage=2Gi"
+    # - "eviction-hard=memory.avail<500Mi,nodefs.available<10%"
 
   # Add node-label for longhorn to create disks
   # https://longhorn.io/docs/1.1.2/advanced-resources/default-disk-and-node-config/
