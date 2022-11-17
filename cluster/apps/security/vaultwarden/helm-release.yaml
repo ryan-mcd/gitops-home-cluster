@@ -18,8 +18,8 @@ spec:
 
   values:
     image:
-      repository: vaultwarden/server
-      tag: "1.26.0"
+      repository: ghcr.io/ryan-mcd/vaultwarden
+      tag: "v1.26.0"
 
     strategy:
       type: Recreate
