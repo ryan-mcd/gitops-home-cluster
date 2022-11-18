@@ -4,4 +4,5 @@ resources:
   - home-assistant-pvc.yaml
   - mosquitto-config-pvc.yaml
   - esphome-config-pvc.yaml
+  - frigate-config-pvc.yaml
   
