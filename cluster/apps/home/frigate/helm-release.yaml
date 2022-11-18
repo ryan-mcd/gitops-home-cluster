@@ -13,7 +13,7 @@ spec:
       interval: 30m
       sourceRef:
         kind: HelmRepository
-        name: bjw-s
+        name: bjw-s-helm-charts
         namespace: flux-system
 
   values:
@@ -96,11 +96,15 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: "nginx"
+        ingressClassName: "traefik"
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
         hosts:
-          - host: &host "frigate.${INGRESS_DOMAIN}"
+          - host: &host "frigate.${SECRET_DOMAIN}"
             paths:
               - path: /
+                pathType: Prefix
         tls:
           - hosts:
               - *host
