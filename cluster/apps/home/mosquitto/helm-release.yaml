@@ -60,6 +60,7 @@ spec:
       data:
         enabled: true
         existingClaim: mosquitto-config-v1
+        mountPath: /mosquitto/data
       config:
         enabled: true
         type: custom
