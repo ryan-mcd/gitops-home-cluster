@@ -93,3 +93,32 @@ cameras:
     snapshots:
       retain:
         default: 14
+
+  LR:
+    # Camera-specific ffmpeg configuration
+    ffmpeg:
+      inputs:
+        - path: "rtsp://{FRIGATE_CAMERA_LR_USER}:{FRIGATE_CAMERA_LR_PASSWORD}@{FRIGATE_CAMERA_LR_HOST}:554/live"
+          roles:
+            - rtmp
+            - record
+        - path: "rtsp://{FRIGATE_CAMERA_LR_USER}:{FRIGATE_CAMERA_LR_PASSWORD}@{FRIGATE_CAMERA_LR_HOST}:554/live"
+          roles:
+            - detect
+
+    # Camera-specific detection configuration
+    detect:
+      width: 960
+      height: 720
+      fps: 10
+
+    # Camera-specific recording configuration
+    record:
+      events:
+        retain:
+          default: 14
+
+    # Camera-specific snapshots configuration
+    snapshots:
+      retain:
+        default: 14
