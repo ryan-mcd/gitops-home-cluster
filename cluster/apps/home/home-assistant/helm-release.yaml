@@ -32,13 +32,6 @@ spec:
         ports:
           http:
             port: 8123
-      coiot:
-        enabled: true
-        type: LoadBalancer
-        loadBalancerIP: "${LB_COIOT_HOME_ASSISTANT_IP}"
-        ports:
-          http:
-            enabled: false
           coiot:
             enabled: true
             port: 5683
