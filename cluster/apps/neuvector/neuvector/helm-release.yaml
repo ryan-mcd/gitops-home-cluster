@@ -31,7 +31,7 @@ spec:
 
     controller:
       enabled: true
-      replicas: 3
+      replicas: 1
       disruptionbudget: 0
       
       pvc:
