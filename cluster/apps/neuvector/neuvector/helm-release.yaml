@@ -1,0 +1,123 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: neuvector-core
+  namespace: neuvector
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: core
+      version: 2.2.5
+      sourceRef:
+        kind: HelmRepository
+        name: neuvector-charts
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    openshift: false
+
+    registry: docker.io
+
+    psp: false
+    rbac: true
+    serviceAccount: default
+
+    controller:
+      enabled: true
+      replicas: 3
+      disruptionbudget: 0
+      
+      pvc:
+        enabled: false
+        existingClaim: true
+        accessModes:
+          - ReadWriteMany
+        capacity:
+      ingress: # for rest API
+        enabled: false
+
+      resources:
+        requests:
+          cpu: 100m
+          memory: 100Mi
+    
+    enforcer:
+      enabled: true
+      resources:
+        requests:
+          cpu: 100m
+          memory: 100Mi
+    manager:
+      enabled: true
+      env:
+        ssl: false
+      svc:
+        type: LoadBalancer
+        loadBalancerIP: ${LB_NEUVECTOR_IP}
+      ingress:
+        enabled: true
+        host: &host "neuvector.${DOMAIN_2}"
+        ingressClassName: "traefik"
+        path: "/"
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+        tls:
+          - hosts:
+              - *host
+            secretName: "neuvector-${DOMAIN_2/./-}-tls"
+        # host:  # MUST be set, if ingress is enabled
+        # ingressClassName: ""
+        # path: "/"
+        # annotations:
+        #   nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+        #   # kubernetes.io/ingress.class: my-nginx
+        #   # nginx.ingress.kubernetes.io/whitelist-source-range: "1.1.1.1"
+        #   # nginx.ingress.kubernetes.io/rewrite-target: /
+        #   # nginx.ingress.kubernetes.io/enable-rewrite-log: "true"
+        #   # only for end-to-end tls conf - ingress-nginx accepts backend self-signed cert
+        # tls: false
+        # secretName:  # my-tls-secret
+      resources:
+        requests:
+          cpu: 100m
+          memory: 100Mi
+      runAsUser: 5454
+    cve:
+      updater:
+        enabled: true
+        secure: false
+        image:
+          tag: "5"
+        schedule: "0 0 * * *"
+        runAsUser: 5454
+
+    # ??
+    # docker:
+    #   path: /var/run/docker.sock
+
+    resources:
+      # limits:
+      #   cpu: 400m
+      #   memory: 2792Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
+
+    k3s:
+      enabled: true
+      runtimePath: /run/k3s/containerd/containerd.sock
+
+    admissionwebhook:
+      type: ClusterIP
+
+    crdwebhook:
+      enabled: false #disabled due to crd chart

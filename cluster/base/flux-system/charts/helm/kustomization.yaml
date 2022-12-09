@@ -32,3 +32,4 @@ resources:
 - fairwinds-charts.yaml
 - dysnix-charts.yaml
 - loft-charts.yaml
+- neuvector-charts.yaml
