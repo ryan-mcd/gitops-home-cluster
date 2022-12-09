@@ -46,14 +46,14 @@ spec:
       resources:
         requests:
           cpu: 100m
-          memory: 100Mi
+          memory: 440Mi
     
     enforcer:
       enabled: true
       resources:
         requests:
           cpu: 100m
-          memory: 100Mi
+          memory: 150Mi
     manager:
       enabled: true
       env:
@@ -89,7 +89,7 @@ spec:
       resources:
         requests:
           cpu: 100m
-          memory: 100Mi
+          memory: 500Mi
       runAsUser: 5454
     cve:
       updater:
@@ -99,6 +99,15 @@ spec:
           tag: "5"
         schedule: "0 0 * * *"
         runAsUser: 5454
+      scanner:
+        replicas: 1
+        image:
+          tag: "5"
+        runAsUser: 5454
+        resources:
+          requests:
+            cpu: 100m
+            memory: 400Mi
 
     # ??
     # docker:
@@ -110,7 +119,7 @@ spec:
       #   memory: 2792Mi
       requests:
         cpu: 100m
-        memory: 100Mi
+        memory: 500Mi
 
     k3s:
       enabled: true
