@@ -30,8 +30,8 @@ spec:
       operator: "Exists"
     - key: "node-role.kubernetes.io/master"
       operator: "Exists"
-    # env:
-    #   SPEEDTEST_SERVER: "server
+    env:
+      SPEEDTEST_SERVER: "16611"
     service:
       main:
         ports:
