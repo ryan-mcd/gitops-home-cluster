@@ -111,11 +111,11 @@ spec:
           gnetId: 5342
           revision: 5
           datasource: Prometheus
-        # Ref: https://grafana.com/grafana/dashboards/11462
-        traefik:
-          gnetId: 11462
-          revision: 1
-          datasource: Prometheus
+        # # Ref: https://grafana.com/grafana/dashboards/11462
+        # traefik:
+        #   gnetId: 11462
+        #   revision: 1
+        #   datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/13502
         minio:
           gnetId: 13502
