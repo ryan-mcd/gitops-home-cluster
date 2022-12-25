@@ -25,7 +25,7 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/jellyfin
-      tag: 10.8.8@sha256:4726ccad9b46e957e55d37217268d6935443906ba110f1e03966810d2451f00e
+      tag: 10.8.8@sha256:e37b9355b648a4253131961b94bf6f98f79975fcac1fbd8fb515ff87d4422ab1
     env:
       TZ: "America/New_York"
       JELLYFIN_CACHE_DIR: "/config/cache"
