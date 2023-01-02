@@ -56,7 +56,7 @@ snapshots:
 record:
   enabled: true
   retain:
-    days: 1
+    days: 3
     mode: all
   events:
     retain:
@@ -81,7 +81,7 @@ cameras:
     detect:
       width: 960
       height: 720
-      fps: 10
+      fps: 5
 
     # Camera-specific recording configuration
     record:
@@ -110,7 +110,7 @@ cameras:
     detect:
       width: 960
       height: 720
-      fps: 10
+      fps: 5
 
     # Camera-specific recording configuration
     record:
@@ -137,7 +137,7 @@ cameras:
     detect:
       width: 960
       height: 720
-      fps: 10
+      fps: 5
 
     # Camera-specific recording configuration
     record:
