@@ -28,34 +28,19 @@ spec:
         ports:
           http:
             enabled: false
+            primary: false
           mqtt:
             enabled: true
             port: 1883
+            primary: true
+          mqtts:
+            enabled: true
+            port: 8883
         type: LoadBalancer
         loadBalancerIP: ${LB_MOSQUITTO_IP}
         externalTrafficPolicy: Local
-    auth:
-      enabled: true
-    # -- By enabling this, authentication and access control settings will be controlled on a per-listener basis
-    perListenerSettings: false
-
-    # -- When enabled, this adds the `listener` option to the mosquitto config.
-    # Change this to false when using TLS.
-    addListener: true
     podAnnotations:
       secret.reloader.stakater.com/reload: mosquitto
-    configMaps:
-      config:
-        enabled: true
-        data:
-          mosquitto.conf: |
-            per_listener_settings false
-            listener 1883
-            allow_anonymous false
-            persistence true
-            persistence_location /mosquitto/data
-            autosave_interval 1800
-            include_dir /mosquitto/configinc
     persistence:
       data:
         enabled: true
@@ -76,6 +61,14 @@ spec:
         volumeSpec:
           secret:
             secretName: mosquitto
+      mosquitto-tls:
+        enabled: true
+        type: custom
+        volumeSpec:
+          secret:
+            secretName: mqtt-${DOMAIN_2/./-}-tls
+        mountPath: /etc/ssl/mosquitto
+        readOnly: true
     resources:
       requests:
         cpu: 100m

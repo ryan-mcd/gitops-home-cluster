@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mosquitto-config
+  namespace: home
+data:
+  mosquitto.conf: |
+    per_listener_settings false
+    allow_anonymous false
+    persistence true
+    persistence_location /mosquitto/data
+    autosave_interval 120
+    connection_messages false
+    
+    listener 1883
+
+    listener 8883
+    cafile /etc/ssl/mosquitto/tls.crt
+    certfile /etc/ssl/mosquitto/tls.crt
+    keyfile /etc/ssl/mosquitto/tls.key
+
+    include_dir /mosquitto/configinc
