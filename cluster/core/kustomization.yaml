@@ -5,4 +5,4 @@ resources:
 - metallb-system
 - cert-manager
 - rook-ceph
-# - calico
+- calico
