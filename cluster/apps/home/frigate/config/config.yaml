@@ -59,6 +59,7 @@ record:
     days: 3
     mode: all
   events:
+    pre_capture: 15
     retain:
       default: 7
       mode: active_objects
