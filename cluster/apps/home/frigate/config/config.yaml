@@ -76,6 +76,10 @@ cameras:
         - path: "rtsp://{FRIGATE_CAMERA_DOORBELL_USER}:{FRIGATE_CAMERA_AMCREST_PASSWORD}@{FRIGATE_CAMERA_DOORBELL_HOST}:554/cam/realmonitor?channel=1&subtype=1"
           roles:
             - detect
+    objects:
+      track:
+        - person
+        - car
 
     # Camera-specific detection configuration
     detect:
