@@ -56,12 +56,12 @@ snapshots:
 record:
   enabled: true
   retain:
-    days: 3
+    days: 10
     mode: all
   events:
     pre_capture: 15
     retain:
-      default: 7
+      default: 30
       mode: active_objects
 
 # Specify camera's
