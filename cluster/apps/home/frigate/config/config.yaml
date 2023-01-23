@@ -56,12 +56,12 @@ snapshots:
 record:
   enabled: true
   retain:
-    days: 10
+    days: 5
     mode: all
   events:
     pre_capture: 15
     retain:
-      default: 30
+      default: 10
       mode: active_objects
 
 # Specify camera's
@@ -86,18 +86,21 @@ cameras:
     detect:
       width: 960
       height: 720
-      fps: 5
+      fps: 10
 
     # Camera-specific recording configuration
     record:
+      retain:
+        days: 15
+        mode: all
       events:
         retain:
-          default: 14
+          default: 30
 
     # Camera-specific snapshots configuration
     snapshots:
       retain:
-        default: 14
+        default: 30
         
   lr:
     # Camera-specific ffmpeg configuration
