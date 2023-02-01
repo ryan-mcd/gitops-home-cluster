@@ -185,9 +185,9 @@
       "matchUpdateTypes": ["minor", "patch"],
       "matchPackageNames": [
         // "traefik",
+        // "thanos",
         "ingress-nginx",
         "kube-prometheus-stack",
-        "thanos",
         "loki",
         "speedtest-exporter",
         "kured",
