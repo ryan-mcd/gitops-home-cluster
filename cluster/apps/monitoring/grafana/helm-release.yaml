@@ -195,6 +195,9 @@ spec:
     # tolerations:
     #   - key: "node-role.kubernetes.io/master"
     #     operator: "Exists"
+    
+    rbac:
+      pspEnabled: false
 
     resources:
       requests:
