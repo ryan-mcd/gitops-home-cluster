@@ -24,10 +24,6 @@ spec:
     crds:
       install: true
     replicaCount: 3
-    extraArgs:
-      - --autogenInternals=false
-      - --clientRateLimitQPS=30
-      - --clientRateLimitBurst=60
     grafana:
       enabled: true
     serviceMonitor:
