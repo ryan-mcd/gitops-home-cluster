@@ -1,0 +1,3 @@
+kubectl patch crd admissionreports.kyverno.io --type=merge -p '{"metadata": {"annotations": {"meta.helm.sh/release-name": "kyverno"}}}'
+kubectl patch crd admissionreports.kyverno.io --type=merge -p '{"metadata": {"annotations": {"meta.helm.sh/release-namespace": "kyverno"}}}'
+kubectl patch crd admissionreports.kyverno.io --type=merge -p '{"metadata": {"labels": {"app.kubernetes.io/managed-by": "Helm"}}}'
