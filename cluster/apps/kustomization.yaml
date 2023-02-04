@@ -9,6 +9,6 @@ resources:
   - rook-ceph
   - development
   - home
-  - kyverno
+  # - kyverno
   - kopia
   - neuvector
