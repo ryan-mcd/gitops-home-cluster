@@ -21,14 +21,26 @@ spec:
     remediation:
       retries: 5
   values:
-    installCRDs: false
+    crds:
+      install: true
     replicaCount: 3
     extraArgs:
       - --autogenInternals=false
       - --clientRateLimitQPS=30
       - --clientRateLimitBurst=60
+    grafana:
+      enabled: true
     serviceMonitor:
       enabled: true
+    backgroundController:
+      serviceMonitor:
+        enabled: true
+    cleanupController:
+      serviceMonitor:
+        enabled: true
+    reportsController:
+      serviceMonitor:
+        enabled: true
     topologySpreadConstraints:
       - maxSkew: 1
         topologyKey: kubernetes.io/hostname
