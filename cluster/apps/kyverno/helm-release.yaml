@@ -21,6 +21,12 @@ spec:
     remediation:
       retries: 5
   values:
+
+    updateStrategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxSurge: 1
+
     crds:
       install: true
     replicaCount: 3
