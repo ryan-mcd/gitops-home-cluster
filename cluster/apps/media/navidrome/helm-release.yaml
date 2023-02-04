@@ -22,7 +22,7 @@ spec:
   values:
     image:
       repository: ghcr.io/ryan-mcd/navidrome
-      tag: 0.49.0
+      tag: v0.49.1
 
     env:
       ND_DATAFOLDER: /data
