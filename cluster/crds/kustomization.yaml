@@ -6,4 +6,4 @@ resources:
 - rook-ceph
 - kube-prometheus-stack
 - external-snapshotter
-- neuvector
+# - neuvector

@@ -11,4 +11,4 @@ resources:
   - home
   - kyverno
   - kopia
-  - neuvector
+  # - neuvector
