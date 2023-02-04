@@ -113,5 +113,3 @@ spec:
         ports:
           http:
             port: *port
-        monitor:
-          enabled: true
