@@ -33,3 +33,4 @@ resources:
 - dysnix-charts.yaml
 - loft-charts.yaml
 - neuvector-charts.yaml
+- istio-charts.yaml

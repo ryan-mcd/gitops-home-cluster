@@ -2,9 +2,9 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
-  name: loft-charts
+  name: istio-charts
   namespace: flux-system
 spec:
   interval: 1h
-  url: https://charts.loft.sh
+  url: https://istio-release.storage.googleapis.com/charts
   timeout: 3m
