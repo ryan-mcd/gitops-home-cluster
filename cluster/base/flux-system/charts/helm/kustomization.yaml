@@ -34,3 +34,7 @@ resources:
 - loft-charts.yaml
 - neuvector-charts.yaml
 - istio-charts.yaml
+- kiali-charts.yaml
+- jaegertracing-charts.yaml
+- flagger-charts.yaml
+- falco-security-charts.yaml
