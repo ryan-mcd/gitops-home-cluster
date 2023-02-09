@@ -6,4 +6,6 @@ resources:
   - certificates.yaml
   - gateway.yaml
   - helm-release.yaml
+  - private-certificate.yaml
+  - private-gateway.yaml
   # - authorization-policy.yaml
