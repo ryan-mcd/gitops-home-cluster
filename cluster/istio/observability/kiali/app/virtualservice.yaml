@@ -1,0 +1,19 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: kiali
+  namespace: istio-observability
+spec:
+  hosts:
+    - 'kiali.${DOMAIN_2}'
+  gateways:
+    - istio-ingress/istio-private-gateway
+  http:
+    - match:
+        - port: 443
+      route:
+        - destination:
+            port:
+              number: 20001
+            host: kiali.istio-observability.svc.cluster.local

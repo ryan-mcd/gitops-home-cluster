@@ -6,3 +6,4 @@ resources:
   - istio-cni/ks.yaml
   - istiod/ks.yaml
   - istio-ingress
+  - observability
