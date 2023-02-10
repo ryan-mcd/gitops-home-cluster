@@ -59,6 +59,10 @@ spec:
           limits:
             cpu: 200m
             memory: 256Mi
+    pilot:
+      env:
+        PILOT_ENABLE_WORKLOAD_ENTRY_AUTOREGISTRATION: true
+        PILOT_ENABLE_WORKLOAD_ENTRY_HEALTHCHECKS: true
     meshConfig:
       defaultConfig:
         gatewayTopology:
