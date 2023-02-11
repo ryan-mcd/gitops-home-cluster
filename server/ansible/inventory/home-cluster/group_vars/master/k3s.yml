@@ -36,7 +36,7 @@ k3s_server:
   etcd-expose-metrics: true
 
   kubelet-arg:
-    - "feature-gates=EphemeralContainers=true,MixedProtocolLBService=true,ReadWriteOncePod=true"
+    - "feature-gates=MixedProtocolLBService=true,ReadWriteOncePod=true"
     # Adding to reserve resources for host daemons
     ## - Kubernetes docs state the following but it doesn't work
     # - "system-reserved=[cpu=200m][,][memory=500Mi]"
@@ -44,18 +44,22 @@ k3s_server:
     - "kube-reserved=cpu=150m,memory=1000Mi,ephemeral-storage=2Gi"
     # - "eviction-hard=memory.avail<500Mi,nodefs.available<10%"
   kube-controller-manager-arg:
-    - "feature-gates=EphemeralContainers=true,MixedProtocolLBService=true,ReadWriteOncePod=true"
+    - "feature-gates=MixedProtocolLBService=true,ReadWriteOncePod=true"
     # Required to monitor component with kube-prometheus-stack
     - "bind-address=0.0.0.0"
   kube-proxy-arg:
-    - "feature-gates=EphemeralContainers=true,MixedProtocolLBService=true,ReadWriteOncePod=true"
+    - "feature-gates=MixedProtocolLBService=true,ReadWriteOncePod=true"
     # Required to monitor component with kube-prometheus-stack
     - "metrics-bind-address=0.0.0.0"
   kube-scheduler-arg:
-    - "feature-gates=EphemeralContainers=true,MixedProtocolLBService=true,ReadWriteOncePod=true"
+    - "feature-gates=MixedProtocolLBService=true,ReadWriteOncePod=true"
     # - "address=0.0.0.0"
     # Required to monitor component with kube-prometheus-stack
     - "bind-address=0.0.0.0"
   kube-apiserver-arg:
-    - "feature-gates=EphemeralContainers=true,MixedProtocolLBService=true,ReadWriteOncePod=true"
+    - "feature-gates=MixedProtocolLBService=true,ReadWriteOncePod=true"
     - "anonymous-auth=true"
+
+  # # TODO: enable with cilium
+  # node-taint:
+  #   - node.cilium.io/agent-not-ready

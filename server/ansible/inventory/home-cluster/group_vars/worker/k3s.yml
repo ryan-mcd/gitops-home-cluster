@@ -11,7 +11,7 @@ k3s_control_node: false
 k3s_agent:
   node-ip: "{{ ansible_host }}"
   kubelet-arg:
-    - "feature-gates=EphemeralContainers=true,MixedProtocolLBService=true,ReadWriteOncePod=true"
+    - "feature-gates=MixedProtocolLBService=true,ReadWriteOncePod=true"
     # # Adding to reserve resources for host daemons
     # - "system-reserved=[cpu=200m][,][memory=500Mi][,][ephemeral-storage=10Gi]"
     - "system-reserved=cpu=200m,memory=500Mi,ephemeral-storage=5Gi"
@@ -24,3 +24,7 @@ k3s_agent:
   # Leaving here because maybe someday longhorn won't break after 2 months.
   node-label:
     - "node.longhorn.io/create-default-disk=true"
+
+  # # TODO: enable with cilium
+  # node-taint:
+  #   - node.cilium.io/agent-not-ready
