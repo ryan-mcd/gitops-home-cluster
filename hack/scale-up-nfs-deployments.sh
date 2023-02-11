@@ -10,4 +10,6 @@ for (( i=0; i<$len; i++ )); do \
   i=$f; \
 done
 
+kubectl -n monitoring scale --replicas=1 deployment.apps/grafana
+
 kubectl -n development scale --replicas=1 sts --all
