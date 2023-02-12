@@ -1,0 +1,34 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vaultwarden
+  namespace: istio-ingress
+spec:
+  hosts:
+    - 'bitwarden.${SECRET_DOMAIN}'
+  gateways:
+    - istio-ingress/istio-ingressgateway 
+  http:
+    - name: http
+      match:
+        - uri:
+          prefix: "/"
+        - uri:
+          prefix: "/notifications/hub/negotiate"
+      route:
+        - destination:
+            port:
+              number: 8080
+            host: vaultwarden.security.svc.cluster.local
+          weight: 100
+    - name: websockets
+      match:
+        - uri:
+          prefix: "/notifications/hub"
+      route:
+        - destination:
+            port:
+              number: 3012
+            host: vaultwarden.security.svc.cluster.local
+          weight: 100

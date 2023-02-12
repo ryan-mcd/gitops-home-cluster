@@ -23,7 +23,7 @@ resources:
   # - thanos-vs.yaml
   # - traefik-vs.yaml
   # - unifi-vs.yaml
-  # - vaultwarden-vs.yaml
+  - vaultwarden-vs.yaml
   # - nextcloud-admin-vs.yaml
   # - home-assistant-addon-codeserver-vs.yaml
   # - vaultwarden-admin-vs.yaml
