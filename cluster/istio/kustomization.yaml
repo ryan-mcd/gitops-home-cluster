@@ -7,3 +7,4 @@ resources:
   - istiod/ks.yaml
   - istio-ingress
   - observability
+  - virtual-services

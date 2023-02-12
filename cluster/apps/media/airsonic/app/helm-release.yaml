@@ -91,7 +91,7 @@ spec:
             port: 4040
     ingress:
       main:
-        enabled: true
+        enabled: false
         ingressClassName: "traefik"
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"

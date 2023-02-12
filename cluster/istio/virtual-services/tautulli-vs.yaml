@@ -1,0 +1,20 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: tautulli
+  namespace: istio-observability
+spec:
+  hosts:
+    - 'tautulli.${DOMAIN_2}'
+  gateways:
+    - istio-ingress/istio-private-gateway
+  http:
+    - match:
+        - port: 443
+      route:
+        - destination:
+            port:
+              number: 8181
+            host: tautulli.media.svc.cluster.local
+          weight: 100

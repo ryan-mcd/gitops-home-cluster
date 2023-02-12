@@ -2,8 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
 - _pvc
-- jellyfin
-- airsonic
-- plex
-- tautulli
-- navidrome
+- jellyfin/ks.yaml
+- airsonic/ks.yaml
+- plex/ks.yaml
+- tautulli/ks.yaml
+- navidrome/ks.yaml

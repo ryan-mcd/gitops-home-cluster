@@ -30,7 +30,7 @@ spec:
             port: 8181
     ingress:
       main:
-        enabled: true
+        enabled: false
         ingressClassName: "traefik"
         annotations:
           hajimari.io/enable: "true"
