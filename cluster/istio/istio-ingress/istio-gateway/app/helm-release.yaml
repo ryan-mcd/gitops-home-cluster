@@ -44,7 +44,7 @@ spec:
       enabled: false
     service:
       loadBalancerIP: ${LB_ISTIO_INGRESS_GATEWAY}
-      externalTrafficPolicy: "local"
+      externalTrafficPolicy: "Local"
     resources:
       requests:
         cpu: 100m
