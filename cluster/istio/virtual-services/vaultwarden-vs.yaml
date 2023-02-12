@@ -13,9 +13,9 @@ spec:
     - name: http
       match:
         - uri:
-          prefix: "/"
+            prefix: "/"
         - uri:
-          prefix: "/notifications/hub/negotiate"
+            prefix: "/notifications/hub/negotiate"
       route:
         - destination:
             port:
@@ -25,7 +25,7 @@ spec:
     - name: websockets
       match:
         - uri:
-          prefix: "/notifications/hub"
+            prefix: "/notifications/hub"
       route:
         - destination:
             port:
