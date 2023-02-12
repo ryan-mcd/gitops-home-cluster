@@ -15,6 +15,6 @@ spec:
       route:
         - destination:
             port:
-              number: 4040
+              number: 8096
             host: jellyfin.media.svc.cluster.local
           weight: 100
