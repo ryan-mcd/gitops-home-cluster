@@ -40,8 +40,11 @@ spec:
   maxHistory: 3
   values:
     replicaCount: 3
+    autoscaling:
+      enabled: false
     service:
       loadBalancerIP: ${LB_ISTIO_INGRESS_GATEWAY}
+      externalTrafficPolicy: "local"
     resources:
       requests:
         cpu: 100m
