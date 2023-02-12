@@ -3,15 +3,15 @@ kind: Kustomization
 resources:
   - airsonic-vs.yaml
   # - alertmanager-vs.yaml
-  # - esphome-vs.yaml
-  # - frigate-vs.yaml
+  - esphome-vs.yaml
+  - frigate-vs.yaml
   # - gitea-vs.yaml
   # - goldilocks-vs.yaml
   # - grafana-vs.yaml
-  # - home-assistant-vs.yaml
-  # - jaeger-vs.yaml
+  - home-assistant-vs.yaml
+  - jaeger-vs.yaml
   - jellyfin-vs.yaml
-  # - kiali-vs.yaml
+  - kiali-vs.yaml
   # - kopia-vs.yaml
   - navidrome-vs.yaml
   # - nextcloud-vs.yaml

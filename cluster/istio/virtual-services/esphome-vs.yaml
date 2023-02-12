@@ -1,0 +1,20 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: esphome
+  namespace: istio-ingress
+spec:
+  hosts:
+    - 'esphome.${DOMAIN_2}'
+  gateways:
+    - istio-ingress/istio-private-gateway
+  http:
+    - match:
+        - port: 443
+      route:
+        - destination:
+            port:
+              number: 6052
+            host: esphome.home.svc.cluster.local
+          weight: 100
