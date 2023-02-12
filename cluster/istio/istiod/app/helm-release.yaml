@@ -72,6 +72,8 @@ spec:
     meshConfig:
       defaultConfig:
         gatewayTopology:
+          # Trust Cloudflare
+          numTrustedProxies: 1
           # Always forward the XFCC header in the request, regardless of whether the client connection is mTLS.
           forwardClientCertDetails: ALWAYS_FORWARD_ONLY
       accessLogFile: /dev/stdout
