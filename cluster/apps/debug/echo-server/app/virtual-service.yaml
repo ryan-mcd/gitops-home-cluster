@@ -2,11 +2,11 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: httpbin
+  name: echo-server
   namespace: istio-ingress
 spec:
   hosts:
-    - 'httpbin.${DOMAIN_2}'
+    - 'echo-server.${DOMAIN_2}'
   gateways:
     - istio-ingress/istio-private-gateway 
   http:
@@ -15,6 +15,6 @@ spec:
       route:
         - destination:
             port:
-              number: 80
-            host: httpbin.debug.svc.cluster.local
+              number: 8080
+            host: echo-server.debug.svc.cluster.local
           weight: 100
