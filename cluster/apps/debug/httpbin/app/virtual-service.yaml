@@ -1,0 +1,20 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: httpbin
+  namespace: istio-ingress
+spec:
+  hosts:
+    - 'httpbin.${DOMAIN_2}'
+  gateways:
+    - istio-ingress/istio-private-gateway 
+  http:
+    - match:
+        - port: 443
+      route:
+        - destination:
+            port:
+              number: 80
+            host: httpbin.debug.svc.cluster.local
+          weight: 100
