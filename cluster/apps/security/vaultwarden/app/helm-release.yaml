@@ -25,6 +25,7 @@ spec:
       type: Recreate
 
     env:
+      TZ: "${TIMEZONE}"
       DOMAIN: https://bitwarden.${SECRET_DOMAIN}
       DATA_FOLDER: "config"
       ICON_CACHE_FOLDER: "config/icon_cache"
