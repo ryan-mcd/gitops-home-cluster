@@ -6,4 +6,4 @@ resources:
   # - loki
   - speedtest-exporter
   - thanos
-  - goldilocks
+  - goldilocks/ks.yaml

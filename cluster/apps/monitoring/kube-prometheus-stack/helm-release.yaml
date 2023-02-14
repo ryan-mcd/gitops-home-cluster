@@ -72,7 +72,7 @@ spec:
               severity: "warning"
             equal: ["alertname", "namespace"]
       ingress:
-        enabled: true
+        enabled: false
         pathType: Prefix
         ingressClassName: "traefik"
         annotations:
@@ -204,7 +204,7 @@ spec:
             memory: 200Mi
     prometheus:
       ingress:
-        enabled: true
+        enabled: false
         pathType: Prefix
         ingressClassName: "traefik"
         annotations:

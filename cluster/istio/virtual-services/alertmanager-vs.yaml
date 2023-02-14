@@ -2,11 +2,11 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: tautulli
+  name: alert-manager
   namespace: istio-ingress
 spec:
   hosts:
-    - 'tautulli.${DOMAIN_2}'
+    - 'alert-manager.${DOMAIN_2}'
   gateways:
     - istio-ingress/istio-private-gateway
   http:
@@ -15,6 +15,6 @@ spec:
       route:
         - destination:
             port:
-              number: 8181
-            host: tautulli.media.svc.cluster.local
+              number: 9093
+            host: prometheus-alertmanager.monitoring.svc.cluster.local
           weight: 100

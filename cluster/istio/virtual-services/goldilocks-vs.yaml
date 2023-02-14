@@ -2,11 +2,11 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: tautulli
+  name: goldilocks-dashboard
   namespace: istio-ingress
 spec:
   hosts:
-    - 'tautulli.${DOMAIN_2}'
+    - 'goldilocks.${DOMAIN_2}'
   gateways:
     - istio-ingress/istio-private-gateway
   http:
@@ -15,6 +15,6 @@ spec:
       route:
         - destination:
             port:
-              number: 8181
-            host: tautulli.media.svc.cluster.local
+              number: 80
+            host: goldilocks-dashboard.monitoring.svc.cluster.local
           weight: 100

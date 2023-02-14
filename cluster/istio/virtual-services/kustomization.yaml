@@ -2,23 +2,23 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - airsonic-vs.yaml
-  # - alertmanager-vs.yaml
+  - alertmanager-vs.yaml
   - esphome-vs.yaml
   - frigate-vs.yaml
   - gitea-vs.yaml
-  # - goldilocks-vs.yaml
-  # - grafana-vs.yaml
+  - goldilocks-vs.yaml
+  - grafana-vs.yaml
   - home-assistant-vs.yaml
   - jaeger-vs.yaml
   - jellyfin-vs.yaml
   - kiali-vs.yaml
-  # - kopia-vs.yaml
+  - kopia-vs.yaml
   - navidrome-vs.yaml
   - neuvector-vs.yaml
   # - nextcloud-vs.yaml
   - plex-vs.yaml
   # - pgadmin-vs.yaml
-  # - prometheus-vs.yaml
+  - prometheus-vs.yaml
   - rook-ceph-vs.yaml
   - tautulli-vs.yaml
   # - thanos-vs.yaml

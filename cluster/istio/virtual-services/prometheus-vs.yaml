@@ -2,11 +2,11 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: tautulli
+  name: prometheus
   namespace: istio-ingress
 spec:
   hosts:
-    - 'tautulli.${DOMAIN_2}'
+    - 'prometheus.${DOMAIN_2}'
   gateways:
     - istio-ingress/istio-private-gateway
   http:
@@ -15,6 +15,6 @@ spec:
       route:
         - destination:
             port:
-              number: 8181
-            host: tautulli.media.svc.cluster.local
+              number: 9090
+            host: prometheus-prometheus.monitoring.svc.cluster.local
           weight: 100
