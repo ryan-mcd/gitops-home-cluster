@@ -5,7 +5,7 @@ resources:
   # - alertmanager-vs.yaml
   - esphome-vs.yaml
   - frigate-vs.yaml
-  # - gitea-vs.yaml
+  - gitea-vs.yaml
   # - goldilocks-vs.yaml
   # - grafana-vs.yaml
   - home-assistant-vs.yaml
@@ -19,11 +19,11 @@ resources:
   - plex-vs.yaml
   # - pgadmin-vs.yaml
   # - prometheus-vs.yaml
-  # - rook-ceph-vs.yaml
+  - rook-ceph-vs.yaml
   - tautulli-vs.yaml
   # - thanos-vs.yaml
   # - traefik-vs.yaml
-  # - unifi-vs.yaml
+  - unifi-vs.yaml
   - vaultwarden-vs.yaml
   # - nextcloud-admin-vs.yaml
   # - home-assistant-addon-codeserver-vs.yaml

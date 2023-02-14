@@ -1,0 +1,10 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: unifi-container
+  namespace: networking
+spec:
+  host: unifi.networking.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: SIMPLE

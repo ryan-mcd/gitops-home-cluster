@@ -21,20 +21,20 @@ spec:
     monitoring:
       enabled: true
       createPrometheusRules: true
-    ingress:
-      dashboard:
-        annotations:
-          kubernetes.io/ingress.class: "traefik"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-        host:
-          name: "rook.${DOMAIN_2}"
-          path: "/"
-        tls:
-          - hosts:
-              - "rook.${DOMAIN_2}"
-            secretName: "rook-${DOMAIN_2/./-}-tls"
+    # ingress:
+    #   dashboard:
+    #     annotations:
+    #       kubernetes.io/ingress.class: "traefik"
+    #       traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    #       traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
+    #       cert-manager.io/cluster-issuer: "letsencrypt-production"
+    #     host:
+    #       name: "rook.${DOMAIN_2}"
+    #       path: "/"
+    #     tls:
+    #       - hosts:
+    #           - "rook.${DOMAIN_2}"
+    #         secretName: "rook-${DOMAIN_2/./-}-tls"
     configOverride: |
       [global]
       bdev_enable_discard = true

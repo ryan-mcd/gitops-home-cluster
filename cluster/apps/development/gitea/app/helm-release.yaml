@@ -28,7 +28,7 @@ spec:
         loadBalancerIP: ${LB_GITEA_IP}
         # loadBalancerIP: ${LB_TRAEFIK_IP}
     ingress:
-      enabled: true
+      enabled: false
       annotations:
         kubernetes.io/ingress.class: "traefik"
         cert-manager.io/cluster-issuer: "letsencrypt-production"

@@ -2,19 +2,19 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: jaeger
+  name: gitea
   namespace: istio-ingress
 spec:
   hosts:
-    - 'jaeger.${DOMAIN_2}'
+    - 'code.${SECRET_DOMAIN}'
   gateways:
-    - istio-ingress/istio-private-gateway
+    - istio-ingress/istio-ingressgateway 
   http:
     - match:
         - port: 443
       route:
         - destination:
             port:
-              number: 16686
-            host: jaeger-query.istio-observability.svc.cluster.local
+              number: 3000
+            host: gitea-http.development.svc.cluster.local
           weight: 100

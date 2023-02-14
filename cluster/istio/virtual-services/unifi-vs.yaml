@@ -2,11 +2,11 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: jaeger
+  name: unifi
   namespace: istio-ingress
 spec:
   hosts:
-    - 'jaeger.${DOMAIN_2}'
+    - 'unifi.${DOMAIN_2}'
   gateways:
     - istio-ingress/istio-private-gateway
   http:
@@ -15,6 +15,6 @@ spec:
       route:
         - destination:
             port:
-              number: 16686
-            host: jaeger-query.istio-observability.svc.cluster.local
+              number: 8443
+            host: unifi.networking.svc.cluster.local
           weight: 100

@@ -2,11 +2,11 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: jaeger
+  name: rook-ceph
   namespace: istio-ingress
 spec:
   hosts:
-    - 'jaeger.${DOMAIN_2}'
+    - 'rook.${DOMAIN_2}'
   gateways:
     - istio-ingress/istio-private-gateway
   http:
@@ -15,6 +15,6 @@ spec:
       route:
         - destination:
             port:
-              number: 16686
-            host: jaeger-query.istio-observability.svc.cluster.local
+              number: 7000
+            host: rook-ceph-mgr-dashboard.rook-ceph.svc.cluster.local
           weight: 100
