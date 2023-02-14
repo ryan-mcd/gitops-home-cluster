@@ -35,8 +35,8 @@ spec:
       disruptionbudget: 0
       
       pvc:
-        enabled: false
-        existingClaim: true
+        enabled: true
+        existingClaim: false
         accessModes:
           - ReadWriteOnce
         capacity: 1Gi
