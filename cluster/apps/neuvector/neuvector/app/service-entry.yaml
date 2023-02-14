@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: neuvector-kube-api
+  namespace: neuvector
+spec:
+  hosts:
+    - kubernetes.default
+  location: MESH_EXTERNAL
+  ports:
+    - name: kubernetes
+      number: 443
+      protocol: HTTPS
+  resolution: DNS
