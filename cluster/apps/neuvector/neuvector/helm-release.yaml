@@ -62,7 +62,7 @@ spec:
         type: LoadBalancer
         loadBalancerIP: ${LB_NEUVECTOR_IP}
       ingress:
-        enabled: true
+        enabled: false
         host: &host "neuvector.${DOMAIN_2}"
         ingressClassName: "traefik"
         path: "/"
