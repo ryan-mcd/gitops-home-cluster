@@ -4,11 +4,13 @@ metadata:
   name: neuvector-kube-api
   namespace: neuvector
 spec:
+  addresses:
+    - 10.43.0.1/32
   hosts:
     - kubernetes.default
   location: MESH_EXTERNAL
   ports:
     - name: kubernetes
       number: 443
-      protocol: HTTPS
-  resolution: DNS
+      protocol: TCP
+  resolution: NONE
