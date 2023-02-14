@@ -38,8 +38,8 @@ spec:
         enabled: false
         existingClaim: true
         accessModes:
-          - ReadWriteMany
-        capacity:
+          - ReadWriteOnce
+        capacity: 1Gi
       ingress: # for rest API
         enabled: false
 
@@ -59,8 +59,9 @@ spec:
       env:
         ssl: false
       svc:
-        type: LoadBalancer
-        loadBalancerIP: ${LB_NEUVECTOR_IP}
+        type: ClusterIP
+      route:
+        enabled: false
       ingress:
         enabled: false
         host: &host "neuvector.${DOMAIN_2}"

@@ -14,6 +14,7 @@ resources:
   - kiali-vs.yaml
   # - kopia-vs.yaml
   - navidrome-vs.yaml
+  - neuvector-vs.yaml
   # - nextcloud-vs.yaml
   - plex-vs.yaml
   # - pgadmin-vs.yaml

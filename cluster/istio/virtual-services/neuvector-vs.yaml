@@ -1,0 +1,20 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: neuvector
+  namespace: istio-ingress
+spec:
+  hosts:
+    - 'neuvector.${DOMAIN_2}'
+  gateways:
+    - istio-ingress/istio-private-gateway 
+  http:
+    - match:
+        - port: 443
+      route:
+        - destination:
+            port:
+              number: 8443
+            host: neuvector-service-webui.neuvector.svc.cluster.local
+          weight: 100
