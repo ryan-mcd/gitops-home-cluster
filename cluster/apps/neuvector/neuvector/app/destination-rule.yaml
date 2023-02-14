@@ -1,0 +1,10 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: neuvector
+  namespace: neuvector
+spec:
+  host: kubernetes.default
+  trafficPolicy:
+    tls:
+      mode: SIMPLE
