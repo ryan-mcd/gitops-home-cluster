@@ -23,13 +23,16 @@ spec:
   values:
     openshift: false
 
-    registry: docker.io
+    tag: "5.1.0"
 
     psp: false
     rbac: true
     serviceAccount: default
 
     controller:
+      image:
+        repository: ghcr.io/ryan-mcd/neuvector-controller
+        tag: "5.1.0"
       enabled: true
       replicas: 1
       disruptionbudget: 0
@@ -50,12 +53,18 @@ spec:
     
     enforcer:
       enabled: true
+      image:
+        repository: ghcr.io/ryan-mcd/neuvector-enforcer
+        tag: "5.1.0"
       resources:
         requests:
           cpu: 100m
           memory: 150Mi
     manager:
       enabled: true
+      image:
+        repository: ghcr.io/ryan-mcd/neuvector-manager
+        tag: "5.1.0"
       env:
         ssl: false
       svc:
@@ -99,12 +108,14 @@ spec:
         podAnnotations:
           sidecar.istio.io/inject: "false"
         image:
+          repository: ghcr.io/ryan-mcd/neuvector-updater
           tag: "5"
         schedule: "0 0 * * *"
         runAsUser: 5454
       scanner:
         replicas: 1
         image:
+          repository: ghcr.io/ryan-mcd/neuvector-scanner
           tag: "5"
         runAsUser: 5454
         resources:
