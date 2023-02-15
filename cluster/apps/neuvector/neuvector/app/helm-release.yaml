@@ -24,8 +24,10 @@ spec:
     openshift: false
 
     # Fake for renovatebot
-    image: ghcr.io/ryan-mcd/neuvector-controller
-    tag: "5.1.0"
+    image:
+      repository: ghcr.io/ryan-mcd/neuvector-controller
+      tag: &imagetag "5.1.0"
+    tag: *imagetag
 
     psp: false
     rbac: true
