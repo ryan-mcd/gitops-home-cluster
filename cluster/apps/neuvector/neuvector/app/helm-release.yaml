@@ -23,6 +23,8 @@ spec:
   values:
     openshift: false
 
+    # Fake for renovatebot
+    repository: ghcr.io/ryan-mcd/neuvector-controller
     tag: "5.1.0"
 
     psp: false
@@ -32,7 +34,6 @@ spec:
     controller:
       image:
         repository: ghcr.io/ryan-mcd/neuvector-controller
-        tag: "5.1.0"
       enabled: true
       replicas: 1
       disruptionbudget: 0
@@ -55,7 +56,6 @@ spec:
       enabled: true
       image:
         repository: ghcr.io/ryan-mcd/neuvector-enforcer
-        tag: "5.1.0"
       resources:
         requests:
           cpu: 100m
@@ -64,7 +64,6 @@ spec:
       enabled: true
       image:
         repository: ghcr.io/ryan-mcd/neuvector-manager
-        tag: "5.1.0"
       env:
         ssl: false
       svc:
