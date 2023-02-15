@@ -55,7 +55,7 @@ spec:
       enabled: true
       image:
         repository: ghcr.io/ryan-mcd/neuvector-enforcer
-        tag: "5.1.0"
+        tag: "v5.1.1"
       resources:
         requests:
           cpu: 100m
