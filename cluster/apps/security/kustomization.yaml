@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - _pvc
   - vaultwarden/ks.yaml
+  - glauth/ks.yaml
