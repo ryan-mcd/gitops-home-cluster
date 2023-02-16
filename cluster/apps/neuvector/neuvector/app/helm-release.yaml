@@ -52,7 +52,7 @@ spec:
 
       resources:
         requests:
-          cpu: 100m
+          cpu: 10m
           memory: 440Mi
     
     enforcer:
@@ -100,7 +100,7 @@ spec:
         # secretName:  # my-tls-secret
       resources:
         requests:
-          cpu: 100m
+          cpu: 10m
           memory: 500Mi
       runAsUser: 5454
     cve:
@@ -122,7 +122,7 @@ spec:
         runAsUser: 5454
         resources:
           requests:
-            cpu: 100m
+            cpu: 10m
             memory: 400Mi
           limits:
             cpu: 1500m
@@ -137,7 +137,7 @@ spec:
       #   cpu: 400m
       #   memory: 2792Mi
       requests:
-        cpu: 100m
+        cpu: 10m
         memory: 500Mi
 
     k3s:
