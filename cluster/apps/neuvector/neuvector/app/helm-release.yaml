@@ -24,11 +24,11 @@ spec:
     openshift: false
 
     registry: ghcr.io
-    # Fake for renovatebot
-    image:
-      repository: ghcr.io/ryan-mcd/neuvector-controller
-      tag: &imagetag "v5.1.1"
-    tag: *imagetag
+    # # Fake for renovatebot
+    # image:
+    #   repository: ghcr.io/ryan-mcd/neuvector-controller
+    #   tag: &imagetag "v5.1.1"
+    tag: "5.1.1"
 
     psp: false
     rbac: true
