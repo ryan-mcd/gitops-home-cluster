@@ -27,8 +27,8 @@ spec:
     # Fake for renovatebot
     image:
       repository: ghcr.io/ryan-mcd/neuvector-controller
-      tag: &imagetag "v5.1.1"
-    tag: *imagetag
+      tag: "v5.1.1"
+    tag: "v5.1.1"
 
     psp: false
     rbac: true
