@@ -107,7 +107,6 @@ spec:
         runAsUser: 5454
       scanner:
         replicas: 1
-          tag: "5"
         runAsUser: 5454
         resources:
           requests:
