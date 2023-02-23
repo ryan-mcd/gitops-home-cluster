@@ -23,7 +23,7 @@ spec:
   values:
     openshift: false
 
-    registry: ""
+    registry: "docker.io"
     # Fake for renovatebot
     image:
       repository: ghcr.io/ryan-mcd/neuvector-controller
