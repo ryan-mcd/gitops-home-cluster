@@ -42,8 +42,8 @@ spec:
     global:
       defaultPodDisruptionBudget:
         enabled: false
-      hub: docker.io/querycapistio
-      tag: 1.13.1-distroless
+      # hub: docker.io/querycapistio
+      # tag: 1.13.1-distroless
       # caAddress: cert-manager-istio-csr.network-system.svc:443
       proxy:
         resources:

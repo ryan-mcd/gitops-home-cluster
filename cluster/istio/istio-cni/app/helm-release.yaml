@@ -38,7 +38,7 @@ spec:
   uninstall:
     keepHistory: false
   maxHistory: 3
-  values:
-    global:
-      hub: docker.io/querycapistio
-      tag: 1.13.1-distroless
+  # values:
+  #   global:
+  #     hub: docker.io/querycapistio
+  #     tag: 1.13.1-distroless
