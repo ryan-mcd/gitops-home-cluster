@@ -103,10 +103,14 @@ spec:
         secure: false
         podAnnotations:
           sidecar.istio.io/inject: "false"
+        image:
+          tag: "5"
         schedule: "0 0 * * *"
         runAsUser: 5454
       scanner:
         replicas: 1
+        image:
+          tag: "5"
         runAsUser: 5454
         resources:
           requests:
