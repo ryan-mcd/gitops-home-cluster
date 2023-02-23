@@ -5,25 +5,3 @@ resources:
   - helm-release.yaml
   # - service-entry.yaml
   # - destination-rule.yaml
-
-images:
-  - name: neuvector/controller
-    newName: ghcr.io/ryan-mcd/neuvector-controller
-  - name: neuvector/enforcer
-    newName: ghcr.io/ryan-mcd/neuvector-enforcer
-  - name: neuvector/manager
-    newName: ghcr.io/ryan-mcd/neuvector-manager
-  - name: neuvector/updater
-    newName: ghcr.io/ryan-mcd/neuvector-updater
-  - name: neuvector/scanner
-    newName: ghcr.io/ryan-mcd/neuvector-scanner
-  - name: docker.io/neuvector/controller
-    newName: ghcr.io/ryan-mcd/neuvector-controller
-  - name: docker.io/neuvector/enforcer
-    newName: ghcr.io/ryan-mcd/neuvector-enforcer
-  - name: docker.io/neuvector/manager
-    newName: ghcr.io/ryan-mcd/neuvector-manager
-  - name: docker.io/neuvector/updater
-    newName: ghcr.io/ryan-mcd/neuvector-updater
-  - name: docker.io/neuvector/scanner
-    newName: ghcr.io/ryan-mcd/neuvector-scanner
