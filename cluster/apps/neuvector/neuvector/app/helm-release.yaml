@@ -23,18 +23,20 @@ spec:
   values:
     openshift: false
 
-    registry: ghcr.io
+    registry: ""
     # Fake for renovatebot
     image:
       repository: ghcr.io/ryan-mcd/neuvector-controller
-      tag: "v5.1.1"
-    tag: "v5.1.1"
+      tag: &imagetag "v5.1.1"
+    tag: *imagetag
 
     psp: false
     rbac: true
     serviceAccount: default
 
     controller:
+      image:
+        repository: ghcr.io/ryan-mcd/neuvector-controller
       enabled: true
       replicas: 1
       disruptionbudget: 0
@@ -55,12 +57,16 @@ spec:
     
     enforcer:
       enabled: true
+      image:
+        repository: ghcr.io/ryan-mcd/neuvector-enforcer
       resources:
         requests:
           cpu: 100m
           memory: 150Mi
     manager:
       enabled: true
+      image:
+        repository: ghcr.io/ryan-mcd/neuvector-manager
       env:
         ssl: false
       svc:
@@ -103,10 +109,16 @@ spec:
         secure: false
         podAnnotations:
           sidecar.istio.io/inject: "false"
+        image:
+          repository: ghcr.io/ryan-mcd/neuvector-updater
+          tag: "5"
         schedule: "0 0 * * *"
         runAsUser: 5454
       scanner:
         replicas: 1
+        image:
+          repository: ghcr.io/ryan-mcd/neuvector-scanner
+          tag: "5"
         runAsUser: 5454
         resources:
           requests:
