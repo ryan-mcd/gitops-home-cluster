@@ -61,7 +61,7 @@ spec:
             port: 8080
     ingress:
       main:
-        enabled: true
+        enabled: false
         ingressClassName: "traefik"
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
