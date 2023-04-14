@@ -26,7 +26,7 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/plex
-      tag: 1.31.2.6810-a607d384f@sha256:8e2998fd1dfd6e0cc64616b8171833364557799af67f5decbcd0175ee597695f
+      tag: 1.32.0.6918-6f393eda1@sha256:3970cd1af48b039da82b45ba557c8f5c393b86f104b83ca78a3ad9db50d2aa53
     env:
       TZ: "America/New_York"
     podSecurityContext:
