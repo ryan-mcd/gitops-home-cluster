@@ -19,8 +19,6 @@ spec:
     - name: cert-manager
       namespace: cert-manager
   values:
-    image:
-      repository: public.ecr.aws/docker/library/traefik
     deployment:
       kind: Deployment
       replicas: 2
