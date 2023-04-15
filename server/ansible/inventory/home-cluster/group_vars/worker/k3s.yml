@@ -9,6 +9,7 @@ k3s_control_node: false
 
 # k3s settings for all worker nodes
 k3s_agent:
+  # system-default-registry: "{{ system_default_registry }}"
   node-ip: "{{ ansible_host }}"
   kubelet-arg:
     - "feature-gates=MixedProtocolLBService=true,ReadWriteOncePod=true"

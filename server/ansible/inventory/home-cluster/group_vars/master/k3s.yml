@@ -8,6 +8,7 @@ k3s_control_node: true
 
 # k3s settings for all control-plane nodes
 k3s_server:
+  # system-default-registry: "{{ system_default_registry }}"
   node-ip: "{{ ansible_host }}"
   tls-san:
     # # kube-vip

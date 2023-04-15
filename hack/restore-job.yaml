@@ -12,7 +12,7 @@ spec:
       restartPolicy: OnFailure
       containers:
         - name: restore
-          image: ghcr.io/onedr0p/kopia:0.11.3@sha256:2ae9ede0edac68c09d517abd71fa12c96efcf19f27ce7ffca968cebb10ed0e2d
+          image: ghcr.io/onedr0p/kopia:0.12.1@sha256:614f4064ee37c8967440a63061f536ca52d3e62f955eb9362a93f7fb8b3953bf
           env:
             - name: KOPIA_PASSWORD
               value: "none"
@@ -38,5 +38,5 @@ spec:
             claimName: ${VOLUME}
         - name: snapshots
           nfs:
-            server: expanse
-            path: /tycho/Apps/External/Kopia
+            server: 10.11.1.111
+            path: /mnt/user/k8s-bak/kopia

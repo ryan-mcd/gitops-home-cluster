@@ -21,7 +21,7 @@ tasks:
   kubeconfig:
     desc: Remotely fetch kubeconfig from k3s
     cmds:
-    - rsync --verbose --progress --partial --rsync-path="sudo rsync" ubuntu@10.24.0.110:/etc/rancher/k3s/k3s.yaml ./kubeconfig
+    - rsync --verbose --progress --partial --rsync-path="sudo rsync" ubuntu@10.24.0.20:/etc/rancher/k3s/k3s.yaml ./kubeconfig
     - sed -i 's/127.0.0.1/10.24.0.200/g' ./kubeconfig
     - chmod go-r kubeconfig
     silent: true
