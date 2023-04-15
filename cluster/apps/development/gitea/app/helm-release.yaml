@@ -59,7 +59,6 @@ spec:
           existingSecret: gitea-oauth-secret
           scopes: "gitea email profile"
           admin-group: "/admins"
-          required-claim-value: gitea
           skip-local-2fa: "true"
       config:
         server:
