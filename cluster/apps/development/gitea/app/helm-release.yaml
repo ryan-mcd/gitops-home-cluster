@@ -52,6 +52,15 @@ spec:
         username: ${SECRET_GITEA_ADM_USER}
         password: ${SECRET_GITEA_ADM_PASS}
         email: "${SECRET_GITEA_ADM_EMAIL}"
+      oauth:
+        - name: "keycloak"
+          provider: "openidConnect"
+          auto-discover-url: "https://id.${DOMAIN_1}/auth/realms/${KEYCLOAK_REALM}/.well-known/openid-configuration"
+          existingSecret: gitea-oauth-secret
+          scopes: "gitea email profile"
+          admin-group: "/admins"
+          required-claim-value: gitea
+          skip-local-2fa: "true"
       config:
         server:
           PROTOCOL: http
