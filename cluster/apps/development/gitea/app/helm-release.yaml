@@ -77,7 +77,17 @@ spec:
           PASSWD: ${SECRET_GITEA_PG_PASSWORD}
           SCHEMA: public
         service:
-          DISABLE_REGISTRATION: "true"
+          # Force users to log in to view any page or to use API.
+          REQUIRE_SIGNIN_VIEW: "true"
+          # Disable registration
+          DISABLE_REGISTRATION: "false"
+          # ... except via OpenID
+          ALLOW_ONLY_EXTERNAL_REGISTRATION: "true"
+        openid:
+          # Do not allow signin to local users via OpenID
+          ENABLE_OPENID_SIGNIN: "false"
+          # Allow creation of new users via OpenID
+          ENABLE_OPENID_SIGNUP: "true"
         security:
           SECRET_KEY: "${SECRET_GITEA_SECRET}"
         migrations:
