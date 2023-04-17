@@ -58,6 +58,7 @@ spec:
           auto-discover-url: "https://id.${DOMAIN_1}/auth/realms/${KEYCLOAK_REALM}/.well-known/openid-configuration"
           existingSecret: gitea-oauth-secret
           scopes: "gitea email profile"
+          group-claim-name: groups
           admin-group: "/admins"
           skip-local-2fa: "true"
       config:
