@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: ghcr.io/ryan-mcd/vaultwarden
-      tag: "v1.27.0"
+      tag: "v1.28.1"
 
     strategy:
       type: Recreate
