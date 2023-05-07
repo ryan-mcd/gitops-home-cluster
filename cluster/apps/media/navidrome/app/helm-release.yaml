@@ -21,8 +21,8 @@ spec:
 
   values:
     image:
-      repository: ghcr.io/onedr0p/navidrome
-      tag: 0.49.3@sha256:5ce3d0c20b1c8bac22f8644edf18e4fd85a49fc41f1c9ad07171a1625dc2a21b
+      repository: ghcr.io/ryan-mcd/navidrome
+      tag: v0.49.3
 
     env:
       ND_DATAFOLDER: /data
