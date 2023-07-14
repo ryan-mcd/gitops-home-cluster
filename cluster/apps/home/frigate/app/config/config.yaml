@@ -140,6 +140,14 @@ cameras:
             - rtmp
             - record
             - detect
+    objects:
+      track:
+        - person
+        - cat
+        - dog
+        - bird
+        - bear
+        - sheep
 
     # Camera-specific detection configuration
     detect:
