@@ -173,6 +173,20 @@
       "additionalBranchPrefix": "",
       "separateMinorPatch": true
     },
+    {
+      "matchDatasources": ["helm"],
+      "matchPackageNames": ["base", "cni", "istiod", "gateway"],
+      "groupName": "istio-suite",
+      "additionalBranchPrefix": "",
+      "separateMinorPatch": true
+    },
+    {
+      "matchDatasources": ["helm"],
+      "matchPackageNames": ["core", "crd"],
+      "groupName": "neuvector-suite",
+      "additionalBranchPrefix": "",
+      "separateMinorPatch": true
+    },
     // enable auto-merge
     {
       "matchDatasources": ["docker"],
