@@ -33,8 +33,7 @@ spec:
       enabled: true
       replicas: 1
       disruptionbudget: 1
-      strategy:
-        type: Recreate
+      strategy: { type: Recreate }
       
       pvc:
         enabled: true
