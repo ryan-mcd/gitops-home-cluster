@@ -158,5 +158,4 @@ spec:
             patch:
               - op: replace
                 path: /spec/strategy
-                value: |-
-                  { type: Recreate }
+                value: { type: Recreate }
