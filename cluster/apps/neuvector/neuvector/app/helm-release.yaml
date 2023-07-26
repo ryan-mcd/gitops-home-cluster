@@ -143,11 +143,20 @@ spec:
     # Instruct helm-controller to use built-in "kustomize" post renderer.
     - kustomize:
         patchesJson6902:
+          # - target:
+          #     version: v1
+          #     kind: Deployment
+          #     name: neuvector-controller-pod
+          #   patch:
+          #     # remove CephNodeInconsistentMTU
+          #     - op: remove
+          #       path: /spec/strategy/rollingUpdate
           - target:
               version: v1
               kind: Deployment
               name: neuvector-controller-pod
             patch:
-              - op: add
-                path: /spec/strategy/type
-                value: Recreate
+              - op: replace
+                path: /spec/strategy
+                value: |
+                  type: Recreate
