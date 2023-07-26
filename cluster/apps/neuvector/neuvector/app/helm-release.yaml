@@ -35,9 +35,6 @@ spec:
       disruptionbudget: 1
       strategy:
         type: Recreate
-        rollingUpdate:
-          maxSurge: 1
-          maxUnavailable: 0
       
       pvc:
         enabled: true
