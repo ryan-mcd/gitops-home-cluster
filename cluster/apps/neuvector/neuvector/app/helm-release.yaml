@@ -33,7 +33,8 @@ spec:
       enabled: true
       replicas: 1
       disruptionbudget: 1
-      strategy: { type: Recreate }
+      strategy:
+
       
       pvc:
         enabled: true
@@ -137,3 +138,16 @@ spec:
 
     crdwebhook:
       enabled: false #disabled due to crd chart
+
+  postRenderers:
+    # Instruct helm-controller to use built-in "kustomize" post renderer.
+    - kustomize:
+        patchesJson6902:
+          - target:
+              version: v1
+              kind: Deployment
+              name: neuvector-controller-pod
+            patch:
+              - op: add
+                path: /spec/strategy/type
+                value: Recreate
