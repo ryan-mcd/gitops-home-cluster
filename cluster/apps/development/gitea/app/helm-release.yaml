@@ -100,6 +100,11 @@ spec:
       enabled: false
     postgresql-ha:
       enabled: false
+    redis-cluster:
+      enabled: true
+      persistence:
+        enabled: true
+        size: 400Mi
     
     resources:
       requests:
