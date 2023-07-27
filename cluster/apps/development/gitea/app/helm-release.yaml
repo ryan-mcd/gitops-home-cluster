@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: gitea
-      version: 8.3.0
+      version: 9.0.4
       sourceRef:
         kind: HelmRepository
         name: gitea-charts
@@ -45,7 +45,9 @@ spec:
           secretName: "gitea-tls"
     persistence:
       enabled: true
-      existingClaim: gitea-config-v1
+      mount: true
+      create: false
+      claimName: gitea-config-v1
     gitea:
       admin:
         #existingSecret: gitea-admin-secret
@@ -95,6 +97,8 @@ spec:
           ALLOW_LOCALNETWORKS: "true"
 
     postgresql:
+      enabled: false
+    postgresql-ha:
       enabled: false
     
     resources:
