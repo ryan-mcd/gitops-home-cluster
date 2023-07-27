@@ -33,7 +33,9 @@ spec:
       enabled: true
       replicas: 1
       disruptionbudget: 1
-      strategy:
+      strategy: 
+        type: Recreate
+        rollingUpdate: null
 
       
       pvc:
@@ -139,14 +141,14 @@ spec:
     crdwebhook:
       enabled: false #disabled due to crd chart
 
-  postRenderers:
-    - kustomize:
-        patchesJson6902:
-          - target:
-              version: v1
-              kind: Deployment
-              name: neuvector-controller-pod
-            patch:
-              - op: replace
-                path: /spec/strategy
-                value: { type: Recreate }
+  # postRenderers:
+  #   - kustomize:
+  #       patchesJson6902:
+  #         - target:
+  #             version: v1
+  #             kind: Deployment
+  #             name: neuvector-controller-pod
+  #           patch:
+  #             - op: replace
+  #               path: /spec/strategy
+  #               value: { type: Recreate }
