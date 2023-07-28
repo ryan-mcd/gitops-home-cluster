@@ -1,10 +1,10 @@
-apiVersion: crd.projectcalico.org/v1
+apiVersion: projectcalico.org/v3
 kind: IPPool
 metadata:
   name: lb-pool
 spec:
-  blockSize: 29
-  cidr: 10.44.44.0/29
+  blockSize: 28
+  cidr: 10.44.44.0/28
   ipipMode: Never
   vxlanMode: CrossSubnet
   natOutgoing: true

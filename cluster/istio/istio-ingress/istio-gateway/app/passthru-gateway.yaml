@@ -1,0 +1,35 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: passthrough-gateway
+  namespace: istio-ingress
+spec:
+  selector:
+    app: passthru-ingressgateway
+  servers:
+    - port:
+        number: 443
+        name: https-private
+        protocol: HTTPS
+      hosts:
+        - '*'
+      tls:
+        mode: PASSTHROUGH
+    - port:
+        number: 6443
+        name: kubeapi1
+        protocol: HTTPS
+      hosts:
+        - '*'
+      tls:
+        mode: PASSTHROUGH
+    - port:
+        number: 6444
+        name: kubeapi2
+        protocol: HTTPS
+      hosts:
+        - '*'
+      tls:
+        mode: PASSTHROUGH
+

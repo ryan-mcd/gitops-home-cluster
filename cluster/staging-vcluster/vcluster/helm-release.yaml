@@ -25,7 +25,7 @@ spec:
       retries: 5
   values:
     vcluster:
-      image: rancher/k3s:v1.27.3-k3s1
+      image: ghcr.io/ryan-mcd/k3s-nfs-1.25:v1.25.11-k3s1
 
     sync:
       nodes:
@@ -125,10 +125,10 @@ spec:
           requests.cpu: 10
           requests.memory: 20Gi
           requests.storage: "100Gi"
-          requests.ephemeral-storage: "200Gi"
+          requests.ephemeral-storage: "60Gi"
           limits.cpu: 20
           limits.memory: 40Gi
-          limits.ephemeral-storage: "200Gi"
+          limits.ephemeral-storage: "160Gi"
           services.nodeports: 20
           services.loadbalancers: 2
           count/endpoints: 40
@@ -144,11 +144,11 @@ spec:
       limitRange:
         enabled: true
         default:
-          ephemeral-storage: 2Gi
+          # ephemeral-storage: 2Gi
           memory: 512Mi
           cpu: "300m"
         defaultRequest:
-          ephemeral-storage: 1Gi
+          # ephemeral-storage: 1Gi
           memory: 128Mi
           cpu: 100m
 
@@ -164,11 +164,15 @@ spec:
               - 172.16.0.0/12
               - 192.168.0.0/16
 
-    # service:
-    #   type: LoadBalancer
-    #   loadBalancerIP: ${LB_VCLUSTER_IP}
+    service:
+      type: LoadBalancer
+      loadBalancerIP: ${LB_VCLUSTER_IP}
     ingress:
       enabled: false
+    telemetry:
+      disabled: "true"
+      instanceCreator: "helm"
+      instanceCreatorUID: ""
 
     # securityContext:
     #   runAsUser: 12345

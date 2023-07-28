@@ -8,4 +8,6 @@ resources:
   - helm-release.yaml
   - private-certificate.yaml
   - private-gateway.yaml
+  - passthru-gw-helm-release.yaml
+  - passthru-gateway.yaml
   # - authorization-policy.yaml
