@@ -23,6 +23,7 @@ spec:
     crds: CreateReplace
     remediation:
       retries: 5
+  # kubectl get secret vc-my-vcluster -n test --template={{.data.config}} | base64 -d
   values:
     vcluster:
       image: ghcr.io/ryan-mcd/k3s-nfs-1.25:v1.25.11-k3s1
@@ -35,10 +36,17 @@ spec:
         enabled: true
 
     # Enable HA mode
-    enableHA: true
+    enableHA: false
+    replicas: 1
+    # Storage settings for the vcluster
+    storage:
+      persistence: true
+      size: 5Gi
+      # # Optional StorageClass used for the pvc
+      #className:
     # Scale up syncer replicas
     syncer:
-      replicas: 3
+      replicas: 1
       extraArgs:
         - --tls-san=staging-vcluster.${DOMAIN_2}
       securityContext:
@@ -53,25 +61,9 @@ spec:
         seccompProfile:
           type: RuntimeDefault
 
-    # Scale up etcd
-    etcd:
-      replicas: 3
-      fsGroup: 12345
-      securityContext:
-        allowPrivilegeEscalation: false
-        capabilities:
-          drop:
-            - ALL
-        readOnlyRootFilesystem: true
-        runAsGroup: 12345
-        runAsNonRoot: true
-        runAsUser: 12345
-        seccompProfile:
-          type: RuntimeDefault
-
     # Scale up controller manager
     controller:
-      replicas: 3
+      replicas: 1
       securityContext:
         allowPrivilegeEscalation: false
         capabilities:
@@ -86,7 +78,7 @@ spec:
 
     # Scale up api server
     api:
-      replicas: 3
+      replicas: 1
       securityContext:
         allowPrivilegeEscalation: false
         capabilities:
@@ -164,9 +156,9 @@ spec:
               - 172.16.0.0/12
               - 192.168.0.0/16
 
-    service:
-      type: LoadBalancer
-      loadBalancerIP: ${LB_VCLUSTER_IP}
+    # service:
+    #   type: LoadBalancer
+    #   loadBalancerIP: ${LB_VCLUSTER_IP}
     ingress:
       enabled: false
     telemetry:
