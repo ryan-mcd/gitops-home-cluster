@@ -11,12 +11,12 @@ spec:
     - istio-ingress/passthru-gateway
   tls:
     - match:
-        - port: 6443
+        - port: 443
           sniHosts:
             - 'staging-vcluster.${DOMAIN_2}'
       route:
         - destination:
             port:
-              number: 6443
-            host: vcluster.staging-vcluster.cluster.local
+              number: 443
+            host: vcluster.staging-vcluster.svc.cluster.local
           weight: 100
