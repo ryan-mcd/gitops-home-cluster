@@ -49,6 +49,7 @@ spec:
       replicas: 1
       extraArgs:
         - --tls-san=vcluster3.${DOMAIN_2}
+        - --out-kube-config-server=https://vcluster3.${DOMAIN_2}
       securityContext:
         allowPrivilegeEscalation: false
         capabilities:
