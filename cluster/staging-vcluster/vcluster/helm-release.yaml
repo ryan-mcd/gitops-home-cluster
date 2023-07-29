@@ -134,7 +134,7 @@ spec:
         scopes:
 
       limitRange:
-        enabled: true
+        enabled: false
         default:
           # ephemeral-storage: 2Gi
           memory: 512Mi

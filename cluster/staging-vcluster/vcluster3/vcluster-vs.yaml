@@ -18,5 +18,5 @@ spec:
         - destination:
             port:
               number: 443
-            host: vcluster3.staging-vcluster.svc.cluster.local
+            host: vcluster3.staging-vcluster3.svc.cluster.local
           weight: 100

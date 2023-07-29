@@ -15,3 +15,5 @@ resources:
 - kyverno.yaml
 - services.yaml
 - staging-vcluster.yaml
+- staging-vcluster2.yaml
+- staging-vcluster3.yaml
