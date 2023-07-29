@@ -1,0 +1,22 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vcluster3
+  namespace: istio-ingress
+spec:
+  hosts:
+    - 'vcluster3.${DOMAIN_2}'
+  gateways:
+    - istio-ingress/passthru-gateway
+  tls:
+    - match:
+        - port: 443
+          sniHosts:
+            - 'vcluster3.${DOMAIN_2}'
+      route:
+        - destination:
+            port:
+              number: 443
+            host: vcluster3.staging-vcluster.svc.cluster.local
+          weight: 100
