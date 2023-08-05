@@ -27,6 +27,13 @@ spec:
   values:
     vcluster:
       image: ghcr.io/ryan-mcd/k3s-nfs-1.25:v1.25.12-k3s1
+      resources:
+        limits:
+          cpu: 1
+          memory: 2Gi
+        requests:
+          cpu: 200m
+          memory: 256Mi
 
     sync:
       nodes:

@@ -27,6 +27,13 @@ spec:
   values:
     vcluster:
       image: ghcr.io/ryan-mcd/k3s-nfs-1.25:v1.25.12-k3s1
+      resources:
+        limits:
+          cpu: 2
+          memory: 2Gi
+        requests:
+          cpu: 200m
+          memory: 256Mi
 
     sync:
       nodes:
@@ -49,6 +56,7 @@ spec:
       replicas: 1
       extraArgs:
         - --tls-san=staging-vcluster.${DOMAIN_2}
+        - --out-kube-config-server=https://vcluster.${DOMAIN_2}
       securityContext:
         allowPrivilegeEscalation: false
         capabilities:
@@ -134,7 +142,7 @@ spec:
         scopes:
 
       limitRange:
-        enabled: false
+        enabled: true
         default:
           # ephemeral-storage: 2Gi
           memory: 512Mi
