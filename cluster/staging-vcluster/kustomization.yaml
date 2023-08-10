@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - vcluster
   - vcluster2
-  - vcluster3
+  # - vcluster3
