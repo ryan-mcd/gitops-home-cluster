@@ -113,6 +113,13 @@ spec:
         runAsUser: 12345
         seccompProfile:
           type: RuntimeDefault
+      resources:
+        limits:
+          cpu: 100m
+          memory: 170Mi
+        requests:
+          cpu: 3m
+          memory: 16Mi
 
     isolation:
       enabled: true
@@ -153,7 +160,7 @@ spec:
           cpu: 100m
 
       networkPolicy:
-        enabled: true
+        enabled: false
         outgoingConnections:
           ipBlock:
             cidr: 0.0.0.0/0
