@@ -6,3 +6,4 @@ resources:
   - mosquitto/ks.yaml
   - esphome/ks.yaml
   - frigate/ks.yaml
+  - excalidraw/ks.yaml
