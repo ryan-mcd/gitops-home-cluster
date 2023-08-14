@@ -1,0 +1,20 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: excalidraw
+  namespace: istio-ingress
+spec:
+  hosts:
+    - 'draw.${SECRET_DOMAIN}'
+  gateways:
+    - istio-ingress/istio-ingressgateway 
+  http:
+    - match:
+        - port: 443
+      route:
+        - destination:
+            port:
+              number: 80
+            host: excalidraw.home.svc.cluster.local
+          weight: 100
