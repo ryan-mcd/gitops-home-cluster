@@ -23,12 +23,13 @@ spec:
 
     env:
       TZ: "${TIMEZONE}"
+      PORT: &port 3002
 
     service:
       main:
         ports:
           http:
-            port: &port 80
+            port: *port
 
     ingress:
       main:

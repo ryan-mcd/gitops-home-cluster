@@ -6,7 +6,7 @@ metadata:
   namespace: istio-ingress
 spec:
   hosts:
-    - 'excalidraw-room.${SECRET_DOMAIN}'
+    - 'draw-collab.${SECRET_DOMAIN}'
   gateways:
     - istio-ingress/istio-ingressgateway 
   http:
@@ -15,6 +15,6 @@ spec:
       route:
         - destination:
             port:
-              number: 80
+              number: 3002
             host: excalidraw-room.home.svc.cluster.local
           weight: 100
