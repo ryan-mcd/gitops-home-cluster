@@ -24,21 +24,22 @@ spec:
 
     env:
       TZ: "${TIMEZONE}"
-      PUB_SRV_NAME: draw.${DOMAIN_1}
-      PUB_SRV_NAME_WS: draw-collab.${DOMAIN_1}
-      VITE_APP_BACKEND_V2_GET_URL: https://draw.${DOMAIN_1}/api/v2/
-      VITE_APP_BACKEND_V2_POST_URL: https://draw.${DOMAIN_1}/api/v2/post
-      VITE_APP_WS_SERVER_URL: https://draw-collab.${DOMAIN_1}
-
-      # set this only if using the collaboration workflow we use on excalidraw.com
-      VITE_APP_PORTAL_URL: ""
+      NODE_ENV: development
+      # VITE_APP_BACKEND_V2_GET_URL: https://draw.${DOMAIN_1}/api/v2/
+      # VITE_APP_BACKEND_V2_POST_URL: https://draw.${DOMAIN_1}/api/v2/post
+      # VITE_APP_WS_SERVER_URL: http://excalidraw-room.home.svc.cluster.local:3002
+      # VITE_APP_WS_SERVER_URL: https://draw-collab.${DOMAIN_1}
+      COLLAB_ADDR: https://draw-collab.${DOMAIN_1}
+    command: "/bin/ash"
+    args:
+      - -c
+      - "sed -i s,http://localhost:3002,$COLLAB_ADDR,g /usr/share/nginx/html/assets/*.js && /docker-entrypoint.sh nginx -g 'daemon off;'"
       
-
     service:
       main:
         ports:
           http:
-            port: &port 80
+            port: &port 8080
 
     ingress:
       main:

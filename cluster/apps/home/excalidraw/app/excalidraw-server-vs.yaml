@@ -15,6 +15,6 @@ spec:
       route:
         - destination:
             port:
-              number: 80
+              number: 8080
             host: excalidraw.home.svc.cluster.local
           weight: 100
