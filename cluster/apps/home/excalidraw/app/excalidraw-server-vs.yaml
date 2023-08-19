@@ -6,7 +6,7 @@ metadata:
   namespace: istio-ingress
 spec:
   hosts:
-    - 'draw.${SECRET_DOMAIN}'
+    - 'draw.${DOMAIN_1}'
   gateways:
     - istio-ingress/istio-ingressgateway 
   http:

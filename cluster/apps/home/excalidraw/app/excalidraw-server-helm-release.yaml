@@ -18,23 +18,14 @@ spec:
 
   values:
     image:
-      repository: registry.${DOMAIN_1}/testproj/excalidraw
-      tag: test
+      repository: ghcr.io/ryan-mcd/excalidraw-collab
+      tag: "0.0.3111"
       pullPolicy: Always
 
     env:
       TZ: "${TIMEZONE}"
-      NODE_ENV: development
-      # VITE_APP_BACKEND_V2_GET_URL: https://draw.${DOMAIN_1}/api/v2/
-      # VITE_APP_BACKEND_V2_POST_URL: https://draw.${DOMAIN_1}/api/v2/post
-      # VITE_APP_WS_SERVER_URL: http://excalidraw-room.home.svc.cluster.local:3002
-      # VITE_APP_WS_SERVER_URL: https://draw-collab.${DOMAIN_1}
       COLLAB_ADDR: https://draw-collab.${DOMAIN_1}
-    command: "/bin/ash"
-    args:
-      - -c
-      - "sed -i s,http://localhost:3002,$COLLAB_ADDR,g /usr/share/nginx/html/assets/*.js && /docker-entrypoint.sh nginx -g 'daemon off;'"
-      
+       
     service:
       main:
         ports:
@@ -44,10 +35,19 @@ spec:
     ingress:
       main:
         enabled: false
+        # ingressClassName: nginx
+        # hosts:
+        #   - host: &host "{{ .Release.Name }}.${DOMAIN_1}"
+        #     paths:
+        #       - path: /
+        #         pathType: Prefix
+        # tls:
+        #   - hosts:
+        #       - *host
 
     resources:
       requests:
         cpu: 100m
         memory: 150Mi
-      # limits:
-      #   memory: 1000Mi
+      limits:
+        memory: 500Mi
