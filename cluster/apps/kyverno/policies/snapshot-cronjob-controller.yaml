@@ -4,6 +4,7 @@ kind: ClusterPolicy
 metadata:
   name: snapshot-cronjob-controller
   annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
     policies.kyverno.io/title: Snapshot CronJob controller
     policies.kyverno.io/subject: PersistentVolumeClaim
     policies.kyverno.io/description: |
@@ -88,8 +89,20 @@ spec:
                     initContainers:
                       - name: wait
                         image: kopia/kopia:0.13.0
-                        command: ["/scripts/sleep.sh"]
-                        args: ["1", "900"]
+                        command:
+                          - /bin/bash
+                          - -c
+                          - |-
+                            min_seconds="1"
+                            max_seconds="900"
+                            seconds="$(shuf -i "${min_seconds}"-"${max_seconds}" -n 1)"
+                            function logz { msg="${1}"; level="${2:-info}"; printf "\e[1;32m%-6s\e[m\n" "timestamp=\"$(date +"%Y-%m-%dT%H:%M:%S%z")\" level=\"${level}\" msg=\"${msg}\"" }
+                            function datez { secs="${1}"; printf "%dh%dm%ds" \$((secs/3600)) \$((secs%3600/60)) \$((secs%60)) }
+                            printf "\e[1;32m%-6s\e[m\n" "$(logz "min seconds set to ${min_seconds}" "debug")"
+                            printf "\e[1;32m%-6s\e[m\n" "$(logz "max seconds set to ${max_seconds}" "debug")"
+                            printf "\e[1;32m%-6s\e[m\n" "$(logz "sleeping for $(datez "${seconds}")" "info")"
+                            for ((i=seconds;i>0;i--)); do printf "\e[1;32m%-6s\e[m\n" "$(logz "sleeping for $(datez "${i}")" "info")"; sleep 1; done
+                            printf "\e[1;32m%-6s\e[m\n" "$(logz "done" "debug")"
                     containers:
                       - name: snapshot
                         image: kopia/kopia:0.13.0
@@ -127,7 +140,7 @@ spec:
                           claimName: "{{ claimName }}"
                       - name: snapshots
                         nfs:
-                          server: ${NAS_ADDRESS}
+                          server: 10.11.1.111
                           path: /mnt/user/k8s-bak/kopia
                     affinity:
                       podAffinity:
