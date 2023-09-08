@@ -62,3 +62,12 @@ spec:
               matchOn:
                 - usbId:
                     vendor: ["1a6e", "18d1"]
+            - name: tripp-lite-ups
+              matchOn:
+                - usbId:
+                    vendor: ["09ae"]
+                    device: ["2012"]
+            - name: bd-drive
+              matchOn:
+                - usbId:
+                    vendor: ["13fd"]
