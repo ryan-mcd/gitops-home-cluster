@@ -24,7 +24,7 @@ spec:
   values:
     initContainers:
       wait-for-repo:
-        image: kopia/kopia:0.13.0
+        image: kopia/kopia:20230907.0.202725
         command:
           - /bin/bash
           - -c
@@ -38,7 +38,7 @@ spec:
             mountPath: /snapshots
     image:
       repository: kopia/kopia
-      tag: 0.13.0
+      tag: 20230907.0.202725
     env:
       TZ: "${TIMEZONE}"
       KOPIA_PASSWORD: "none"
