@@ -19,7 +19,7 @@ spec:
           restartPolicy: OnFailure
           initContainers:
             - name: wait-for-repo
-              image: kopia/kopia:0.13.0
+              image: kopia/kopia:20230908.0.173657
               command:
                 - /bin/bash
                 - -c
@@ -33,7 +33,7 @@ spec:
                   mountPath: /snapshots
           containers:
             - name: maintenance
-              image: kopia/kopia:0.13.0
+              image: kopia/kopia:20230908.0.173657
               env:
                 - name: TZ
                   value: "${TIMEZONE}"
