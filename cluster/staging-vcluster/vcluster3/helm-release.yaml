@@ -26,7 +26,7 @@ spec:
   # kubectl get secret vc-my-vcluster -n test --template={{.data.config}} | base64 -d
   values:
     vcluster:
-      image: ghcr.io/ryan-mcd/k3s-nfs-1.25:v1.25.12-k3s1
+      image: ghcr.io/ryan-mcd/k3s-nfs-1.25:v1.25.13-k3s1
       resources:
         limits:
           cpu: 1
