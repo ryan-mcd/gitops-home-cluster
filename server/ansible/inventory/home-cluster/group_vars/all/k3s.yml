@@ -6,7 +6,7 @@
 #
 
 # Use a specific version of k3s
-k3s_release_version: "v1.25.8+k3s1"
+k3s_release_version: "v1.26.8+k3s1"
 
 # Install using hard links rather than symbolic links.
 # ...if you are using the system-upgrade-controller you will need to use hard links rather than symbolic links as the controller will not be able to follow symbolic links.
@@ -26,6 +26,8 @@ k3s_use_unsupported_config: false
 # Control Plane registration address
 # ...this is set to my kube-vip address
 k3s_registration_address: 10.24.0.200
+k3s_additional_registration_address: 192.168.24.200
+k3s_dns_registration_address: "k8s-control-plane.rmcd.win"
 
 #
 # /var/lib/rancher/k3s/server/manifests

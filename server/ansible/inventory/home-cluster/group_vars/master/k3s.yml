@@ -15,6 +15,9 @@ k3s_server:
     # - "{{ kubevip_address }}"
     # haproxy
     - "{{ k3s_registration_address }}"
+    - "{{ k3s_additional_registration_address }}"
+    - "{{ k3s_dns_registration_address }}"
+  tls-san-security: true
   docker: false
   flannel-backend: "none" # This needs to be in quotes
   disable:
