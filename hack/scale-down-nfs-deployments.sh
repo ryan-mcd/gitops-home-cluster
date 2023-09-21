@@ -11,4 +11,5 @@ for (( i=0; i<$len; i++ )); do \
 done
 
 kubectl -n monitoring scale --replicas=0 deployment.apps/grafana
-kubectl -n development scale --replicas=0 sts --all
+
+kubectl -n development scale --replicas=0 deployment.apps/gitea

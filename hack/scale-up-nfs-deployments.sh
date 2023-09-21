@@ -12,4 +12,4 @@ done
 
 kubectl -n monitoring scale --replicas=1 deployment.apps/grafana
 
-kubectl -n development scale --replicas=1 sts --all
+kubectl -n development scale --replicas=1 deployment.apps/gitea
