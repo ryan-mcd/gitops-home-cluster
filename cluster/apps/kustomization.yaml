@@ -9,7 +9,7 @@ resources:
   - rook-ceph
   - development
   - home
-  - kyverno
+  # - kyverno
   - kopia
   - debug
   - neuvector
