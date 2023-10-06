@@ -48,6 +48,17 @@ spec:
                 - delete
                 - get
                 - list
+            - apiGroups:
+                - "batch"
+              resources:
+                - cronjobs
+              verbs:
+                - create
+                - update
+                - patch
+                - delete
+                - get
+                - list
     cleanupController:
       serviceMonitor:
         enabled: true
