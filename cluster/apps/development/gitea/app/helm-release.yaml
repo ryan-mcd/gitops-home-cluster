@@ -102,8 +102,10 @@ spec:
       enabled: false
     redis-cluster:
       enabled: true
+      cluster:
+        nodes: 3
       persistence:
-        enabled: true
+        enabled: false
         size: 400Mi
     
     resources:
