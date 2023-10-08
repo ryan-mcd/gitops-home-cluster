@@ -18,6 +18,10 @@ spec:
   values:
     global:
       fullnameOverride: *app
+      labels:
+        app: *app
+    podLabels:
+      app: *app
     automountServiceAccountToken: false
     controller:
       type: deployment
