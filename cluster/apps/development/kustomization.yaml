@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
   - _pvc
   - gitea/ks.yaml
-  
+  - gitea/gitea-secrets.sops.yaml
+  - gitea/gitea-admin-secret.sops.yaml
 

@@ -50,10 +50,7 @@ spec:
       claimName: gitea-config-v1
     gitea:
       admin:
-        #existingSecret: gitea-admin-secret
-        username: ${SECRET_GITEA_ADM_USER}
-        password: ${SECRET_GITEA_ADM_PASS}
-        email: "${SECRET_GITEA_ADM_EMAIL}"
+        existingSecret: gitea-admin-secret
       oauth:
         - name: "keycloak"
           provider: "openidConnect"
@@ -70,15 +67,9 @@ spec:
           ROOT_URL: "https://code.${SECRET_DOMAIN}"
           # START_SSH_SERVER: "true"
           SSH_DOMAIN: ssh-code.${SECRET_DOMAIN}
-          LFS_START_SERVER: "true"
-          LFS_JWT_SECRET: ${SECRET_GITEA_LFS_JWT}
-        database:
-          DB_TYPE: postgres
-          HOST: ${POSTGRESQL_ADDRESS}:5432
-          NAME: gitea
-          USER: gitea
-          PASSWD: ${SECRET_GITEA_PG_PASSWORD}
-          SCHEMA: public
+          LFS_START_SERVER: "false"
+        actions:
+          ENABLED: "true"
         service:
           # Force users to log in to view any page or to use API.
           REQUIRE_SIGNIN_VIEW: "true"
@@ -91,22 +82,46 @@ spec:
           ENABLE_OPENID_SIGNIN: "false"
           # Allow creation of new users via OpenID
           ENABLE_OPENID_SIGNUP: "true"
-        security:
-          SECRET_KEY: "${SECRET_GITEA_SECRET}"
         migrations:
           ALLOW_LOCALNETWORKS: "true"
+      additionalConfigFromEnvs:
+      - name: GITEA__DATABASE__DB_TYPE
+        value: postgres
+      - name: GITEA__DATABASE__HOST
+        valueFrom:
+          secretKeyRef:
+            name: gitea-secrets
+            key: SECRET_GITEA_PG_HOST
+      - name: GITEA__DATABASE__NAME
+        value: gitea
+      - name: GITEA__DATABASE__USER
+        value: gitea
+      - name: GITEA__DATABASE__PASSWD
+        valueFrom:
+          secretKeyRef:
+            name: gitea-secrets
+            key: SECRET_GITEA_PG_PASSWORD
+      - name: GITEA__DATABASE__SCHEMA
+        value: public
+      - name: GITEA__CACHE__ADAPTER
+        value: redis
+      - name: GITEA__CACHE__HOST
+        valueFrom:
+          secretKeyRef:
+            name: gitea-secrets
+            key: SECRET_GITEA_REDIS_HOST
+      - name: GITEA__SECURITY__SECRET_KEY
+        valueFrom:
+          secretKeyRef:
+            name: gitea-secrets
+            key: SECRET_GITEA_SECRET
 
     postgresql:
       enabled: false
     postgresql-ha:
       enabled: false
     redis-cluster:
-      enabled: true
-      cluster:
-        nodes: 3
-      persistence:
-        enabled: false
-        size: 400Mi
+      enabled: false
     
     resources:
       requests:
