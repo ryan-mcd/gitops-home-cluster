@@ -46,7 +46,12 @@ spec:
       main:
         ports:
           http:
+            enabled: false
+            primary: false
+          tcp-redis:
+            enabled: true
             port: 6379
+            primary: true
     resources:
       requests:
         cpu: 10m
