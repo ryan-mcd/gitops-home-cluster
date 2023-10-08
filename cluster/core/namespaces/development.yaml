@@ -4,6 +4,7 @@ kind: Namespace
 metadata:
   name: development
   labels:
+    istio-injection: "enabled"
     goldilocks.fairwinds.com/enabled: "true"
   annotations:
     "cni.projectcalico.org/ipv4pools": "[\"default-ipv4-ippool\"]"
