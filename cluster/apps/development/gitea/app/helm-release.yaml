@@ -115,6 +115,20 @@ spec:
           secretKeyRef:
             name: gitea-secrets
             key: SECRET_GITEA_SECRET
+      - name: GITEA__QUEUE__TYPE
+        value: redis
+      - name: GITEA__QUEUE__CONN_STR
+        valueFrom:
+          secretKeyRef:
+            name: gitea-secrets
+            key: SECRET_GITEA_REDIS_HOST
+      - name: GITEA__SESSION__PROVIDER
+        value: redis
+      - name: GITEA__SESSION__PROVIDER_config
+        valueFrom:
+          secretKeyRef:
+            name: gitea-secrets
+            key: SECRET_GITEA_REDIS_HOST
 
     postgresql:
       enabled: false
