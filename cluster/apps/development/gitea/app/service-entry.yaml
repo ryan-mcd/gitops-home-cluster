@@ -1,0 +1,33 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: gitea-external-sso
+  namespace: development
+spec:
+  hosts:
+    - id.${DOMAIN_1}
+  location: MESH_EXTERNAL
+  ports:
+    - name: https
+      number: 443
+      protocol: HTTPS
+  resolution: DNS
+---
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: gitea-external-postgres-tcp
+  namespace: development
+spec:
+  resolution: NONE
+  addresses:
+    - ${POSTGRESQL_ADDRESS}/32
+  ports:
+    - name: tcp-pg
+      number: 5432
+      protocol: TCP
+  # Hosts required but ignored
+  hosts:
+    - pg.doesnt.matter
+  location: MESH_EXTERNAL
