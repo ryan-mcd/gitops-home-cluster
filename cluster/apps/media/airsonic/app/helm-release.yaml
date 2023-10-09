@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: ghcr.io/kagemomiji/airsonic-advanced
-      tag: edge-11.1.3-SNAPSHOT.20231002232734
+      tag: edge-11.1.3-SNAPSHOT.20231009014635
       pullPolicy: IfNotPresent
     podSecurityContext:
       runAsUser: 2000
