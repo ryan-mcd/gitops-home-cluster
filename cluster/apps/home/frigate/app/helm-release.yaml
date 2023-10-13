@@ -18,8 +18,8 @@ spec:
 
   values:
     image:
-      repository: docker.io/blakeblackshear/frigate
-      tag: 0.11.1
+      repository: ghcr.io/blakeblackshear/frigate
+      tag: 0.13.0-beta2
 
     env:
       TZ: "${TIMEZONE}"
