@@ -3,8 +3,6 @@ kind: Kustomization
 resources:
   - kube-prometheus-stack
   - grafana
-  # - loki
   - speedtest-exporter
   - thanos
-  - goldilocks/ks.yaml
   - network-ups-tools/ks.yaml
