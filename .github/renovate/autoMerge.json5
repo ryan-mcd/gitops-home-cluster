@@ -8,7 +8,7 @@
       "ignoreTests": true,
       "automergeType": "branch",
       "matchUpdateTypes": ["digest"],
-      "matchPackagePatterns": ["ghcr.io/bjw-s", "ghcr.io/onedr0p"]
+      "matchPackagePatterns": ["ghcr.io/bjw-s", "ghcr.io/onedr0p", "ghcr.io/ryan-mcd"]
     },
     {
       "matchDatasources": ["docker"],
@@ -19,7 +19,9 @@
       "matchPackageNames": [
         "ghcr.io/miguelndecarvalho/speedtest-exporter",
         "eclipse-mosquitto",
-        "ghcr.io/onedr0p/tautulli"
+        "ghcr.io/onedr0p/tautulli",
+        "ghcr.io/coder/code-server",
+        "ghcr.io/kube-vip/kube-vip"
       ]
     },
     {
