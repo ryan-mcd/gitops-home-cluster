@@ -1,0 +1,57 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "packageRules": [
+    {
+      "description": "Auto merge container digests",
+      "matchDatasources": ["docker"],
+      "automerge": true,
+      "ignoreTests": true,
+      "automergeType": "branch",
+      "matchUpdateTypes": ["digest"],
+      "matchPackagePatterns": ["ghcr.io/bjw-s", "ghcr.io/onedr0p"]
+    },
+    {
+      "matchDatasources": ["docker"],
+      "automerge": true,
+      "automergeType": "branch",
+      "requiredStatusChecks": null,
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": [
+        "ghcr.io/miguelndecarvalho/speedtest-exporter",
+        "eclipse-mosquitto",
+        "ghcr.io/onedr0p/tautulli"
+      ]
+    },
+    {
+      "matchDatasources": ["helm"],
+      "automerge": true,
+      "automergeType": "branch",
+      "requiredStatusChecks": null,
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": [
+        "cert-manager",
+        "kube-prometheus-stack",
+        "loki",
+        "speedtest-exporter",
+        "vpa",
+        "goldilocks",
+        "grafana",
+        "thanos",
+        "reloader",
+        // //istio
+        // "base",
+        // "cni",
+        // "gateway",
+        // "istiod",
+        "kiali-server",
+        "jaeger",
+        //neuvector"
+        "crds",
+        "core",
+        "rancher",
+        "ingress-nginx"
+        // "traefik",
+      ]
+    }
+  ]
+}
