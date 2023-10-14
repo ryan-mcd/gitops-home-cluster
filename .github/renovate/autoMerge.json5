@@ -21,7 +21,8 @@
         "eclipse-mosquitto",
         "ghcr.io/onedr0p/tautulli",
         "ghcr.io/coder/code-server",
-        "ghcr.io/kube-vip/kube-vip"
+        "ghcr.io/kube-vip/kube-vip",
+        "ghcr.io/ryan-mcd/excalidraw-collab"
       ]
     },
     {
