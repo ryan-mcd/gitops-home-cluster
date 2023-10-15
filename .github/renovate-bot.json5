@@ -1,6 +1,6 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "username": "snuffleupagus-bot[bot]",
-  // obtain id via https://api.github.com/users/snuffleupagus-bot%5Bbot%5D
-  "gitAuthor": "snuffleupagus-bot <140569405+snuffleupagus-bot[bot]@users.noreply.github.com>"
-}
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "username": "rmcd-bot[bot]",
+    // obtain id via https://api.github.com/users/rmcd-bot%5Bbot%5D
+    "gitAuthor": "rmcd-bot <140569405+rmcd-bot[bot]@users.noreply.github.com>"
+  }
