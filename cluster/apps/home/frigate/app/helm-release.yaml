@@ -30,8 +30,6 @@ spec:
       annotations:
         configmap.reloader.stakater.com/reload: "frigate-config"
         secret.reloader.stakater.com/reload: "frigate-secrets"
-      securityContext:
-        privileged: true
 
     service:
       main:
@@ -42,6 +40,9 @@ spec:
       main:
         containers:
           main:
+            securityContext:
+              privileged: true
+
             image:
               repository: ghcr.io/blakeblackshear/frigate
               tag: 0.12.1
