@@ -25,7 +25,7 @@
     {
       "description": "Rook-Ceph Group",
       "groupName": "Rook-Ceph",
-      "matchPackagePatterns": ["rook.ceph"],
+      "matchPackagePatterns": ["rook.ceph", "rook-ceph-source"],
       "matchDatasources": ["helm", "docker"],
       "group": {
         "commitMessageTopic": "{{{groupName}}} group"
@@ -35,7 +35,7 @@
     {
       "description": "External Snapshotter Group",
       "groupName": "External Snapshotter",
-      "matchPackageNames": ["snapshot-controller", "snapshot-validation-webhook"],
+      "matchPackageNames": ["snapshot-controller", "snapshot-validation-webhook", "external-snapshotter-source"],
       "matchDatasources": ["helm"],
       "group": {
         "commitMessageTopic": "{{{groupName}}} group"
