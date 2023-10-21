@@ -26,7 +26,7 @@
       "description": "Rook-Ceph Group",
       "groupName": "Rook-Ceph",
       "matchPackagePatterns": ["rook.ceph"],
-      "matchDatasources": ["helm"],
+      "matchDatasources": ["helm", "docker"],
       "group": {
         "commitMessageTopic": "{{{groupName}}} group"
       },

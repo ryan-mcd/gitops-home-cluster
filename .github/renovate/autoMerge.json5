@@ -22,6 +22,7 @@
         "ghcr.io/onedr0p/tautulli",
         "ghcr.io/coder/code-server",
         "ghcr.io/kube-vip/kube-vip",
+        "quay.io/thanos/thanos",
         "ghcr.io/ryan-mcd/excalidraw-collab"
       ]
     },
