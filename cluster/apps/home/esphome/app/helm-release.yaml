@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.0.3
       sourceRef:
         kind: HelmRepository
         name: bjw-s-helm-charts
@@ -17,13 +17,17 @@ spec:
       interval: 15m
 
   values:
-    image:
-      repository: esphome/esphome
-      tag: 2023.9.3
-      pullPolicy: Always
-    env:
-      TZ: "America/New_York"
-      ESPHOME_DASHBOARD_USE_PING: "true"
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: esphome/esphome
+              tag: 2023.10.1
+              pullPolicy: Always
+            env:
+              TZ: "${TIMEZONE}"
+              ESPHOME_DASHBOARD_USE_PING: "true"
     service:
       main:
         ports:
@@ -32,22 +36,11 @@ spec:
     ingress:
       main:
         enabled: false
-        ingressClassName: "traefik"
-        annotations:
-          cert-manager.io/cluster-issuer: letsencrypt-production
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918@kubernetescrd
-        hosts:
-          - host: &host "esphome.${DOMAIN_2}"
-            paths:
-              - path: /
-        tls:
-          - secretName: tls.esphome
-            hosts:
-              - *host
+
     persistence:
       config:
         enabled: true
+        type: persistentVolumeClaim
         existingClaim: esphome-config
     resources:
       requests:
