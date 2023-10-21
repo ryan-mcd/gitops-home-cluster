@@ -80,7 +80,7 @@
       ],
       "datasourceTemplate": "helm"
     }
-  ]
+  ],
   "customManagers": [
     {
       "customType": "regex",
