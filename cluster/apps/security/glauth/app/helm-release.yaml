@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.0.3
       sourceRef:
         kind: HelmRepository
         name: bjw-s-helm-charts
@@ -26,17 +26,47 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+
   values:
-    controller:
-      replicas: 2
-      strategy: RollingUpdate
-      annotations:
-        reloader.stakater.com/auto: "true"
-    image:
-      # https://github.com/glauth/glauth/issues/298
-      repository: ghcr.io/onedr0p/glauth
-      tag: v2.2.0-rc1
-    command: ["/app/glauth", "-c", "/config"]
+
+    defaultPodOptions:
+      podSecurityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+
+    controllers:
+      main:
+        replicas: 1
+        strategy: RollingUpdate
+
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        pod:
+          topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: DoNotSchedule
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: *app
+
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/glauth
+              tag: v2.2.0-rc1
+            command: ["/app/glauth", "-c", "/config"]
+
+        resources:
+          requests:
+            cpu: 5m
+            memory: 10Mi
+          limits:
+            memory: 50Mi
+
     service:
       main:
         ports:
@@ -45,42 +75,29 @@ spec:
           ldap:
             enabled: true
             port: 389
+
     serviceMonitor:
       main:
-        enabled: true
+        enabled: false
         endpoints:
           - port: metrics
             scheme: http
             path: /metrics
             interval: 1m
             scrapeTimeout: 10s
-    podSecurityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-      fsGroupChangePolicy: "OnRootMismatch"
+
     persistence:
       config:
         enabled: true
         type: secret
         name: glauth-secret
-        items:
-          - key: server.toml
-            path: server.toml
-          - key: groups.toml
-            path: groups.toml
-          - key: users.toml
-            path: users.toml
-    topologySpreadConstraints:
-      - maxSkew: 1
-        topologyKey: kubernetes.io/hostname
-        whenUnsatisfiable: DoNotSchedule
-        labelSelector:
-          matchLabels:
-            app.kubernetes.io/name: *app
-    resources:
-      requests:
-        cpu: 5m
-        memory: 10Mi
-      limits:
-        memory: 50Mi
+        globalMounts:
+          - path: /config/server.toml
+            subPath: server.toml
+            readOnly: true
+          - path: /config/groups.toml
+            subPath: groups.toml
+            readOnly: true
+          - path: /config/users.toml
+            subPath: users.toml
+            readOnly: true
