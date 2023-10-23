@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.0.3
       sourceRef:
         kind: HelmRepository
         name: bjw-s-helm-charts
@@ -17,11 +17,28 @@ spec:
       interval: 15m
 
   values:
-    image:
-      repository: ghcr.io/onedr0p/tautulli
-      tag: 2.13.1@sha256:525209414d149214584819313b0ec7507a3259dfa5f8d618692c34b54f172db9
-    env:
-      TZ: "America/New_York"
+    controllers:
+      main:
+        replicas: 1
+        strategy: RollingUpdate
+
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/tautulli
+              tag: 2.13.1@sha256:525209414d149214584819313b0ec7507a3259dfa5f8d618692c34b54f172db9
+            env:
+              TZ: ${TIMEZONE}
+
+        resources:
+          requests:
+            cpu: 100m
+            memory: 250Mi
+          limits:
+            memory: 500Mi
       
     service:
       main:
@@ -31,36 +48,15 @@ spec:
     ingress:
       main:
         enabled: false
-        ingressClassName: "traefik"
-        annotations:
-          hajimari.io/enable: "true"
-          hajimari.io/icon: "chart-bar"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-        hosts:
-          - host: &host "tautulli.${DOMAIN_2}"
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          - hosts:
-              - *host
-            secretName: "tautulli-${DOMAIN_2/./-}-tls"
+
     persistence:
       config:
         enabled: true
         existingClaim: tautulli-config-v1
       backup:
         enabled: true
-        type: custom
-        volumeSpec:
-          nfs:
-            server: ${NAS_ADDRESS}
-            path: /mnt/user/k8s-bak/tautulli
+        type: nfs
+        server: "${NAS_ADDRESS}"
+        path: /mnt/user/k8s-bak/tautulli
         mountPath: /config/backups
         readOnly: false
-    resources:
-      requests:
-        cpu: 100m
-        memory: 250Mi
-      limits:
-        memory: 500Mi
