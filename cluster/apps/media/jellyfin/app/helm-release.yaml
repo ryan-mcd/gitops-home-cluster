@@ -52,15 +52,6 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
 
-        pod:
-          topologySpreadConstraints:
-            - maxSkew: 1
-              topologyKey: kubernetes.io/hostname
-              whenUnsatisfiable: DoNotSchedule
-              labelSelector:
-                matchLabels:
-                  app.kubernetes.io/name: jellyfin
-
         containers:
           main:
             image:
@@ -82,7 +73,7 @@ spec:
       main:
         type: LoadBalancer
         annotations:
-          metallb.universe.tf/loadBalancerIPs: ${LB_MOSQUITTO_IP}
+          metallb.universe.tf/loadBalancerIPs: ${LB_JELLYFIN_IP}
         externalTrafficPolicy: Local
         ports:
           http:
