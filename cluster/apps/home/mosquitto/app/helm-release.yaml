@@ -5,26 +5,52 @@ metadata:
   name: mosquitto
   namespace: home
 spec:
-  interval: 5m
+  interval: 30m
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.0.3
       sourceRef:
         kind: HelmRepository
         name: bjw-s-helm-charts
         namespace: flux-system
-      interval: 5m
+      interval: 30m
   install:
     createNamespace: true
   values:
-    image:
-      repository: eclipse-mosquitto
-      tag: "2.0.18"
-    env:
-      TZ: "America/New_York"
+    defaultPodOptions:
+      annotations:
+        secret.reloader.stakater.com/reload: mosquitto
+    controllers:
+      main:
+        initContainers:
+          init-config:
+            image:
+              repository: public.ecr.aws/docker/library/eclipse-mosquitto
+              tag: 2.0.18
+            command:
+              - "/bin/sh"
+              - "-c"
+              - "cp /tmp/secret/* /mosquitto/external_config/ && mosquitto_passwd -U /mosquitto/external_config/mosquitto_pwd"
+        containers:
+          main:
+            image:
+              repository: public.ecr.aws/docker/library/eclipse-mosquitto
+              tag: 2.0.18
+            env:
+              TZ: "${TIMEZONE}"
+            resources:
+              requests:
+                cpu: 100m
+                memory: 250Mi
+              limits:
+                memory: 500Mi
     service:
       main:
+        type: LoadBalancer
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: ${LB_MOSQUITTO_IP}
+        externalTrafficPolicy: Local
         ports:
           http:
             enabled: false
@@ -36,42 +62,40 @@ spec:
           mqtts:
             enabled: true
             port: 8883
-        type: LoadBalancer
-        loadBalancerIP: ${LB_MOSQUITTO_IP}
-        externalTrafficPolicy: Local
-    podAnnotations:
-      secret.reloader.stakater.com/reload: mosquitto
+
     persistence:
       data:
         enabled: true
         existingClaim: mosquitto-config-v1
-        mountPath: /mosquitto/data
+        type: persistentVolumeClaim
+        globalMounts:
+          - path: /mosquitto/data
       config:
         enabled: true
-        type: custom
-        mountPath: /mosquitto/config/mosquitto.conf
-        subPath: mosquitto.conf
-        volumeSpec:
-          configMap:
-            name: mosquitto-config
+        type: configMap
+        name: mosquitto-config
+        advancedMounts:
+          main:
+            main:
+              - path: /mosquitto/config/mosquitto.conf
+                subPath: mosquitto.conf
+                readOnly: true
       configinc:
         enabled: true
-        type: custom
-        mountPath: /mosquitto/configinc
-        volumeSpec:
-          secret:
-            secretName: mosquitto
+        type: secret
+        name: mosquitto
+        advancedMounts:
+          main:
+            init-config:
+              - path: /tmp/secret
       mosquitto-tls:
         enabled: true
-        type: custom
-        volumeSpec:
-          secret:
-            secretName: mqtt-${DOMAIN_2/./-}-tls
-        mountPath: /etc/ssl/mosquitto
-        readOnly: true
-    resources:
-      requests:
-        cpu: 100m
-        memory: 250Mi
-      limits:
-        memory: 500Mi
+        type: secret
+        name: mqtt-${DOMAIN_2/./-}-tls
+        globalMounts:
+          - path: /etc/ssl/mosquitto
+            readOnly: true
+      mosquitto-externalconfig:
+        type: emptyDir
+        globalMounts:
+          - path: /mosquitto/external_config

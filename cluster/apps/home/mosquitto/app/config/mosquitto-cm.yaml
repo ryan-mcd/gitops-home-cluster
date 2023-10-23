@@ -6,6 +6,7 @@ metadata:
 data:
   mosquitto.conf: |
     per_listener_settings false
+    password_file /mosquitto/external_config/mosquitto_pwd
     allow_anonymous false
     persistence true
     persistence_location /mosquitto/data
@@ -18,5 +19,3 @@ data:
     cafile /etc/ssl/mosquitto/tls.crt
     certfile /etc/ssl/mosquitto/tls.crt
     keyfile /etc/ssl/mosquitto/tls.key
-
-    include_dir /mosquitto/configinc
