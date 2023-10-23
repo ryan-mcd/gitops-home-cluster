@@ -33,12 +33,12 @@ spec:
             env:
               TZ: ${TIMEZONE}
 
-        resources:
-          requests:
-            cpu: 100m
-            memory: 250Mi
-          limits:
-            memory: 500Mi
+            resources:
+              requests:
+                cpu: 100m
+                memory: 250Mi
+              limits:
+                memory: 500Mi
       
     service:
       main:
