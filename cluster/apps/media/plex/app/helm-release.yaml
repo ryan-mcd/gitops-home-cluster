@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.0.3
       sourceRef:
         kind: HelmRepository
         name: bjw-s-helm-charts
@@ -24,103 +24,86 @@ spec:
       namespace: kube-system
       
   values:
-    image:
-      repository: ghcr.io/onedr0p/plex
-      tag: 1.32.6.7557-1cf77d501@sha256:f37a6cd024ec9e6a2a1c04d280c4c1930aa66071d11c29fbc74ed696fdc673bf
-    env:
-      TZ: "America/New_York"
-    podSecurityContext:
-      supplementalGroups:
-        - 44
-        - 109
-        - 100
+
+    defaultPodOptions:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: feature.node.kubernetes.io/custom-intel-gpu
+                    operator: In
+                    values:
+                      - "true"
+      podSecurityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: "OnRootMismatch"
+        supplementalGroups:
+          - 44
+          - 109
+          - 100
+
+    controllers:
+      main:
+        replicas: 1
+        strategy: RollingUpdate
+
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/plex
+              tag: 1.32.6.7557-1cf77d501@sha256:f37a6cd024ec9e6a2a1c04d280c4c1930aa66071d11c29fbc74ed696fdc673bf
+            env:
+              TZ: ${TIMEZONE}
+            resources:
+              requests:
+                cpu: 100m
+                memory: 2000Mi
+                gpu.intel.com/i915: 1
+              limits:
+                memory: 4000Mi
+                gpu.intel.com/i915: 1
+
     service:
       main:
         type: LoadBalancer
         annotations:
+          metallb.universe.tf/loadBalancerIPs: "${LB_PLEX_IP}"
           traefik.ingress.kubernetes.io/service.serversscheme: https
-        loadBalancerIP: "${LB_PLEX_IP}"
         externalTrafficPolicy: Local
-        primary: true
         ports:
           http:
             port: 32400
-      dnla-tcp:
-        enabled: false
-        type: NodePort
-        ports:
-          dnla-tcp:
-            enabled: true
-            port: 32469
-            protocol: TCP
-            targetPort: 32469
-        externalTrafficPolicy: Local
-      dnla-udp:
-        enabled: false
-        type: NodePort
-        ports:
-          dnla-udp:
-            enabled: true
-            port: 1900
-            protocol: TCP
-            targetPort: 1900
-        externalTrafficPolicy: Local
     ingress:
       main:
         enabled: false
-        ingressClassName: "traefik"
-        annotations:
-          hajimari.io/enable: "true"
-          hajimari.io/icon: "plex"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-        hosts:
-          - host: &host "plex.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          - hosts:
-              - *host
+
     persistence:
       config:
         enabled: true
         existingClaim: plex-config-v1
       media:
         enabled: true
-        type: custom
-        volumeSpec:
-          nfs:
-            server: "${NAS_ADDRESS}"
-            path: /mnt/user/Media
-        mountPath: /media
+        type: nfs
+        server: "${NAS_ADDRESS}"
+        path: /mnt/user/Media
+        mountPath: /media-nas
         readOnly: true
       backup:
         enabled: true
-        type: custom
-        volumeSpec:
-          nfs:
-            server: ${NAS_ADDRESS}
-            path: /mnt/user/k8s-bak/plex-backup
+        type: nfs
+        server: "${NAS_ADDRESS}"
+        path: /mnt/user/k8s-bak/plex-backup
         mountPath: /backups
         readOnly: false
       transcode:
         enabled: true
         type: emptyDir
+        globalMounts:
+          - path: /transcode
       #   medium: Memory
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: feature.node.kubernetes.io/custom-intel-gpu
-                  operator: In
-                  values:
-                    - "true"
-    resources:
-      requests:
-        gpu.intel.com/i915: 1
-        cpu: 100m
-        memory: 2000Mi
-      limits:
-        gpu.intel.com/i915: 1
-        memory: 4000Mi
