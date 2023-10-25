@@ -45,7 +45,7 @@ spec:
 
             image:
               repository: ghcr.io/blakeblackshear/frigate
-              tag: 0.12.1
+              tag: 0.13.0-beta2
 
             env:
               TZ: "${TIMEZONE}"
@@ -118,10 +118,11 @@ spec:
       usb:
         enabled: true
         type: hostPath
-        hostPath: /dev/bus/usb
-        hostPathType: Directory
+        hostPath: /dev/bus/usb/001/004
+        readOnly: false
+        # hostPathType: Directory
         globalMounts:
-          - path: /dev/bus/usb
+          - path: /dev/bus/usb/001/001
       cache:
         enabled: true
         type: emptyDir
