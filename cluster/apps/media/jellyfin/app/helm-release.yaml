@@ -88,7 +88,7 @@ spec:
         enabled: true
         existingClaim: jellyfin-config-v1
         globalMounts:
-          - path: /transcode
+          - path: /config
       media:
         enabled: true
         type: nfs
