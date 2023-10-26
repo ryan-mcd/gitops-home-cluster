@@ -87,12 +87,15 @@ spec:
       config:
         enabled: true
         existingClaim: jellyfin-config-v1
+        globalMounts:
+          - path: /transcode
       media:
         enabled: true
         type: nfs
         server: "${NAS_ADDRESS}"
         path: /mnt/user/Media
-        mountPath: /media-nas
+        globalMounts:
+          - path: /media-nas
         readOnly: true
       transcode:
         enabled: true

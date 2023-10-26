@@ -88,19 +88,23 @@ spec:
       config:
         enabled: true
         existingClaim: plex-config-v1
+        globalMounts:
+          - path: /config
       media:
         enabled: true
         type: nfs
         server: "${NAS_ADDRESS}"
         path: /mnt/user/Media
-        mountPath: /media-nas
+        globalMounts:
+          - path: /media
         readOnly: true
       backup:
         enabled: true
         type: nfs
         server: "${NAS_ADDRESS}"
         path: /mnt/user/k8s-bak/plex-backup
-        mountPath: /backups
+        globalMounts:
+          - path: /backups
         readOnly: false
       transcode:
         enabled: true
