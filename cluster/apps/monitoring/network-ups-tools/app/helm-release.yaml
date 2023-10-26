@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.0.3
       sourceRef:
         kind: HelmRepository
         name: bjw-s-helm-charts
@@ -24,30 +24,60 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  values:
-    image:
-      repository: ghcr.io/jr0dd/network-ups-tools
-      tag: v2.8.0@sha256:8878ab0f9420801f110ba1f173c97ad056cd9a6f56b181e1b39add1d91dc9626
-    controller:
-      strategy: RollingUpdate
 
-    env:
-      TZ: "${TIMEZONE}"
+  values:
+
+    defaultPodOptions:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: feature.node.kubernetes.io/custom-tripp-lite-ups
+                    operator: In
+                    values: ["true"]
+      tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+
+    controllers:
+      main:
+        replicas: 1
+        strategy: RollingUpdate
+
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          main:
+            image:
+              repository: ghcr.io/jr0dd/network-ups-tools
+              tag: v2.8.0@sha256:8878ab0f9420801f110ba1f173c97ad056cd9a6f56b181e1b39add1d91dc9626
+
+            env:
+              TZ: "${TIMEZONE}"
+
+            resources:
+              requests:
+                memory: 64Mi
+                cpu: 25m
+              limits:
+                memory: 128Mi
+            securityContext:
+              privileged: true
 
     service:
       main:
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${LB_NUT_V4}"
+          external-dns.alpha.kubernetes.io/hostname: "exporters.${DOMAIN_2}"
         ports:
           http:
             port: 3493
             protocol: TCP
         type: LoadBalancer
-        loadBalancerIPs:
-          - "${LB_NUT_V4}"
         externalTrafficPolicy: Local
         # ipFamilyPolicy: PreferDualStack
-        annotations:
-          metallb.universe.tf/loadBalancerIPs: "${LB_NUT_V4}"
-          external-dns.alpha.kubernetes.io/hostname: "exporters.${DOMAIN_2}"
       metrics:
         enabled: false
         ports:
@@ -55,20 +85,21 @@ spec:
             enabled: true
             port: 9199
             protocol: TCP
-    securityContext:
-      privileged: true
+
     persistence:
       config:
         enabled: true
         type: configMap
         name: &config network-ups-tools-config
-        mountPath: /etc/nut
+        globalMounts:
+          - path: /etc/nut
         defaultMode: 256
       ups:
         enabled: true
         type: hostPath
         hostPath: /dev/bus/usb/001/099
-        mountPath: /dev/bus/usb/001/001
+        globalMounts:
+          - path: /dev/bus/usb/001/001
         readOnly: false
     configMaps:
       config:
@@ -101,25 +132,3 @@ spec:
               upsmon primary
               actions = SET
               instcmds = ALL
-
-    podAnnotations:
-      configmap.reloader.stakater.com/reload: *config
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: feature.node.kubernetes.io/custom-tripp-lite-ups
-                  operator: In
-                  values: ["true"]
-    tolerations:
-      - key: node-role.kubernetes.io/control-plane
-        operator: Exists
-
-
-    resources:
-      requests:
-        memory: 64Mi
-        cpu: 25m
-      limits:
-        memory: 128Mi
