@@ -10,6 +10,18 @@ spec:
   gateways:
     - istio-ingress/istio-ingressgateway 
   http:
+    - name: admin
+      match:
+        - uri:
+            prefix: "/admin"
+      directResponse:
+        status: 403
+        body:
+          string: "{\"error\": \"thou shall not pass\"}"
+      headers:
+        response:
+          set:
+            content-type: "text/plain"
     - name: http
       match:
         - uri:

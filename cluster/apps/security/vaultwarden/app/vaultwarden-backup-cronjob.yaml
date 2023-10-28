@@ -17,7 +17,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: sqlite3
-              image: keinos/sqlite3:3.43.1
+              image: ghcr.io/ryan-mcd/sqlite:3.41.2
               imagePullPolicy: IfNotPresent
               command:
               - /bin/sh
