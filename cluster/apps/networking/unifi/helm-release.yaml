@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.0.3
       sourceRef:
         kind: HelmRepository
         name: bjw-s-helm-charts
@@ -16,36 +16,52 @@ spec:
       interval: 15m
 
   values:
-    image:
-      repository: jacobalberty/unifi
-      tag: v7.5.176
+    controllers:
+      main:
+        replicas: 1
+        strategy: Recreate
 
-    env:
-      TZ: America/New_York
-      # -- Run UniFi as root
-      RUNAS_UID0: "false"
-      # -- Specify the user ID the application will run as
-      UNIFI_UID: "999"
-      # -- Specify the group ID the application will run as
-      UNIFI_GID: "999"
-      # -- Java Virtual Machine (JVM) initial, and minimum, heap size
-      # # Unset value means there is no lower limit
-      # JVM_INIT_HEAP_SIZE:
-      # -- Java Virtual Machine (JVM) maximum heap size
-      # For larger installations a larger value is recommended.
-      # For memory constrained system this value can be lowered.
-      JVM_MAX_HEAP_SIZE: 1024M
-      # # -- External MongoDB URI
-      # DB_URI:  # mongodb://unifi-mongodb:27017/unifi
-      # STATDB_URI:  # mongodb://unifi-mongodb:27017/unifi_stat
-      # DB_NAME:  # unifi
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          main:
+            image:
+              repository: jacobalberty/unifi
+              tag: v7.5.176
+
+            env:
+              TZ: ${TIMEZONE}
+              # -- Run UniFi as root
+              RUNAS_UID0: "false"
+              # -- Specify the user ID the application will run as
+              UNIFI_UID: "999"
+              # -- Specify the group ID the application will run as
+              UNIFI_GID: "999"
+              # -- Java Virtual Machine (JVM) initial, and minimum, heap size
+              # # Unset value means there is no lower limit
+              # JVM_INIT_HEAP_SIZE:
+              # -- Java Virtual Machine (JVM) maximum heap size
+              # For larger installations a larger value is recommended.
+              # For memory constrained system this value can be lowered.
+              JVM_MAX_HEAP_SIZE: 1024M
+              # # -- External MongoDB URI
+              # DB_URI:  # mongodb://unifi-mongodb:27017/unifi
+              # STATDB_URI:  # mongodb://unifi-mongodb:27017/unifi_stat
+              # DB_NAME:  # unifi
+            resources:
+              requests:
+                cpu: "25m"
+                memory: "1000Mi"
+              limits:
+                memory: "1400Mi"
 
     service:
       main:
         type: LoadBalancer
         annotations:
+          metallb.universe.tf/loadBalancerIPs: "${LB_PLEX_IP}"
           coredns.io/hostname: unifi
-        loadBalancerIP: "${LB_UNIFI_IP}"
         externalTrafficPolicy: Local
         ports:
           # -- Configure Web interface + API port
@@ -100,22 +116,6 @@ spec:
     ingress:
       main:
         enabled: false
-        ingressClassName: "traefik"
-        annotations:
-          cert-manager.io/cluster-issuer: letsencrypt-production
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.middlewares: networking-rfc1918-ips@kubernetescrd
-
-        hosts:
-          - host: "unifi.${DOMAIN_2}"
-            paths:
-              - path: /
-
-        tls:
-          - secretName: unifi-controller-tls
-            hosts:
-              - unifi.${DOMAIN_2}
-            
 
       # # -- Enable and configure settings for the captive portal ingress under this key.
       # # @default -- See values.yaml
@@ -145,20 +145,13 @@ spec:
       data:
         enabled: true
         existingClaim: unifi-data
-        mountPath: /unifi
+        globalMounts:
+          - path: /unifi
       backup:
         enabled: true
-        type: custom
-        volumeSpec:
-          nfs:
-            server: ${NAS_ADDRESS}
-            path: /mnt/user/k8s-bak/unifi
-        mountPath: /var/lib/unifi/backup
+        type: nfs
+        server: "${NAS_ADDRESS}"
+        path: /mnt/user/k8s-bak/unifi
+        globalMounts:
+          - path:  /var/lib/unifi/backup
         readOnly: false
-
-    resources:
-      requests:
-        cpu: "25m"
-        memory: "1000Mi"
-      limits:
-        memory: "1400Mi"
