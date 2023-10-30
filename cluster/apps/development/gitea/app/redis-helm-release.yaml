@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.0.3
       sourceRef:
         name: bjw-s-helm-charts
         kind: HelmRepository
@@ -20,28 +20,44 @@ spec:
       fullnameOverride: *app
       labels:
         app: *app
-    podLabels:
-      app: *app
-    automountServiceAccountToken: false
-    controller:
-      type: deployment
-      replicas: 1
-    image:
-      repository: public.ecr.aws/docker/library/redis
-      tag: 7.0.11-bullseye
-    command:
-      - sh
-    args:
-      - -c
-      - >-
-        redis-server --requirepass $REDIS_PASSWORD
-    env:
-      REDIS_PORT: "6379"
-      REDIS_PASSWORD:
-        valueFrom:
-          secretKeyRef:
-            name: gitea-secrets
-            key: SECRET_GITEA_REDIS_PASSWORD
+    defaultPodOptions:
+      automountServiceAccountToken: false
+      labels:
+        app: *app
+
+    controllers:
+      main:
+        replicas: 1
+        strategy: Recreate
+
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          main:
+            image:
+              repository: public.ecr.aws/docker/library/redis
+              tag: 7.0.11-bullseye
+            command:
+              - sh
+            args:
+              - -c
+              - >-
+                redis-server --requirepass $REDIS_PASSWORD
+            env:
+              REDIS_PORT: "6379"
+              REDIS_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: gitea-secrets
+                    key: SECRET_GITEA_REDIS_PASSWORD
+            resources:
+              requests:
+                cpu: 10m
+                memory: 204Mi
+              limits:
+                memory: 512Mi
+
     service:
       main:
         ports:
@@ -52,9 +68,3 @@ spec:
             enabled: true
             port: 6379
             primary: true
-    resources:
-      requests:
-        cpu: 10m
-        memory: 204Mi
-      limits:
-        memory: 512Mi
