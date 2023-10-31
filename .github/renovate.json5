@@ -84,6 +84,18 @@
       ],
       "datasourceTemplate": "docker",
       "versioningTemplate": "redhat"
+    },
+    //fix this to be github-release
+    {
+      "customType": "regex",
+      "description": "Process kube-prom-stack crds",
+      "fileMatch": [
+        "cluster/crds/kube-prometheus-stack/.+\\.yaml$"
+      ],
+      "matchStrings": [
+        "registryUrl=(?<registryUrl>.*?)\n *tag: (?<depName>[a-zA-Z-]+)-(?<currentValue>.*)\n",
+      ],
+      "datasourceTemplate": "helm"
     }
   ],
   "packageRules": [
