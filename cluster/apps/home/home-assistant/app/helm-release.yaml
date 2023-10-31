@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.0.3
       sourceRef:
         kind: HelmRepository
         name: bjw-s-helm-charts
@@ -17,18 +17,48 @@ spec:
       interval: 15m
   install:
     createNamespace: true
+
   values:
-    image:
-      repository: ghcr.io/home-assistant/home-assistant
-      tag: 2023.10.5
-    env:
-      TZ: "America/New_York"
-    hostNetwork: true
-    dnsPolicy: ClusterFirstWithHostNet
+    defaultPodOptions:
+      annotations:
+        secret.reloader.stakater.com/reload: "home-assistant"
+      # # Already privileged, what's the point?
+      # securityContext:
+      #   runAsUser: 568
+      #   runAsGroup: 568
+      #   fsGroup: 568
+      #   fsGroupChangePolicy: "OnRootMismatch"
+      #   supplementalGroups:
+      #     - 100
+
+    controllers:
+      main:
+        strategy: Recreate
+        pod:
+          hostNetwork: true
+          dnsPolicy: ClusterFirstWithHostNet
+        containers:
+          main:
+            securityContext:
+              privileged: true
+
+            image:
+              repository: ghcr.io/home-assistant/home-assistant
+              tag: 2023.10.5
+            env:
+              TZ: ${TIMEZONE}
+            resources:
+              requests:
+                cpu: 10m
+                memory: 350Mi
+              limits:
+                memory: 750Mi
+
     service:
       main:
         type: LoadBalancer
-        loadBalancerIP: "${LB_HOME_ASSISTANT_IP}"
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: ${LB_HOME_ASSISTANT_IP}
         ports:
           http:
             port: 8123
@@ -36,21 +66,19 @@ spec:
             enabled: true
             port: 5683
             protocol: UDP
+          mdns-tcp:
+            enabled: true
+            port: 5353
+            protocol: TCP
+            targetPort: 5353
+          mdns-udp:
+            enabled: true
+            port: 5353
+            protocol: UDP
+            targetPort: 5353
     ingress:
       main:
         enabled: false
-        ingressClassName: "traefik"
-        annotations:
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-cloudflare-ips-secure-headers@kubernetescrd"
-        hosts:
-          - host: &host "hass.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          - hosts:
-              - *host
     probes:
       liveness:
         enabled: false
@@ -58,31 +86,17 @@ spec:
         enabled: false
       startup:
         enabled: true
+
     persistence:
       config:
         enabled: true
         existingClaim: home-assistant-config-v1
+        globalMounts:
+          - path: /config
       backup:
         enabled: true
-        type: custom
-        volumeSpec:
-          nfs:
-            server: ${NAS_ADDRESS}
-            path: /mnt/user/k8s-bak/hass-backup
+        type: nfs
+        server: "${NAS_ADDRESS}"
+        path: /mnt/user/k8s-bak/hass-backup
         mountPath: /config/backups
         readOnly: false
-    podAnnotations:
-      secret.reloader.stakater.com/reload: "home-assistant"
-    podSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
-      fsGroupChangePolicy: "OnRootMismatch"
-      supplementalGroups:
-        - 100
-    resources:
-      requests:
-        cpu: 10m
-        memory: 350Mi
-      limits:
-        memory: 750Mi
