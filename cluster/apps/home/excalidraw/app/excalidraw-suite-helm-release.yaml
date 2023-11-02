@@ -68,7 +68,7 @@ spec:
           http:
             port: 8080
       room:
-        nameOverride: excalidraw-room
+        # nameOverride: excalidraw-room -> creates service named excalidraw-excalidraw-room
         controller: room
         ports:
           http:
