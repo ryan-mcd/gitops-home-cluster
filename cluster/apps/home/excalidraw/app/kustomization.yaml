@@ -2,6 +2,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ./excalidraw-suite-helm-release.yaml
+  - ./excalidraw-helm-release.yaml
   - ./excalidraw-room-vs.yaml
   - ./excalidraw-server-vs.yaml
