@@ -18,8 +18,8 @@ spec:
 
   values:
     image:
-      repository: docker.io/excalidraw/excalidraw-room
-      tag: sha-49bf529
+      repository: ghcr.io/ryan-mcd/excalidraw-room
+      tag: 0.0.82
 
     env:
       TZ: "${TIMEZONE}"
