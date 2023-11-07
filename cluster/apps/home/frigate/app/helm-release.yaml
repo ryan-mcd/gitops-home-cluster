@@ -118,7 +118,7 @@ spec:
       usb:
         enabled: true
         type: hostPath
-        hostPath: /dev/bus/usb/001/006
+        hostPath: /dev/bus/usb/002/003
         readOnly: false
         # hostPathType: Directory
         globalMounts:
