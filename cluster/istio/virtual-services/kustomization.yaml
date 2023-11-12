@@ -28,3 +28,4 @@ resources:
   # - nextcloud-admin-vs.yaml
   # - home-assistant-addon-codeserver-vs.yaml
   # - vaultwarden-admin-vs.yaml
+  - omada-vs.yaml

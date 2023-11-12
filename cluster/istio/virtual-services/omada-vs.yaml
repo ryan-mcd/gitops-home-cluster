@@ -1,0 +1,20 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: omada
+  namespace: istio-ingress
+spec:
+  hosts:
+    - 'omada.${DOMAIN_2}'
+  gateways:
+    - istio-ingress/istio-private-gateway
+  http:
+    - match:
+        - port: 443
+      route:
+        - destination:
+            port:
+              number: 8043
+            host: omada-controller.networking.svc.cluster.local
+          weight: 100
