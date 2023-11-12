@@ -6,3 +6,4 @@ resources:
 - traefik
 - calico
 - unifi
+- omada-controller/ks.yaml

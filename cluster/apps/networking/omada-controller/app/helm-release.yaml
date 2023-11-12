@@ -1,0 +1,168 @@
+---
+# yaml-language-server: $schema=https://github.com/fluxcd-community/flux2-schemas/raw/main/helmrelease-helm-v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app omada-controller
+  namespace: networking
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.0.3
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-helm-charts
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      main:
+        replicas: 1
+        strategy: Recreate
+
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          main:
+            image:
+              repository: mbentley/omada-controller
+              tag: 5.12@sha256:3ecf2d45e139fa71bf881d8ec46036493e5edc5ab8b973ee0ba7f2564c66dbda
+
+            env:
+              TZ: ${TIMEZONE}
+              MANAGE_HTTP_PORT: "8088"
+              MANAGE_HTTPS_PORT: "8043"
+              PORTAL_HTTP_PORT: "8888"
+              PORTAL_HTTPS_PORT: "8843"
+              SHOW_SERVER_LOGS: "true"
+              SHOW_MONGODB_LOGS: "true"
+            resources:
+              requests:
+                cpu: 1
+                memory: 1200Mi
+              limits:
+                memory: 2000Mi
+    service:
+      main:
+        enabled: true
+        ports:
+          http:
+            enabled: true
+            port: 8043
+            targetPort: 8043
+            protocol: TCP
+      controller:
+        enabled: true
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: ${LB_OMADA_IP}
+        type: LoadBalancer
+        externalTrafficPolicy: Local
+        controller: main
+        ports:
+          # # Docs: https://www.tp-link.com/us/support/faq/3281/
+          # Management Ports
+          mgmt-8088-tcp:
+            enabled: true
+            port: 8088
+            targetPort: 8088
+            protocol: TCP
+          # mgmt-8043-tcp:
+          #   enabled: true
+          #   port: 8043
+          #   protocol: TCP
+          #   targetPort: 8043
+          portal-8843-tcp:
+            enabled: true
+            port: 8843
+            protocol: TCP
+            targetPort: 8843
+          # # Device Discovery, Adoption, Management, and Upgrade
+          eap-discovery:
+            enabled: true
+            port: 29810
+            protocol: UDP
+            targetPort: 29810
+          eap-v5-manage:
+            enabled: true
+            port: 29814
+            protocol: UDP
+            targetPort: 29814
+          eap-v5-device-info:
+            enabled: true
+            port: 29815
+            protocol: UDP
+            targetPort: 29815
+          eap-v5-remote-control:
+            enabled: true
+            port: 29816
+            protocol: UDP
+            targetPort: 29816
+          init-check:
+            enabled: true
+            port: 27001
+            protocol: UDP
+            targetPort: 27001
+          db-access:
+            enabled: true
+            port: 27217
+            protocol: TCP
+            targetPort: 27217
+
+    persistence:
+      data:
+        enabled: true
+        existingClaim: omada-data
+        globalMounts:
+          - path: /opt/tplink/EAPController/data
+      work:
+        enabled: true
+        existingClaim: omada-work
+        globalMounts:
+          - path: /opt/tplink/EAPController/work
+      logs:
+        enabled: true
+        existingClaim: omada-logs
+        globalMounts:
+          - path: /opt/tplink/EAPController/logs
+      # backup:
+      #   enabled: true
+      #   type: nfs
+      #   server: "${NAS_ADDRESS}"
+      #   path: /mnt/user/k8s-bak/OMADA
+      #   globalMounts:
+      #     - path:  ???
+      #   readOnly: false
+
+    ingress:
+      main:
+        enabled: false
+        # ingressClassName: "nginx"
+        # annotations:
+        #   hajimari.io/icon: "router-wireless-settings"
+        #   nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+        #   nginx.ingress.kubernetes.io/proxy-ssl-verify: "off"
+        #   nginx.ingress.kubernetes.io/use-regex: "true"
+        #   nginx.ingress.kubernetes.io/upstream-vhost: "omada.${CLUSTER_DOMAIN}:8043"
+        #   nginx.ingress.kubernetes.io/proxy-redirect-from: "~https://(.+):8043/(.+)/login$"
+        #   nginx.ingress.kubernetes.io/proxy-redirect-to: "https://$1/$2/login"
+        # hosts:
+        #   - host: &host omada.${CLUSTER_DOMAIN}
+        #     paths:
+        #       - path: /
+        #         service:
+        #           name: main
+        # tls:
+        #   - hosts:
+        #       - *host
