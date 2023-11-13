@@ -5,5 +5,4 @@ resources:
 - wildcard-certificate2
 - traefik
 - calico
-- unifi
 - omada-controller/ks.yaml
