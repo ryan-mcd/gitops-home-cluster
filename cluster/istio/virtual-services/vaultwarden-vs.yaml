@@ -34,13 +34,3 @@ spec:
               number: 8080
             host: vaultwarden.security.svc.cluster.local
           weight: 100
-    - name: websockets
-      match:
-        - uri:
-            prefix: "/notifications/hub"
-      route:
-        - destination:
-            port:
-              number: 3012
-            host: vaultwarden.security.svc.cluster.local
-          weight: 100
