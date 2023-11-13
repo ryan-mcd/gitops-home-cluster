@@ -60,12 +60,12 @@ spec:
         ports:
           http:
             enabled: true
-            port: 8088
-            targetPort: 8088
-            protocol: TCP
-            # port: 8043
-            # targetPort: 8043
+            # port: 8088
+            # targetPort: 8088
             # protocol: TCP
+            port: 8043
+            targetPort: 8043
+            protocol: TCP
       controller:
         enabled: true
         annotations:
@@ -76,11 +76,11 @@ spec:
         ports:
           # # Docs: https://www.tp-link.com/us/support/faq/3281/
           # Management Ports
-          # mgmt-8088-tcp:
-          #   enabled: true
-          #   port: 8088
-          #   targetPort: 8088
-          #   protocol: TCP
+          mgmt-8088-tcp:
+            enabled: true
+            port: 8088
+            targetPort: 8088
+            protocol: TCP
           # mgmt-8043-tcp:
           #   enabled: true
           #   port: 8043
