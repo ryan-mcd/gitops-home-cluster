@@ -25,9 +25,7 @@ spec:
     - name: http
       match:
         - uri:
-            prefix: "/"
-        - uri:
-            prefix: "/notifications/hub/negotiate"
+            prefix: /
       route:
         - destination:
             port:
