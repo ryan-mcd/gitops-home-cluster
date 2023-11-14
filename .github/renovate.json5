@@ -98,6 +98,12 @@
       "matchDatasources": ["docker"],
       "versioning": "regex:^RELEASE\\.(?<major>\\d+)-(?<minor>\\d+)-(?<patch>\\d+)T.*Z$",
       "matchPackagePatterns": ["minio"]
+    },
+    {
+      "description": "Use custom versioning for KPS CRDs",
+      "matchDatasources": ["github-releases"],
+      "versioning": "regex:kube-prometheus-stack-(?<major>\\d+).(?<minor>\\d+).(?<patch>\\d+)?$",
+      "matchPackagePatterns": ["kube-prometheus-stack-source"]
     }
   ]
 }
