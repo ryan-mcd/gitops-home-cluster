@@ -23,7 +23,7 @@ spec:
           main:
             image:
               repository: esphome/esphome
-              tag: 2023.10.6
+              tag: 2023.11.1
               pullPolicy: Always
             env:
               TZ: "${TIMEZONE}"
