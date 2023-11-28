@@ -30,7 +30,7 @@ spec:
           main:
             image:
               repository: ghcr.io/ryan-mcd/excalidraw-collab
-              tag: "0.0.3230"
+              tag: "0.0.3231"
             env:
               TZ: "${TIMEZONE}"
               COLLAB_ADDR: https://draw-collab.${DOMAIN_1}
