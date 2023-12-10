@@ -1,0 +1,20 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: zwave-js-ui
+  namespace: istio-ingress
+spec:
+  hosts:
+    - 'zwave.${DOMAIN_1}'
+  gateways:
+    - istio-ingress/istio-ingressgateway
+  http:
+    - match:
+        - port: 443
+      route:
+        - destination:
+            port:
+              number: 8091
+            host: zwave-js-ui.home.svc.cluster.local
+          weight: 100

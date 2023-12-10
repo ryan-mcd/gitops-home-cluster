@@ -5,4 +5,5 @@ resources:
   - mosquitto-config-pvc.yaml
   - esphome-config-pvc.yaml
   - frigate-config-pvc.yaml
+  - zwave-js-ui-pvc.yaml
   

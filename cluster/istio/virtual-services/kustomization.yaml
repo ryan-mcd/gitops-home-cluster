@@ -29,3 +29,4 @@ resources:
   # - home-assistant-addon-codeserver-vs.yaml
   # - vaultwarden-admin-vs.yaml
   - omada-vs.yaml
+  - zwave-js-ui-vs.yaml
