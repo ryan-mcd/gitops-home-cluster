@@ -1,0 +1,59 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: rtlamr2mqtt
+  namespace: home
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-helm-charts
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      main:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: docker.io/allangood/rtlamr2mqtt
+              tag: 2.3.4@sha256:f5b7bab1bbecfc3af57f2beec26ac6a005758486a95b7ed9caee7a70a1994de7
+            securityContext:
+              privileged: true
+            resources:
+              requests:
+                cpu: 50m
+                memory: 64Mi
+              limits:
+                memory: 128Mi
+        pod:
+          nodeSelector:
+            feature.node.kubernetes.io/custom-rtlamr: "true"
+    service:
+      main:
+        enabled: false
+    persistence:
+      config-file:
+        type: secret
+        name: rtlamr2mqtt-secret
+        globalMounts:
+          - path: /etc/rtlamr2mqtt.yaml
+            subPath: rtlamr2mqtt.yaml
+            readOnly: true

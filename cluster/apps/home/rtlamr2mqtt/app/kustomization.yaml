@@ -1,0 +1,13 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: home
+resources:
+  - ./helm-release.yaml
+secretGenerator:
+  - name: rtlamr2mqtt-secret
+    files:
+      - rtlamr2mqtt.yaml=./resources/rtlamr2mqtt.yaml
+generatorOptions:
+  disableNameSuffixHash: true

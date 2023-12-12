@@ -70,3 +70,8 @@ spec:
               matchOn:
                 - usbId:
                     vendor: ["13fd"]
+            - name: rtlamr
+              matchOn:
+                - usbId:
+                    vendor: ["0bda"]
+                    device: ["2838"]
