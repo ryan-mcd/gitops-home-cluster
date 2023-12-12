@@ -8,5 +8,5 @@ resources:
   - frigate/ks.yaml
   - excalidraw/ks.yaml
   - zwave-js-ui/ks.yaml
-  - rtlamr2mqtt/ks.yaml
+  # - rtlamr2mqtt/ks.yaml
   - rtlamr2mqtt/secret.sops.yaml
