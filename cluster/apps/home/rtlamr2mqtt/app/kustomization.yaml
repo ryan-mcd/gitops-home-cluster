@@ -5,9 +5,6 @@ kind: Kustomization
 namespace: home
 resources:
   - ./helm-release.yaml
-secretGenerator:
-  - name: rtlamr2mqtt-secret
-    files:
-      - rtlamr2mqtt.yaml=./resources/rtlamr2mqtt.yaml
+  - ./secret.sops.yaml
 generatorOptions:
   disableNameSuffixHash: true
