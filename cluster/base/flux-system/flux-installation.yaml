@@ -61,3 +61,13 @@ spec:
         - op: add
           path: /metadata/annotations/cni.projectcalico.org~1ipv4pools
           value: '["default-ipv4-ippool"]'
+    - patch: |
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --concurrent=20
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --requeue-dependency=5s
+      target:
+        kind: Deployment
+        name: "(kustomize-controller|helm-controller|source-controller)"
