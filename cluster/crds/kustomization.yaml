@@ -4,6 +4,7 @@ resources:
 - cert-manager
 - traefik
 - rook-ceph
-- kube-prometheus-stack
 - external-snapshotter
 - neuvector
+# # managed by kps hr
+# - kube-prometheus-stack
