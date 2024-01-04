@@ -38,3 +38,4 @@ resources:
 - jaegertracing-charts.yaml
 - flagger-charts.yaml
 - falco-security-charts.yaml
+- democratic-csi-charts.yaml

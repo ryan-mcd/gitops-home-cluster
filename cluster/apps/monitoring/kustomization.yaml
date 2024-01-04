@@ -6,3 +6,5 @@ resources:
   - speedtest-exporter
   - thanos
   - network-ups-tools/ks.yaml
+  - loki/secret.sops.yaml
+  - loki/ks.yaml
