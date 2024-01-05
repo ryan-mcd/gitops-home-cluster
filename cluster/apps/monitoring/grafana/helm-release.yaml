@@ -16,8 +16,6 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-    # image:
-    #   repository: ghcr.io/k8s-at-home/grafana
     replicas: 1
     deploymentStrategy:
       type: Recreate
@@ -88,7 +86,7 @@ spec:
           - name: Loki
             type: loki
             access: proxy
-            url: http://loki.monitoring:3100
+            url: http://loki-gateway.monitoring.svc.cluster.local
     dashboards:
       default:
         # # Ref: https://grafana.com/grafana/dashboards/12175
@@ -120,7 +118,8 @@ spec:
         minio:
           gnetId: 13502
           revision: 18
-          datasource: Prometheus
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
         # # Ref: https://grafana.com/grafana/dashboards/11315
         # unifi-client-insights:
         #   gnetId: 11315
