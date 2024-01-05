@@ -129,6 +129,7 @@ sinks:
     out_of_order_action: rewrite_timestamp
     labels:
       hostname: "{{ host }}"
+      source_type: "{{ source_type }}"
 
   # loki_vyos:
   #   type: loki
