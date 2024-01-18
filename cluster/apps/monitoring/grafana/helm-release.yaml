@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: grafana
@@ -26,15 +26,6 @@ spec:
       GF_LOG_FILTERS: rendering:debug
       GF_DATE_FORMATS_FULL_DATE: "MMM Do, YYYY hh:mm:ss a"
     adminPassword: "${SECRET_GRAFANA_PASSWORD}"
-    envValueFrom:
-      DB_USER:
-        secretKeyRef:
-          key: username
-          name: grafana-pg-creds
-      DB_PASSWORD:
-        secretKeyRef:
-          key: password
-          name: grafana-pg-creds
     grafana.ini:
       server:
         root_url: "https://grafana.${DOMAIN_2}"
@@ -49,13 +40,6 @@ spec:
         mode: console
       grafana_net:
         url: https://grafana.net
-      database:
-        type: "postgres"
-        host: "${POSTGRESQL_ADDRESS}:5432"
-        name: grafana
-        ssl_mode: disable 
-        user: $__env{DB_USER}
-        password: $__env{DB_PASSWORD}
       auth.basic:
         disable_login_form: false
     dashboardProviders:
