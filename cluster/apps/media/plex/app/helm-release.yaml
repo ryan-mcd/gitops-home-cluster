@@ -58,7 +58,7 @@ spec:
           main:
             image:
               repository: ghcr.io/onedr0p/plex
-              tag: 1.32.8.7639-fb6452ebf@sha256:9be1261be15b1d58d9461d9798f1d52b435c2b2d35ff5bb56db7dd93190ba647
+              tag: 1.32.8.7639-fb6452ebf@sha256:9c15c8d0dc5fc1c734c97b38b66cdbee126c2b1d9bce8605c73bf06c17ff1e32
             env:
               TZ: ${TIMEZONE}
             resources:
