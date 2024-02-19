@@ -7,6 +7,5 @@ resources:
   - thanos
   - network-ups-tools/ks.yaml
   - loki/secret.sops.yaml
-  - loki/ks.yaml
-  - vector/ks.yaml
-  # - promtail/ks.yaml
+  # - loki/ks.yaml
+  # - vector/ks.yaml
