@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: core
-      version: 2.6.6
+      version: 2.7.3
       sourceRef:
         kind: HelmRepository
         name: neuvector-charts
