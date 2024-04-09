@@ -51,7 +51,7 @@ spec:
           main:
             image:
               repository: ghcr.io/ryan-mcd/excalidraw-room
-              tag: 0.0.82
+              tag: 0.0.83
             env:
               TZ: "${TIMEZONE}"
               PORT: &room-port 3002
