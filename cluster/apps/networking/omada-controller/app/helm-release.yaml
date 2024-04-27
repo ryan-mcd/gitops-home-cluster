@@ -60,12 +60,12 @@ spec:
         ports:
           http:
             enabled: true
-            # port: 8088
-            # targetPort: 8088
-            # protocol: TCP
-            port: 8043
-            targetPort: 8043
+            port: 8088
+            targetPort: 8088
             protocol: TCP
+            # port: 8043
+            # targetPort: 8043
+            # protocol: TCP
       controller:
         enabled: true
         annotations:
