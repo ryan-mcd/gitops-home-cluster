@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
     - name: yamllint
-      uses: reviewdog/action-yamllint@04e023c110e088170fb3dea6ab7bea64f04d0db0 # v1
+      uses: reviewdog/action-yamllint@8d79c3d034667db2792e328936811ed44953d691 # v1
       with:
         github_token: ${{ secrets.github_token }}
         reporter: github-pr-review
