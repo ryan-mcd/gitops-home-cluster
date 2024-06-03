@@ -80,7 +80,7 @@ spec:
         nodes:
           - name: "k8s-3080-1yn"
             devices:
-              - name: "/dev/disk/by-id/nvme-INTEL_SSDPEKNW512G8_BTNH21361YYE512A"
+              - name: "/dev/disk/by-id/nvme-CT500P3PSSD8_23414420E745"
           - name: "k8s-3080-5xn"
             devices:
               - name: "/dev/disk/by-id/nvme-INTEL_SSDPEKNW512G8_BTNH00830NAY512A"
