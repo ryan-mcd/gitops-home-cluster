@@ -38,7 +38,7 @@ spec:
           main:
             image:
               repository: mbentley/omada-controller
-              tag: 5.13@sha256:0df08de9637b5bd9437e08c533a84218f564f05b7e43b8a1a761e5ee976b24ad
+              tag: 5.13@sha256:85695a7c6b94b2b62259ead8346db68377be82b59c35f6fac25d3ebaba434278
 
             env:
               TZ: ${TIMEZONE}
