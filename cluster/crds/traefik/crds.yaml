@@ -9,7 +9,7 @@ spec:
   # renovate: datasource=github-releases
   url: https://github.com/traefik/traefik-helm-chart.git
   ref:
-    tag: v27.0.2
+    tag: v32.1.1
   ignore: |
     # exclude all
     /*
