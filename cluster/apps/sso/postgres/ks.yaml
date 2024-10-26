@@ -8,12 +8,12 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 3m
-  path: "./kubernetes/apps/sso/postgres/app"
+  path: "./cluster/apps/sso/postgres/app"
   prune: true
   wait: true
   sourceRef:
     kind: GitRepository
-    name: flux-cluster
+    name: flux-system
   decryption:
     provider: sops
     secretRef:

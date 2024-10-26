@@ -60,14 +60,14 @@ spec:
           limits:
             cpu: 200m
             memory: 256Mi
-    pilot:
-      autoscaleEnabled: true
-      replicaCount: 2
-      autoscaleMin: 1
-      autoscaleMax: 3
-      env:
-        PILOT_ENABLE_WORKLOAD_ENTRY_AUTOREGISTRATION: true
-        PILOT_ENABLE_WORKLOAD_ENTRY_HEALTHCHECKS: true
+    # pilot:
+    #   autoscaleEnabled: true
+    #   replicaCount: 2
+    #   autoscaleMin: 1
+    #   autoscaleMax: 3
+    #   env:
+    #     PILOT_ENABLE_WORKLOAD_ENTRY_AUTOREGISTRATION: true
+    #     PILOT_ENABLE_WORKLOAD_ENTRY_HEALTHCHECKS: true
     meshConfig:
       defaultConfig:
         gatewayTopology:

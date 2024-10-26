@@ -8,12 +8,12 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 3m
-  path: "./kubernetes/apps/sso/keycloak/app"
+  path: "./cluster/apps/sso/keycloak/app"
   prune: true
   wait: true
   sourceRef:
     kind: GitRepository
-    name: flux-cluster
+    name: flux-system
   dependsOn:
     - name: postgres-sso
   decryption:
