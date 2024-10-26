@@ -37,3 +37,4 @@ resources:
 - traefik-charts.yaml
 - vector-charts.yaml
 - vmware-tanzu-charts.yaml
+- codecentric-charts.yaml

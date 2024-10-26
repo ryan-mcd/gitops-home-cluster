@@ -13,3 +13,4 @@ resources:
   - debug
   - kyverno/ks.yaml
   # - neuvector
+  - sso

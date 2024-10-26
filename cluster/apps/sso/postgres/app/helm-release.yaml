@@ -1,0 +1,47 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: postgresql
+  namespace: sso
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: postgresql
+      version: 13.2.9
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    global:
+      postgresql:
+        auth:
+          postgresPassword: "${POSTGRES_SSO_ADMIN_PASSWORD}"
+          username: "${POSTGRES_SSO_USERNAME}"
+          password: "${POSTGRES_SSO_PASSWORD}"
+          database: sso
+    image:
+      registry: docker.io
+      repository: bitnami/postgresql
+      tag: "15.5.0"
+    primary:
+      persistence:
+        enabled: true
+        existingClaim: postgresql-data
+    metrics:
+      enabled: false
+      serviceMonitor:
+        enabled: false

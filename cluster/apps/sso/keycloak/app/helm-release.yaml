@@ -1,0 +1,213 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: keycloak
+  namespace: sso
+spec:
+  interval: 30m
+  chart:
+    spec:
+      # renovate: registryUrl=https://codecentric.github.io/helm-charts
+      chart: keycloakx
+      version: 2.3.0
+      sourceRef:
+        kind: HelmRepository
+        name: codecentric-charts
+        namespace: flux-system
+      interval: 15m
+  values:
+    fullnameOverride: keycloak
+    image:
+      repository: quay.io/keycloak/keycloak
+      tag: 23.0.3
+
+    ## Overrides the default entrypoint of the Keycloak container
+    command:
+      - "/opt/keycloak/bin/kc.sh"
+
+    ## Overrides the default args for the Keycloak container
+    args:
+      - "start"
+
+    resources:
+      requests:
+        cpu: "500m"
+        memory: "1024Mi"
+    # limits:
+    #   cpu: "500m"
+    #   memory: "1024Mi"
+
+
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+
+    postgresql:
+      enabled: false
+
+    dbchecker:
+      enabled: true
+    database:
+      vendor: postgres
+      hostname: "postgresql.sso.svc.cluster.local"
+      port: 5432
+      username: "${POSTGRES_SSO_USERNAME}"
+      password: "${POSTGRES_SSO_PASSWORD}"
+      database: sso
+
+    # Keeps keycloak paths the same as legacy
+    http:
+      relativePath: '/auth'
+    # metrics:
+    #   enabled: true
+    # https://www.keycloak.org/server/all-config
+    proxy:
+      enabled: false #defined as envar
+      # java opts for jgroups required for infinispan distributed cache when using the kubernetes stack.
+      # https://www.keycloak.org/server/caching
+    extraEnv: |-
+      - name: TZ
+        value: "${TIMEZONE}"
+      - name: JAVA_OPTS_APPEND
+        value: "-Djgroups.dns.query=keycloak-headless"
+      - name: KC_PROXY
+        value: edge
+      - name: KC_HTTP_ENABLED
+        value: "true"
+      - name: KC_HOSTNAME
+        value: id.${DOMAIN_1}
+      - name: KC_HOSTNAME_STRICT
+        value: "true"
+      - name: KC_HOSTNAME_STRICT_HTTPS
+        value: "true"
+      - name: KC_LOG_LEVEL
+        value: "org.keycloak.events:DEBUG,org.infinispan:INFO,org.jgroups:INFO"
+      - name: KEYCLOAK_ADMIN
+        value: "${KEYCLOAK_ADMIN_USER}"
+      - name: KEYCLOAK_ADMIN_PASSWORD
+        value: "${KEYCLOAK_ADMIN_PASS}"
+
+      # - name: QUARKUS_TRANSACTION_MANAGER_ENABLE_RECOVERY
+      #   value: "true"
+      # - name: KC_CACHE_STACK
+      #   value: kubernetes
+      # - name: KC_DB_USERNAME
+      #   value: "${POSTGRES_SSO_USERNAME}"
+      # - name: KC_DB_PASSWORD
+      #   value: "${POSTGRES_SSO_PASSWORD}"
+      # - name: KC_DB
+      #   value: postgres
+      # - name: KC_DB_URL_HOST
+      #   value: "postgresql.sso.svc.cluster.local"
+      # - name: KC_DB_URL_PORT
+      #   value: "5432"
+      # - name: KC_DB_URL_DATABASE
+      #   value: sso
+      # - name: KC_CACHE
+      #   value: ispn
+      # - name: KC_HTTP_RELATIVE_PATH
+      #   value: /auth
+      # - name: KC_HTTPS_CERTIFICATE_FILE
+      #   value: /opt/keycloak/conf/tls.crt
+      # - name: KC_HTTPS_CERTIFICATE_KEY_FILE
+      #   value: /opt/keycloak/conf/tls.key
+      # - name: KC_HTTPS_TRUST_STORE_FILE
+      #   value: /opt/keycloak/conf/truststore.jks
+      # - name: KC_HTTPS_TRUST_STORE_PASSWORD
+      #   value: password
+      # - name: KC_HTTPS_CLIENT_AUTH
+      #   value: request
+
+    secrets:
+      quarkusproperties:
+        stringData:
+          quarkus.properties: |-
+            # Could use the above envar, but lets use the quarkus conf file
+            quarkus.transaction-manager.enable-recovery=true
+            # quarkus.http.non-application-root-path=/
+
+          # # custom redirects
+          # quarkus.kc-routing.path-redirect./=/auth/realms/YOUR-REALM-NAME/account
+          # quarkus.kc-routing.path-redirect./auth=/auth/realms/YOUR-REALM-NAME/account
+          # quarkus.kc-routing.path-redirect./register=/auth/realms/YOUR-REALM-NAME/protocol/openid-connect/registrations?client_id=account&response_type=code
+          # quarkus.kc-routing.path-prefix./oauth/authorize=/auth/realms/YOUR-REALM-NAME/protocol/openid-connect/auth
+          # quarkus.kc-routing.path-filter./api/v4/user=/auth/realms/YOUR-REALM-NAME/protocol/openid-connect/userinfo
+          # quarkus.kc-routing.path-filter./oauth/token=/auth/realms/YOUR-REALM-NAME/protocol/openid-connect/token
+          # # block metrics and health enpoints from being exposed through the istio ingress
+          # quarkus.kc-routing.path-recursive-block./metrics=8443
+          # quarkus.kc-routing.path-recursive-block./health=8443
+      # env:
+      #   stringData:
+      #     KEYCLOAK_ADMIN: "admin"
+      #     KEYCLOAK_ADMIN_PASSWORD: "your-super-secure-password"
+      #     CUSTOM_REGISTRATION_CONFIG: /opt/keycloak/conf/customreg.yaml
+      # customreg:
+      #   stringData:
+      #     customreg.yaml: '{{ .Files.Get "resources/realm.yaml" }}'
+      # realm:
+      #   stringData:
+      #     realm.json: '{{ .Files.Get "resources/realm.json" }}'
+      # truststore:
+      #   data:
+      #     truststore.jks: |-
+      #       {{ .Files.Get "resources/truststore.jks" | b64enc }}
+
+    extraVolumes: |-
+      - name: objectstore
+        emptyDir:
+          sizeLimit: 100Mi
+      - name: quarkusproperties
+        secret:
+          secretName: keycloak-quarkusproperties
+          defaultMode: 0777
+
+    # # - name: customreg
+    # #   secret:
+    # #     secretName: {{ include "keycloak.fullname" . }}-customreg
+    # # - name: realm
+    # #   secret:
+    # #     secretName: {{ include "keycloak.fullname" . }}-realm
+    # # - name: plugin
+    # #   emptyDir: {}
+    # # - name: truststore
+    # #   secret:
+    # #     secretName: {{ include "keycloak.fullname" . }}-truststore
+    # # - name: custom-theme
+    # #   emptyDir: {}
+    extraVolumeMounts: |-
+      - mountPath: /ObjectStore
+        name: objectstore
+      - name: quarkusproperties
+        mountPath: /opt/keycloak/conf/quarkus.properties
+        subPath: quarkus.properties
+
+    # # - name: customreg
+    # #   mountPath: /opt/keycloak/conf/customreg.yaml
+    # #   subPath: customreg.yaml
+    # #   readOnly: true
+    # # - name: realm
+    # #   mountPath: /opt/keycloak/data/import/realm.json
+    # #   subPath: realm.json
+    # # - name: plugin
+    # #   mountPath: /opt/keycloak/providers/keycloak-plugin.jar
+    # #   subPath: keycloak-plugin.jar
+    # # - name: truststore
+    # #   mountPath: /opt/keycloak/conf/truststore.jks
+    # #   subPath: truststore.jks
+    # # - name: custom-theme
+    # #   mountPath: /opt/keycloak/providers/YOUR-CUSTOM-THEME-JAR-NAME.jar
+    # #   subPath: YOUR-CUSTOM-THEME-JAR-NAME.jar
+
+
+    ingress:
+      enabled: false
+
+    podSecurityContext:
+      fsGroup: 1000
+    securityContext:
+      runAsUser: 1000
+      runAsNonRoot: true
+      capabilities:
+        drop:
+          - ALL
