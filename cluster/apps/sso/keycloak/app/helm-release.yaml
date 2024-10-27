@@ -76,11 +76,13 @@ spec:
       - name: KC_HTTP_ENABLED
         value: "true"
       - name: KC_HOSTNAME
-        value: id.${DOMAIN_1}
+        value: localhost:30443
       - name: KC_HOSTNAME_STRICT
         value: "false"
       - name: KC_HOSTNAME_STRICT_HTTPS
         value: "false"
+      - name: KC_HTTPS_PORT
+        value: "30443"
       - name: KC_LOG_LEVEL
         value: "org.keycloak.events:DEBUG,org.infinispan:INFO,org.jgroups:INFO"
       - name: KEYCLOAK_ADMIN
