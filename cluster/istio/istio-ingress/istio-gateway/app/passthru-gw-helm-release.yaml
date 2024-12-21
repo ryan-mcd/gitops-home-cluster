@@ -39,6 +39,8 @@ spec:
     keepHistory: false
   maxHistory: 3
   values:
+    strategy:
+      type: Recreate
     replicaCount: 3
     autoscaling:
       enabled: false
