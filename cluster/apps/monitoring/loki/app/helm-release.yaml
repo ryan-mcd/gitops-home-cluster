@@ -128,7 +128,7 @@ spec:
       image:
         registry: ghcr.io
         repository: nginxinc/nginx-unprivileged
-        tag: 1.25-alpine
+        tag: 1.27-alpine
       ingress:
         enabled: false
 
