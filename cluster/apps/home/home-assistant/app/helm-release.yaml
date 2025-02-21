@@ -44,7 +44,7 @@ spec:
 
             image:
               repository: ghcr.io/home-assistant/home-assistant
-              tag: 2025.2.2
+              tag: 2025.2.5
             env:
               TZ: ${TIMEZONE}
             resources:
