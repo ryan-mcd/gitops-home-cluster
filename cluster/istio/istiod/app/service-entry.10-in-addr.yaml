@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: allow-rfc1918-10
+spec:
+  hosts:
+  - "*.10.in-addr.arpa"
+  addresses:
+  - 10.0.0.0/8
+  ports:
+  - number: 80
+    name: http
+    protocol: HTTP
+  - number: 443
+    name: https
+    protocol: HTTPS
+  resolution: NONE

@@ -1,0 +1,11 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-rfc1918
+spec:
+  rules:
+  - to:
+    - operation:
+        hosts:
+        - "*.10.in-addr.arpa"
+        - "*.192.in-addr.arpa"

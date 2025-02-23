@@ -3,9 +3,9 @@ kind: Kustomization
 resources:
   - _pvc
   - home-assistant/ks.yaml
-  - mosquitto/ks.yaml
+  # - mosquitto/ks.yaml
   - esphome/ks.yaml
-  - frigate/ks.yaml
-  - excalidraw/ks.yaml
+  # - frigate/ks.yaml
+  # - excalidraw/ks.yaml
   - zwave-js-ui/ks.yaml
-  - rtlamr2mqtt/ks.yaml
+  # - rtlamr2mqtt/ks.yaml

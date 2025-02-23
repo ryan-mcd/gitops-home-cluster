@@ -69,6 +69,9 @@ spec:
     #     PILOT_ENABLE_WORKLOAD_ENTRY_AUTOREGISTRATION: true
     #     PILOT_ENABLE_WORKLOAD_ENTRY_HEALTHCHECKS: true
     meshConfig:
+      # # TODO: Block All traffic
+      # outboundTrafficPolicy:
+      #   mode: "REGISTRY_ONLY"
       defaultConfig:
         gatewayTopology:
           # Trust Cloudflare

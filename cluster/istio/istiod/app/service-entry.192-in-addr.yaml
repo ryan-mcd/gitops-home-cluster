@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: allow-rfc1918-192
+spec:
+  hosts:
+  - "*.192.in-addr.arpa"
+  addresses:
+  - 192.168.0.0/16
+  ports:
+  - number: 80
+    name: http
+    protocol: HTTP
+  - number: 443
+    name: https
+    protocol: HTTPS
+  resolution: NONE

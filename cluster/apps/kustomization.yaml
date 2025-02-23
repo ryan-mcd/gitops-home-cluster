@@ -10,7 +10,7 @@ resources:
   - development
   - home
   - kopia
-  - debug
+  # - debug
   - kyverno/ks.yaml
   # - neuvector
   # - sso

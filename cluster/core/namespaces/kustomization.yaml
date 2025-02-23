@@ -14,7 +14,7 @@ resources:
 - calico-system.yaml
 - kyverno.yaml
 - services.yaml
-- staging-vcluster.yaml
-- staging-vcluster2.yaml
-- staging-vcluster3.yaml
 - storage.yaml
+# - staging-vcluster.yaml
+# - staging-vcluster2.yaml
+# - staging-vcluster3.yaml

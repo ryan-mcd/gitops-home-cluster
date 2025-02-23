@@ -4,4 +4,6 @@ namespace: istio-system
 
 resources:
   - helm-release.yaml
-  # - ../addons/monitoring
+  # - auth-policy.rfc1918.yaml
+  # - service-entry.10-in-addr.yaml
+  # - service-entry.192-in-addr.yaml
