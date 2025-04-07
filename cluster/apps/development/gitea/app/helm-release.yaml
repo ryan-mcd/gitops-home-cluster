@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: gitea/gitea
-      tag: 1.21.11
+      tag: 1.23.7
     service:
       ssh:
         annotations:
