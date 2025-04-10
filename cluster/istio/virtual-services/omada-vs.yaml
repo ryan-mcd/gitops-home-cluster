@@ -15,6 +15,6 @@ spec:
       route:
         - destination:
             port:
-              number: 8843
+              number: 8043
             host: omada-controller-controller.networking.svc.cluster.local
           weight: 100
