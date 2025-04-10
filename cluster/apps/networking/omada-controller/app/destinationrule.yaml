@@ -4,7 +4,7 @@ metadata:
   name: omada
   namespace: networking
 spec:
-  host: omada-controller.networking.svc.cluster.local
+  host: omada-controller-controller.networking.svc.cluster.local
   trafficPolicy:
     tls:
       mode: SIMPLE
