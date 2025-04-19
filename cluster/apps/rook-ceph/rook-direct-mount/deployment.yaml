@@ -71,8 +71,8 @@ spec:
                 path: mon-endpoints
         - name: nas-data
           nfs:
-            server: "${NAS_ADDRESS}"
-            path: /mnt/user/rook-bak/
+            server: "10.24.0.226"
+            path: /mnt/user/kubernetes/rook-bak/
         - name: direct-mount-scripts
           projected:
             defaultMode: 0775
