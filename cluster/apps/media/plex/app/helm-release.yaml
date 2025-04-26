@@ -36,15 +36,14 @@ spec:
                     values:
                       - "true"
       securityContext:
-        runAsUser: 568
-        runAsGroup: 568
-        fsGroup: 568
+        runAsUser: 2000
+        runAsGroup: 2000
+        fsGroup: 2000
         fsGroupChangePolicy: "OnRootMismatch"
         supplementalGroups:
           - 44
           - 109
           - 100
-          - 65539
 
     controllers:
       main:
@@ -93,16 +92,16 @@ spec:
       media:
         enabled: true
         type: nfs
-        server: "${NAS_ADDRESS}"
-        path: /mnt/user/Media
+        server: "10.24.0.226"
+        path: /mnt/tank/media
         globalMounts:
           - path: /media
         readOnly: true
       backup:
         enabled: true
         type: nfs
-        server: "${NAS_ADDRESS}"
-        path: /mnt/user/k8s-bak/plex-backup
+        server: "10.24.0.226"
+        path: /mnt/tank/kubernetes/plex-backup
         globalMounts:
           - path: /backups
         readOnly: false
