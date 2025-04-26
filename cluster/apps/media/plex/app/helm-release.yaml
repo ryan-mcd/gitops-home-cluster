@@ -57,7 +57,7 @@ spec:
           main:
             image:
               repository: ghcr.io/home-operations/plex
-              tag: 1.41.6
+              tag: 1.41.6.9685
             env:
               TZ: ${TIMEZONE}
             resources:
