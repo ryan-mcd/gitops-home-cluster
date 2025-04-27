@@ -34,7 +34,7 @@ spec:
           wait-for-repo:
             image:
               repository: ghcr.io/ryan-mcd/kopia
-              tag: 0.14.1@sha256:e8a08d734a54a9a15a82d8e65a88af35effaa34b67d8ac8a9faf0c4030e88b08
+              tag: 0.15.0@sha256:a37a4eadefc8a6693f6dbeead47d796a165b3ada5dd33438c5ecefd67724d1c8
             command:
               - /bin/bash
               - -c
@@ -48,7 +48,7 @@ spec:
           main:
             image:
               repository: ghcr.io/ryan-mcd/kopia
-              tag: 0.14.1@sha256:e8a08d734a54a9a15a82d8e65a88af35effaa34b67d8ac8a9faf0c4030e88b08
+              tag: 0.15.0@sha256:a37a4eadefc8a6693f6dbeead47d796a165b3ada5dd33438c5ecefd67724d1c8
             env:
               TZ: "${TIMEZONE}"
               KOPIA_PASSWORD: "none"
