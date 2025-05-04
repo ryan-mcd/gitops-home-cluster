@@ -11,9 +11,23 @@ creation_rules:
       B98EF6FF6F3748661F449D0CA912302389FEB397,
       95106BD4F26A01996BDA831E6D9E63E5FF3AE8E0,
       E6D978BF2C0B69227A85D9BA04812C60A830A726
+  - path_regex: talos/.*\.sops\.ya?ml
+    mac_only_encrypted: true
+    hc_vault_transit_uri: "https://hashivault.rmcd.win/v1/sops/keys/sops-user"
+    age: >-
+      age1nhsedg5k84dkmeufjud2g0epwz8dsl2l9qnsrzg0vtwdd9zgkdvsh662xm,
+      age1tfmjgyxfv09xc7kvy0895wekpcqarywaeeuxs7cy0n37zs77tejs9z40a4
+  - path_regex: kubernetes/.*\.sops\.ya?ml
+    encrypted_regex: '^(data|stringData)$'
+    mac_only_encrypted: true
+    hc_vault_transit_uri: "https://hashivault.rmcd.win/v1/sops/keys/sops-user"
+    age: >-
+      age1nhsedg5k84dkmeufjud2g0epwz8dsl2l9qnsrzg0vtwdd9zgkdvsh662xm,
+      age1tfmjgyxfv09xc7kvy0895wekpcqarywaeeuxs7cy0n37zs77tejs9z40a4
   - encrypted_regex: '^(data|stringData)$'
     hc_vault_transit_uri: "https://hashivault.rmcd.win/v1/sops/keys/sops-user"
     age: >-
+      age1nhsedg5k84dkmeufjud2g0epwz8dsl2l9qnsrzg0vtwdd9zgkdvsh662xm,
       age1h4562p88dlf3mh8v585vuautuae4hs0pvuyeh8wlagplt5dz3yqsgx7q9g,
       age19mqhjpr2yqrwz9n3p7cs52tt3090wjt9kskylgquu3839ce6wuksy5ssqy,
       age1tfmjgyxfv09xc7kvy0895wekpcqarywaeeuxs7cy0n37zs77tejs9z40a4,

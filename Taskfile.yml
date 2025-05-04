@@ -1,22 +1,42 @@
 ---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
 version: '3'
 
+set: [pipefail]
+shopt: [globstar]
+
 vars:
-  PROJECT_DIR:
-    sh: "git rev-parse --show-toplevel"
-  CLUSTER_DIR: "{{.PROJECT_DIR}}/cluster"
-  ANSIBLE_DIR: "{{.PROJECT_DIR}}/server/ansible"
+  BOOTSTRAP_DIR: '{{.ROOT_DIR}}/bootstrap'
+  KUBERNETES_DIR: '{{.ROOT_DIR}}/kubernetes'
+  SCRIPTS_DIR: '{{.ROOT_DIR}}/scripts'
+  TALOS_DIR: '{{.ROOT_DIR}}/talos'
+  PRIVATE_DIR: '{{.ROOT_DIR}}/.private'
+  TALOSCONFIG: '{{.ROOT_DIR}}/talos/clusterconfig/talosconfig'
+  CLUSTER_DIR: "{{.ROOT_DIR}}/cluster"
+  ANSIBLE_DIR: "{{.ROOT_DIR}}/server/ansible"
 
 env:
-  KUBECONFIG: "{{.PROJECT_DIR}}/kubeconfig"
+  KUBECONFIG: '{{.ROOT_DIR}}/kubeconfig'
+  SOPS_AGE_KEY_FILE: '{{.ROOT_DIR}}/age.key'
+  TALOSCONFIG: '{{.TALOSCONFIG}}'
 
 includes:
+  bootstrap: .taskfiles/bootstrap
+  talos: .taskfiles/talos
+  template: .taskfiles/template
   ansible: .taskfiles/ansible.yml
-  blocky: .taskfiles/blocky.yml
-  flux: .taskfiles/flux.yml
   snapshot: .taskfiles/snapshot.yml
 
 tasks:
+
+  default: task --list
+
+  reconcile:
+    desc: Force Flux to pull in changes from your Git repository
+    cmd: flux --namespace flux-system reconcile kustomization flux-system --with-source
+    preconditions:
+      - test -f {{.KUBECONFIG}}
+      - which flux
 
   kubeconfig:
     desc: Remotely fetch kubeconfig from k3s

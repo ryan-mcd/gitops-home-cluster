@@ -8,7 +8,53 @@
       "ignoreTests": true,
       "automergeType": "branch",
       "matchUpdateTypes": ["digest"],
-      "matchPackagePatterns": ["ghcr.io/bjw-s", "ghcr.io/onedr0p", "ghcr.io/ryan-mcd"]
+      "matchPackagePatterns": ["ghcr.io/bjw-s"]
+    },
+    {
+      description: "Auto-merge trusted container digests",
+      matchDatasources: ["docker"],
+      automerge: true,
+      automergeType: "pr",
+      matchUpdateTypes: ["digest"],
+      matchPackageNames: ["/home-operations/"],
+      ignoreTests: false,
+    },
+    {
+      description: "Auto-merge OCI Charts",
+      matchDatasources: ["docker"],
+      automerge: true,
+      automergeType: "pr",
+      matchUpdateTypes: ["minor", "patch"],
+      matchPackageNames: ["/kube-prometheus-stack/", "/grafana/"],
+      ignoreTests: false,
+    },
+    {
+      description: "Auto-merge GitHub Actions",
+      matchManagers: ["github-actions"],
+      automerge: true,
+      automergeType: "branch",
+      matchUpdateTypes: ["minor", "patch", "digest"],
+      minimumReleaseAge: "3 days",
+      ignoreTests: true,
+    },
+    {
+      description: "Auto-merge trusted GitHub Actions",
+      matchManagers: ["github-actions"],
+      matchPackageNames: ["/^actions\//"],
+      automerge: true,
+      automergeType: "branch",
+      matchUpdateTypes: ["minor", "patch", "digest"],
+      minimumReleaseAge: "1 minute",
+      ignoreTests: true,
+    },
+    {
+      description: "Auto-merge GitHub Releases",
+      matchDatasources: ["github-releases"],
+      automerge: true,
+      automergeType: "branch",
+      matchUpdateTypes: ["minor", "patch"],
+      matchPackageNames: ["/external-dns/", "/gateway-api/", "/prometheus-operator/"],
+      ignoreTests: true,
     },
     {
       "matchDatasources": ["docker"],
@@ -18,12 +64,7 @@
       "matchUpdateTypes": ["minor", "patch"],
       "matchPackageNames": [
         "ghcr.io/miguelndecarvalho/speedtest-exporter",
-        "eclipse-mosquitto",
-        "ghcr.io/onedr0p/tautulli",
-        "ghcr.io/coder/code-server",
-        "ghcr.io/kube-vip/kube-vip",
-        "quay.io/thanos/thanos",
-        "ghcr.io/ryan-mcd/excalidraw-collab"
+        "eclipse-mosquitto"
       ]
     },
     {
@@ -34,27 +75,14 @@
       "matchUpdateTypes": ["minor", "patch"],
       "matchPackageNames": [
         "cert-manager",
-        "kube-prometheus-stack",
-        "loki",
-        "speedtest-exporter",
-        "vpa",
-        "goldilocks",
-        "grafana",
-        "thanos",
-        "reloader",
         // //istio
         // "base",
         // "cni",
         // "gateway",
         // "istiod",
-        "kiali-server",
-        "jaeger",
-        //neuvector"
-        "crds",
-        "core",
-        "rancher",
-        "ingress-nginx"
-        // "traefik",
+        // "kiali-server",
+        // "jaeger"
+        "speedtest-exporter"
       ]
     }
   ]
