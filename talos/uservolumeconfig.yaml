@@ -1,0 +1,7 @@
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: csi-local-hostpath
+provisioning:
+    diskSelector:
+        match: disk.transport == 'sata' && disk.size > 1u * TiB && disk.size < 3u * TiB
+    minSize: 1800GB

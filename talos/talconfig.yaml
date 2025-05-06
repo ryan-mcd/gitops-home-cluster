@@ -39,6 +39,13 @@ nodes:
         mtu: 1500
         vip:
           ip: "192.168.209.200"
+    # userVolumes:
+    #   - name: csi-local-hostpath
+    #     provisioning:
+    #       diskSelector:
+    #         match: /dev/disk/by-id/ata-CT2000MX500SSD1_2051E4E0610A in disk.symlinks
+    extraManifests:
+      - uservolumeconfig.yaml
 
 # Global patches
 patches:
