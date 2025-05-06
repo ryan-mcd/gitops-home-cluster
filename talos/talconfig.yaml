@@ -58,6 +58,18 @@ patches:
 # Controller patches
 controlPlane:
   patches:
+    # Configure udev
+    - |-
+      machine:
+        udev:
+          rules:
+            - SUBSYSTEM=="drm", KERNEL=="renderD*", GROUP="44", MODE="0660" # Intel GPU
+
+    - |-
+      machine:
+        nodeLabels:
+          intel.feature.node.kubernetes.io/gpu: "true"
+
     - "@./patches/controller/admission-controller-patch.yaml"
     - "@./patches/controller/cluster.yaml"
 
