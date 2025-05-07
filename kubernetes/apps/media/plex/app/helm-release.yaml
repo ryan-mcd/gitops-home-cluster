@@ -128,7 +128,7 @@ spec:
         path: /mnt/tank/media
         globalMounts:
           - path: /media
-        readOnly: true
+            readOnly: true
       backup:
         enabled: true
         type: nfs
@@ -136,4 +136,4 @@ spec:
         path: /mnt/tank/kubernetes/plex-backup
         globalMounts:
           - path: /backups
-        readOnly: false
+            readOnly: false
