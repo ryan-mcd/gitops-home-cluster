@@ -7,4 +7,4 @@ components:
   - ../../components/common
   - ../../components/repos/app-template
 resources:
-  - ./echo/ks.yaml
+  # - ./echo/ks.yaml
