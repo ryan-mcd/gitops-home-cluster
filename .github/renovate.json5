@@ -19,9 +19,6 @@
   ],
   "enabled": true,
   "timezone": "America/New_York",
-  "platform": "github",
-  "onboarding": false,
-  "requireConfig": "optional",
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
   suppressNotifications: [
     "prEditedNotification",
