@@ -129,6 +129,13 @@ spec:
         globalMounts:
           - path: /media
             readOnly: true
+      recorded-tv:
+        type: nfs
+        server: nas.rmcd.internal
+        path: /mnt/tank/media/Recorded-TV
+        globalMounts:
+          - path: /media/Recorded-TV
+            readOnly: false
       backup:
         enabled: true
         type: nfs
