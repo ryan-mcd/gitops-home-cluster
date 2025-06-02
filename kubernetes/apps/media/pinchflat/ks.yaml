@@ -1,20 +1,19 @@
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app plex
+  name: &app pinchflat
   namespace: &namespace media
-  labels:
-    substitution.flux/enabled: true
 spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  interval: 1h
-  path: ./kubernetes/apps/media/plex/app
   dependsOn:
     - name: democratic-csi
       namespace: storage
+  interval: 1h
+  path: ./kubernetes/apps/media/pinchflat/app
   postBuild:
     substituteFrom:
       - name: cluster-secrets

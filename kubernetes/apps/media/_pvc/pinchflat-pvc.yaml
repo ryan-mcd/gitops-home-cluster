@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pinchflat
+  namespace: media
+  labels:
+    app.kubernetes.io/name: &name pinchflat
+    app.kubernetes.io/instance: *name
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: local-hostpath
