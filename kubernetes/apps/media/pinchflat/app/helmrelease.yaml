@@ -84,7 +84,7 @@ spec:
       media:
         type: nfs
         server: nas.rmcd.internal
-        path: /mnt/tank/Media
+        path: /mnt/tank/media
         advancedMounts:
           pinchflat:
             app:
