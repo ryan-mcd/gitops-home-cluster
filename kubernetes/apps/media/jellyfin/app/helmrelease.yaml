@@ -69,7 +69,7 @@ spec:
       app:
         type: LoadBalancer
         annotations:
-          io.cilium/lb-ipam-ips: 192.168.209.211, ::ffff:192.168.209.211
+          io.cilium/lb-ipam-ips: 192.168.209.212, ::ffff:192.168.209.212
         controller: jellyfin
         ports:
           http:
