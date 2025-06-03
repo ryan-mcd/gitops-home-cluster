@@ -7,7 +7,7 @@ resources:
 - _pvc
 - plex/ks.yaml
 - pinchflat/ks.yaml
-# - jellyfin/ks.yaml
+- jellyfin/ks.yaml
 # - tautulli/ks.yaml
 components:
   - ../../components/common
