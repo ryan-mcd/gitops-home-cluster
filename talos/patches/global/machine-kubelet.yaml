@@ -2,6 +2,9 @@ machine:
   kubelet:
     extraConfig:
       serializeImagePulls: false
+      featureGates:
+        UserNamespacesSupport: true
+        UserNamespacesPodSecurityStandards: true
     nodeIP:
       validSubnets:
         - 192.168.209.0/24
