@@ -40,10 +40,10 @@ spec:
             env:
               DEBUG_LEVEL: debug
               DRYRUN: false
-              JELLYFIN_BASEURL: http://jellyfin.default.svc.cluster.local:8096
+              JELLYFIN_BASEURL: http://jellyfin.media.svc.cluster.local:8096
               LOGFILE: /tmp/sync.log
               MARK_FILE: /tmp/mark.log
-              PLEX_BASEURL: http://plex.default.svc.cluster.local:32400
+              PLEX_BASEURL: http://plex.media.svc.cluster.local:32400
               RUN_ONLY_ONCE: true
               TZ: America/New_York
               SYNC_FROM_PLEX_TO_JELLYFIN: "True"
