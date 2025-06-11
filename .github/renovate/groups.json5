@@ -91,7 +91,8 @@
     {
       description: "Mise-en-place Group",
       groupName: "Mise-en-place",
-      matchDepNames: ["aqua:*"],
+      matchDepNames: ["aqua"],
+      matchDatasources: ["github-tags"],
       group: {
         commitMessageTopic: "{{{groupName}}} group",
       },
