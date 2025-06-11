@@ -91,10 +91,13 @@
     {
       description: "Mise-en-place Group",
       groupName: "Mise-en-place",
-      matchPackageNames: ["aqua:*"],
+      "extends": [
+        "packages:mise"
+      ],
       group: {
         commitMessageTopic: "{{{groupName}}} group",
       },
+      "separateMajorMinor": true
     },
     {
       description: "Rook-Ceph Group",
