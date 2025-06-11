@@ -89,6 +89,14 @@
       },
     },
     {
+      description: "Mise-en-place Group",
+      groupName: "Mise-en-place",
+      matchPackageNames: ["aqua:*"],
+      group: {
+        commitMessageTopic: "{{{groupName}}} group",
+      },
+    },
+    {
       description: "Rook-Ceph Group",
       groupName: "Rook-Ceph",
       matchDatasources: ["docker"],
