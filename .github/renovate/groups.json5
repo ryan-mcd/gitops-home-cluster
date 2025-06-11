@@ -91,7 +91,7 @@
     {
       description: "Mise-en-place Group",
       groupName: "Mise-en-place",
-      matchPackageNames: ["aqua:*"],
+      matchDepNames: ["aqua:*"],
       group: {
         commitMessageTopic: "{{{groupName}}} group",
       },
