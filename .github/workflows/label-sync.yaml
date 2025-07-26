@@ -11,6 +11,9 @@ on:
 jobs:
   label-sync:
     name: Label Sync
+    permissions:
+      contents: read
+      issues: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

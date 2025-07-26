@@ -15,9 +15,14 @@ cgroup:
 # devices: eno+ eth+
 endpointRoutes:
   enabled: true
-envoy:
-  enabled: false
 dashboards:
+  enabled: true
+envoy:
+  rollOutPods: true
+  prometheus:
+     serviceMonitor:
+       enabled: true
+gatewayAPI:
   enabled: true
 hubble:
   enabled: false
